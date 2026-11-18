@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T03:21:40.695Z",
+  "title": "Design System: Pyxis",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Violet-Tinted Ground",
+        "canonical": "oklch(0.14 0.012 285)",
+        "tonalRamp": [
+          "oklch(0.2 0.021 285)",
+          "oklch(0.3 0.023 285)",
+          "oklch(0.4 0.026 285)",
+          "oklch(0.5 0.029 285)",
+          "oklch(0.6 0.029 285)",
+          "oklch(0.7 0.026 285)",
+          "oklch(0.8 0.023 285)",
+          "oklch(0.92 0.02 285)"
+        ]
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Rail Black",
+        "canonical": "oklch(0.115 0.012 285)",
+        "tonalRamp": [
+          "oklch(0.2 0.021 285)",
+          "oklch(0.3 0.023 285)",
+          "oklch(0.4 0.026 285)",
+          "oklch(0.5 0.029 285)",
+          "oklch(0.6 0.029 285)",
+          "oklch(0.7 0.026 285)",
+          "oklch(0.8 0.023 285)",
+          "oklch(0.92 0.02 285)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "oklch(0.18 0.014 285)",
+        "tonalRamp": [
+          "oklch(0.2 0.021 285)",
+          "oklch(0.3 0.023 285)",
+          "oklch(0.4 0.026 285)",
+          "oklch(0.5 0.029 285)",
+          "oklch(0.6 0.029 285)",
+          "oklch(0.7 0.026 285)",
+          "oklch(0.8 0.023 285)",
+          "oklch(0.92 0.02 285)"
+        ]
+      },
+      "popover": {
+        "role": "neutral",
+        "displayName": "Popover",
+        "canonical": "oklch(0.2 0.016 285)",
+        "tonalRamp": [
+          "oklch(0.2 0.021 285)",
+          "oklch(0.3 0.023 285)",
+          "oklch(0.4 0.026 285)",
+          "oklch(0.5 0.029 285)",
+          "oklch(0.6 0.029 285)",
+          "oklch(0.7 0.026 285)",
+          "oklch(0.8 0.023 285)",
+          "oklch(0.92 0.02 285)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.97 0.006 285)",
+        "tonalRamp": [
+          "oklch(0.2 0.021 285)",
+          "oklch(0.3 0.023 285)",
+          "oklch(0.4 0.026 285)",
+          "oklch(0.5 0.029 285)",
+          "oklch(0.6 0.029 285)",
+          "oklch(0.7 0.026 285)",
+          "oklch(0.8 0.023 285)",
+          "oklch(0.92 0.02 285)"
+        ]
+      },
+      "violet": {
+        "role": "primary",
+        "displayName": "Electric Violet",
+        "canonical": "oklch(0.55 0.22 292)",
+        "tonalRamp": [
+          "oklch(0.2 0.151 292)",
+          "oklch(0.3 0.17 292)",
+          "oklch(0.4 0.19 292)",
+          "oklch(0.5 0.21 292)",
+          "oklch(0.6 0.21 292)",
+          "oklch(0.7 0.19 292)",
+          "oklch(0.8 0.171 292)",
+          "oklch(0.92 0.147 292)"
+        ]
+      },
+      "violet-text": {
+        "role": "primary",
+        "displayName": "Violet Text",
+        "canonical": "oklch(0.8 0.12 292)",
+        "tonalRamp": [
+          "oklch(0.2 0.103 292)",
+          "oklch(0.3 0.116 292)",
+          "oklch(0.4 0.13 292)",
+          "oklch(0.5 0.143 292)",
+          "oklch(0.6 0.143 292)",
+          "oklch(0.7 0.13 292)",
+          "oklch(0.8 0.116 292)",
+          "oklch(0.92 0.1 292)"
+        ]
+      },
+      "violet-series": {
+        "role": "primary",
+        "displayName": "Series Violet",
+        "canonical": "oklch(0.65 0.15 292)",
+        "tonalRamp": [
+          "oklch(0.2 0.103 292)",
+          "oklch(0.3 0.116 292)",
+          "oklch(0.4 0.13 292)",
+          "oklch(0.5 0.143 292)",
+          "oklch(0.6 0.143 292)",
+          "oklch(0.7 0.13 292)",
+          "oklch(0.8 0.116 292)",
+          "oklch(0.92 0.1 292)"
+        ]
+      },
+      "fail-red": {
+        "role": "semantic",
+        "displayName": "Failure Red",
+        "canonical": "oklch(0.68 0.2 25)",
+        "tonalRamp": [
+          "oklch(0.2 0.137 25)",
+          "oklch(0.3 0.155 25)",
+          "oklch(0.4 0.173 25)",
+          "oklch(0.5 0.191 25)",
+          "oklch(0.6 0.191 25)",
+          "oklch(0.7 0.173 25)",
+          "oklch(0.8 0.155 25)",
+          "oklch(0.92 0.133 25)"
+        ]
+      },
+      "warn-amber": {
+        "role": "semantic",
+        "displayName": "Warning Amber",
+        "canonical": "oklch(0.8 0.15 80)",
+        "tonalRamp": [
+          "oklch(0.2 0.103 80)",
+          "oklch(0.3 0.116 80)",
+          "oklch(0.4 0.13 80)",
+          "oklch(0.5 0.143 80)",
+          "oklch(0.6 0.143 80)",
+          "oklch(0.7 0.13 80)",
+          "oklch(0.8 0.116 80)",
+          "oklch(0.92 0.1 80)"
+        ]
+      },
+      "redirect-cyan": {
+        "role": "semantic",
+        "displayName": "Redirect Cyan",
+        "canonical": "oklch(0.78 0.1 215)",
+        "tonalRamp": [
+          "oklch(0.2 0.068 215)",
+          "oklch(0.3 0.077 215)",
+          "oklch(0.4 0.087 215)",
+          "oklch(0.5 0.096 215)",
+          "oklch(0.6 0.096 215)",
+          "oklch(0.7 0.087 215)",
+          "oklch(0.8 0.078 215)",
+          "oklch(0.92 0.067 215)"
+        ]
+      },
+      "ok-green": {
+        "role": "semantic",
+        "displayName": "Success Green",
+        "canonical": "oklch(0.76 0.15 155)",
+        "tonalRamp": [
+          "oklch(0.2 0.103 155)",
+          "oklch(0.3 0.116 155)",
+          "oklch(0.4 0.13 155)",
+          "oklch(0.5 0.143 155)",
+          "oklch(0.6 0.143 155)",
+          "oklch(0.7 0.13 155)",
+          "oklch(0.8 0.116 155)",
+          "oklch(0.92 0.1 155)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Landing section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "PageHeader page titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descriptions, notices, table cells."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "11px uppercase Stat labels only."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Stat values, counts, latencies, routes, times, addresses; Geist Mono with tabular numerals."
+      }
+    },
+    "shadows": [
+      {
+        "name": "popover",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.4)",
+        "purpose": "Def tooltip and chart hover readout; the only floating surfaces."
+      },
+      {
+        "name": "selected-ring",
+        "value": "0 0 0 1px oklch(0.6 0.22 292 / 0.55)",
+        "purpose": "1px violet ring on the selected Segmented option."
+      },
+      {
+        "name": "hero-atmosphere",
+        "value": "radial-gradient(60rem 26rem at 75% -4rem, oklch(0.6 0.22 292 / 0.4), transparent 70%)",
+        "purpose": "Landing hero backdrop only; not used in the app."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "150ms, Tailwind default easing",
+        "purpose": "Hover color on nav, segmented options, popover fade."
+      },
+      {
+        "name": "live-ping",
+        "value": "animate-ping on an 8px green dot",
+        "purpose": "Live readout; off under prefers-reduced-motion."
+      },
+      {
+        "name": "skeleton-pulse",
+        "value": "animate-pulse, chart bars staggered 40ms",
+        "purpose": "ChartSkeleton and Skeleton loading."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none; transition: none under prefers-reduced-motion: reduce",
+        "purpose": "Global rule."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px (rail appears)"
+      },
+      {
+        "name": "xl",
+        "value": "1280px (chart beside status classes)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Electric violet action. The only filled accent in the system.",
+      "html": "<button class=\"ds-btn-primary\">Connect wallet</button>",
+      "css": ".ds-btn-primary{height:36px;padding:0 12px;border:1px solid transparent;border-radius:4px;background:oklch(0.55 0.22 292);color:oklch(0.99 0.004 292);font:500 14px/1 'Geist Variable',system-ui,sans-serif;cursor:pointer;transition:background .15s}.ds-btn-primary:hover{background:oklch(0.55 0.22 292 / 0.9)}.ds-btn-primary:focus-visible{outline:2px solid oklch(0.72 0.17 292);outline-offset:2px}.ds-btn-primary:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action: ground fill and a hairline.",
+      "html": "<button class=\"ds-btn-outline\">Keys &amp; setup</button>",
+      "css": ".ds-btn-outline{height:36px;padding:0 12px;border:1px solid oklch(1 0 0 / 0.16);border-radius:4px;background:oklch(0.14 0.012 285);color:oklch(0.97 0.006 285);font:500 14px/1 'Geist Variable',system-ui,sans-serif;cursor:pointer}.ds-btn-outline:hover{background:oklch(0.21 0.015 285)}.ds-btn-outline:focus-visible{outline:2px solid oklch(0.72 0.17 292);outline-offset:2px}"
+    },
+    {
+      "name": "Stat Cell",
+      "kind": "custom",
+      "refersTo": "stat-cell",
+      "description": "KPI cell: 11px label, mono figure, delta chip against the previous period, previous value beneath.",
+      "html": "<div class=\"ds-stat\"><div class=\"ds-stat-label\">p95 latency</div><div class=\"ds-stat-val\"><span>318<small>ms</small></span><span class=\"ds-chip ds-chip-bad\">&#8599; 21%</span></div><p class=\"ds-stat-prev\"><span class=\"ds-mono\">262ms</span> previously &middot; Approximate</p></div>",
+      "css": ".ds-stat{width:240px;padding:14px 16px;border:1px solid oklch(1 0 0 / 0.09);border-radius:4px;background:oklch(0.18 0.014 285);color:oklch(0.97 0.006 285);font-family:'Geist Variable',system-ui,sans-serif}.ds-stat-label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:oklch(0.72 0.02 285)}.ds-stat-val{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 8px;margin-top:8px;font:500 28px/1 'Geist Mono Variable',ui-monospace,monospace;font-variant-numeric:tabular-nums;letter-spacing:-.01em}.ds-stat-val small{margin-left:4px;font-size:14px;font-weight:400;color:oklch(0.72 0.02 285)}.ds-chip{display:inline-flex;align-items:center;gap:2px;padding:2px 6px;border-radius:3px;font:500 11px/1 'Geist Variable',system-ui,sans-serif}.ds-chip-bad{background:oklch(0.68 0.2 25 / 0.15);color:oklch(0.68 0.2 25)}.ds-stat-prev{margin:8px 0 0;font-size:12px;line-height:16px;color:oklch(0.72 0.02 285)}.ds-mono{font-family:'Geist Mono Variable',ui-monospace,monospace}"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "custom",
+      "refersTo": "segmented-selected",
+      "description": "Range selector. Violet marks the selected option.",
+      "html": "<div class=\"ds-seg\" role=\"group\" aria-label=\"Time range\"><button>1h</button><button class=\"on\" aria-pressed=\"true\">24h</button><button>7d</button><button>30d</button></div>",
+      "css": ".ds-seg{display:inline-flex;height:32px;padding:2px;border:1px solid oklch(1 0 0 / 0.09);border-radius:4px;background:oklch(0.21 0.015 285)}.ds-seg button{padding:0 10px;border:0;border-radius:3px;background:transparent;color:oklch(0.72 0.02 285);font:500 12px/1 'Geist Mono Variable',ui-monospace,monospace;cursor:pointer;transition:color .15s}.ds-seg button:hover{color:oklch(0.97 0.006 285)}.ds-seg button.on{background:oklch(0.55 0.22 292 / 0.2);color:oklch(0.8 0.12 292);box-shadow:0 0 0 1px oklch(0.6 0.22 292 / 0.55)}.ds-seg button:focus-visible{outline:2px solid oklch(0.72 0.17 292);outline-offset:2px}"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Hairline-bordered section with a header row. Never nested.",
+      "html": "<section class=\"ds-panel\"><header><h2>Request volume</h2><span>1-minute buckets, rolled up by range</span></header><div>Body content sits on 16px padding.</div></section>",
+      "css": ".ds-panel{width:320px;border:1px solid oklch(1 0 0 / 0.09);border-radius:4px;background:oklch(0.18 0.014 285);color:oklch(0.97 0.006 285);font-family:'Geist Variable',system-ui,sans-serif}.ds-panel header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;min-height:44px;padding:10px 16px;border-bottom:1px solid oklch(1 0 0 / 0.09)}.ds-panel h2{margin:0;font-size:14px;font-weight:600}.ds-panel header span{font-size:12px;color:oklch(0.72 0.02 285)}.ds-panel div{padding:16px;font-size:14px;color:oklch(0.72 0.02 285)}"
+    },
+    {
+      "name": "Definition Tooltip",
+      "kind": "custom",
+      "refersTo": "popover",
+      "description": "Def: help icon beside a label; opens on hover, focus or click, closes on Escape. Shown open.",
+      "html": "<div class=\"ds-def\"><span class=\"ds-def-lab\">p99 latency</span><button class=\"ds-def-btn\" aria-label=\"Definition of p99 latency\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3\"/><path d=\"M12 17h.01\"/></svg></button><span class=\"ds-def-tip\" role=\"tooltip\">99% of responses were faster than this. Responses beyond the top bucket report its lower bound, 10 s.</span></div>",
+      "css": ".ds-def{position:relative;display:inline-flex;align-items:center;gap:6px;padding-bottom:110px;color:oklch(0.72 0.02 285);font-family:'Geist Variable',system-ui,sans-serif}.ds-def-lab{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}.ds-def-btn{display:inline-flex;padding:0;border:0;border-radius:999px;background:none;color:oklch(0.72 0.02 285);cursor:pointer}.ds-def-btn svg{width:14px;height:14px}.ds-def-btn:hover,.ds-def-btn:focus-visible{color:oklch(0.97 0.006 285)}.ds-def-btn:focus-visible{outline:2px solid oklch(0.72 0.17 292);outline-offset:2px}.ds-def-tip{position:absolute;left:0;top:100%;margin-top:8px;width:240px;padding:10px;border:1px solid oklch(1 0 0 / 0.17);border-radius:6px;background:oklch(0.2 0.016 285);color:oklch(0.97 0.006 285);font-size:12px;font-weight:400;line-height:20px;letter-spacing:0;text-transform:none;box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.4)}"
+    },
+    {
+      "name": "Notice",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Tinted, bordered message. Tones: info (violet), bad, warn, ok. Warn shown.",
+      "html": "<div class=\"ds-notice\" role=\"status\"><p>Copy this now. It will not be shown again.</p><div>Only a one-way hash of the secret is stored, so the token cannot be recovered later.</div></div>",
+      "css": ".ds-notice{width:340px;padding:12px 14px;border:1px solid oklch(0.8 0.15 80 / 0.5);border-radius:4px;background:oklch(0.8 0.15 80 / 0.1);color:oklch(0.97 0.006 285);font:14px/1.5 'Geist Variable',system-ui,sans-serif}.ds-notice p{margin:0;font-weight:600}.ds-notice div{margin-top:2px;color:oklch(0.97 0.006 285 / 0.8)}"
+    },
+    {
+      "name": "Empty State",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Dashed box with an icon tile, a title, an explanation and an action.",
+      "html": "<div class=\"ds-empty\"><span class=\"ds-empty-ic\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 12 16 12 14 15 10 15 8 12 2 12\"/><path d=\"M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z\"/></svg></span><p class=\"t\">No endpoint data yet</p><p class=\"d\">Once an instrumented service sends metrics, each route appears here with its own trend.</p></div>",
+      "css": ".ds-empty{width:340px;padding:40px 24px;border:1px dashed oklch(1 0 0 / 0.17);border-radius:4px;text-align:center;color:oklch(0.97 0.006 285);font-family:'Geist Variable',system-ui,sans-serif}.ds-empty-ic{display:grid;place-items:center;width:36px;height:36px;margin:0 auto 12px;border:1px solid oklch(1 0 0 / 0.17);border-radius:4px;background:oklch(0.21 0.015 285);color:oklch(0.8 0.12 292)}.ds-empty .t{margin:0;font-size:14px;font-weight:600}.ds-empty .d{margin:4px auto 0;max-width:52ch;font-size:14px;color:oklch(0.72 0.02 285)}"
+    },
+    {
+      "name": "Request Chart",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Stair of bars with a 5xx overlay, an incident window and local-time ticks.",
+      "html": "<figure class=\"ds-chart\"><div class=\"ds-chart-plot\"><span class=\"ds-chart-band\">14:30-15:30 &middot; worst bucket <b>7.4%</b> 5xx</span><svg viewBox=\"0 0 100 40\" preserveAspectRatio=\"none\"><line x1=\"0\" x2=\"100\" y1=\"0\" y2=\"0\" stroke=\"oklch(1 0 0 / 0.09)\" vector-effect=\"non-scaling-stroke\"/><line x1=\"0\" x2=\"100\" y1=\"20\" y2=\"20\" stroke=\"oklch(1 0 0 / 0.09)\" vector-effect=\"non-scaling-stroke\"/><rect x=\"58.3\" y=\"0\" width=\"25\" height=\"40\" fill=\"oklch(0.68 0.2 25 / 0.1)\"/><line x1=\"58.3\" x2=\"58.3\" y1=\"0\" y2=\"40\" stroke=\"oklch(0.68 0.2 25 / 0.5)\" stroke-dasharray=\"3 3\" vector-effect=\"non-scaling-stroke\"/><line x1=\"83.3\" x2=\"83.3\" y1=\"0\" y2=\"40\" stroke=\"oklch(0.68 0.2 25 / 0.5)\" stroke-dasharray=\"3 3\" vector-effect=\"non-scaling-stroke\"/><rect x=\"0.80\" width=\"6.7\" y=\"26\" height=\"14\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"9.13\" width=\"6.7\" y=\"20\" height=\"20\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"17.46\" width=\"6.7\" y=\"14\" height=\"26\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"25.79\" width=\"6.7\" y=\"18\" height=\"22\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"34.12\" width=\"6.7\" y=\"10\" height=\"30\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"34.12\" width=\"6.7\" y=\"39\" height=\"1\" fill=\"oklch(0.68 0.2 25)\"/><rect x=\"42.45\" width=\"6.7\" y=\"6\" height=\"34\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"50.78\" width=\"6.7\" y=\"13\" height=\"27\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"59.11\" width=\"6.7\" y=\"7\" height=\"33\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"59.11\" width=\"6.7\" y=\"34\" height=\"6\" fill=\"oklch(0.68 0.2 25)\"/><rect x=\"67.44\" width=\"6.7\" y=\"4\" height=\"36\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"67.44\" width=\"6.7\" y=\"30\" height=\"10\" fill=\"oklch(0.68 0.2 25)\"/><rect x=\"75.77\" width=\"6.7\" y=\"9\" height=\"31\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"75.77\" width=\"6.7\" y=\"32\" height=\"8\" fill=\"oklch(0.68 0.2 25)\"/><rect x=\"84.10\" width=\"6.7\" y=\"16\" height=\"24\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"84.10\" width=\"6.7\" y=\"39\" height=\"1\" fill=\"oklch(0.68 0.2 25)\"/><rect x=\"92.43\" width=\"6.7\" y=\"22\" height=\"18\" fill=\"oklch(0.65 0.15 292)\"/></svg></div><div class=\"ds-chart-ticks\"><span>Jan 14, 00:00</span><span>Jan 14, 23:30</span></div><figcaption><i class=\"a\"></i>Requests <i class=\"b\"></i>5xx <span class=\"r\">Times in your local time zone</span></figcaption></figure>",
+      "css": ".ds-chart{width:360px;margin:0;padding:16px;border:1px solid oklch(1 0 0 / 0.09);border-radius:4px;background:oklch(0.18 0.014 285);color:oklch(0.97 0.006 285);font-family:'Geist Variable',system-ui,sans-serif}.ds-chart-plot{position:relative}.ds-chart svg{display:block;width:100%;height:150px;overflow:visible;border-bottom:1px solid oklch(1 0 0 / 0.17)}.ds-chart-band{position:absolute;top:4px;left:50%;z-index:1;padding:2px 6px;border-radius:3px;background:oklch(0.14 0.012 285 / 0.9);font-size:11px;font-weight:500;color:oklch(0.68 0.2 25);white-space:nowrap}.ds-chart-band b{font:500 11px 'Geist Mono Variable',ui-monospace,monospace}.ds-chart-ticks{display:flex;justify-content:space-between;margin-top:6px;font:11px 'Geist Mono Variable',ui-monospace,monospace;color:oklch(0.72 0.02 285)}.ds-chart figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:8px;font-size:12px;color:oklch(0.72 0.02 285)}.ds-chart i{display:inline-block;width:8px;height:8px;border-radius:1px}.ds-chart i.a{background:oklch(0.65 0.15 292)}.ds-chart i.b{background:oklch(0.68 0.2 25)}.ds-chart .r{margin-left:auto}"
+    },
+    {
+      "name": "Endpoint Row",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Mono route with a dimmed dynamic segment, tabular figures, a breach-tinted 5xx cell and a shared-scale Spark.",
+      "html": "<table class=\"ds-ep\"><thead><tr><th>Method</th><th>Route</th><th class=\"r\">p95</th><th class=\"r\">5xx</th><th>Trend</th></tr></thead><tbody><tr><td class=\"m\">POST</td><td class=\"m\">/v1/pools<span class=\"dim\">/:id</span></td><td class=\"r n\">318</td><td class=\"r\"><span class=\"n breach\">3.1%</span></td><td><svg viewBox=\"0 0 100 24\" preserveAspectRatio=\"none\" width=\"120\" height=\"30\"><line x1=\"0\" x2=\"100\" y1=\"23.5\" y2=\"23.5\" stroke=\"oklch(1 0 0 / 0.17)\" vector-effect=\"non-scaling-stroke\"/><rect x=\"2\" y=\"9\" width=\"3\" height=\"14\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"10\" y=\"5\" width=\"3\" height=\"18\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"18\" y=\"11\" width=\"3\" height=\"12\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"26\" y=\"3\" width=\"3\" height=\"20\" fill=\"oklch(0.65 0.15 292)\"/><rect x=\"26\" y=\"17\" width=\"3\" height=\"6\" fill=\"oklch(0.68 0.2 25)\"/></svg></td></tr></tbody></table>",
+      "css": ".ds-ep{border-collapse:collapse;border:1px solid oklch(1 0 0 / 0.09);background:oklch(0.18 0.014 285);color:oklch(0.97 0.006 285);font:14px 'Geist Variable',system-ui,sans-serif}.ds-ep th{height:36px;padding:0 8px;text-align:left;font-size:12px;font-weight:500;color:oklch(0.72 0.02 285);border-bottom:1px solid oklch(1 0 0 / 0.09)}.ds-ep td{padding:10px 8px;white-space:nowrap}.ds-ep .r{text-align:right}.ds-ep .m{font:500 12px 'Geist Mono Variable',ui-monospace,monospace}.ds-ep .dim{color:oklch(0.72 0.02 285 / 0.8);font-weight:400}.ds-ep .n{font-family:'Geist Mono Variable',ui-monospace,monospace;font-variant-numeric:tabular-nums}.ds-ep .breach{padding:2px 6px;border-radius:3px;background:oklch(0.68 0.2 25 / 0.15);color:oklch(0.68 0.2 25);font-weight:500}.ds-ep tr:hover td{background:oklch(0.21 0.015 285 / 0.7)}"
+    },
+    {
+      "name": "Rail Nav Item",
+      "kind": "nav",
+      "refersTo": "rail",
+      "description": "Rail link: muted by default, wash plus violet icon when current.",
+      "html": "<nav class=\"ds-rail\" aria-label=\"Primary\"><a class=\"ds-nav on\" aria-current=\"page\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"9\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\"/></svg>API metrics</a><a class=\"ds-nav\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M2 12h20\"/><path d=\"M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20\"/></svg>Web analytics</a></nav>",
+      "css": ".ds-rail{display:flex;flex-direction:column;gap:2px;width:216px;padding:12px;background:oklch(0.115 0.012 285);border-right:1px solid oklch(1 0 0 / 0.08)}.ds-nav{display:flex;align-items:center;gap:10px;height:32px;padding:0 10px;border-radius:4px;color:oklch(0.72 0.02 285);font:14px 'Geist Variable',system-ui,sans-serif;text-decoration:none;transition:background .15s,color .15s}.ds-nav svg{width:16px;height:16px;flex:none}.ds-nav:hover{background:oklch(0.24 0.04 290 / 0.6);color:oklch(0.97 0.006 285)}.ds-nav.on{background:oklch(0.24 0.04 290);color:oklch(0.97 0.006 285);font-weight:500}.ds-nav.on svg{color:oklch(0.8 0.12 292)}.ds-nav:focus-visible{outline:2px solid oklch(0.72 0.17 292);outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Mission Control",
+    "overview": "Pyxis is a console for people watching their own numbers: near-black, hairline-bordered, quiet until something changes. The ground is a near-black tinted toward violet (hue about 285), panels sit one lightness step above it, and 1px low-alpha white lines do the work that shadows and fills do elsewhere. Figures are set in a mono voice and compared against the previous period; labels stay in the sans. One electric violet marks the few things a person can act on or is currently looking at: the primary button, the selected range, the focus ring and the live request series. Everything else is neutral, and the semantic colors (red, amber, cyan, green) each carry exactly one meaning.\n\nThe build shows how this landed: the app reads as a dense dashboard with a 240px rail, a breadcrumb bar, and panels laid on a grid and never nested. The landing page uses the same material, adding only a violet atmosphere behind the hero and a stair-step pulse line along its lower edge. Definitions sit beside the numbers they explain, because the product's claims depend on stating what a figure is and is not (PRODUCT.md).\n\nThis is a dark system only. The light theme was not designed; `:root` declares `color-scheme: dark` and `<html class=\"dark\">` is fixed. Charts have no annotations beyond the automatic incident window and hover readout.",
+    "keyCharacteristics": [
+      "Near-black violet-tinted ground; panels one step lighter; hairlines instead of shadows.",
+      "Electric violet is the single accent; semantic hues each mean one thing.",
+      "Figures in Geist Mono with tabular numerals; labels and prose in Geist.",
+      "Small multiples on a shared scale; stair-step bars, not smoothed lines.",
+      "4px corners everywhere; 3px for chips, 1-2px for chart bars and swatches.",
+      "Every metric has a definition one hover, click or focus away."
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "Violet is the only accent and only for action, selection, focus and the live series. If it does not mark something a person can press, has chosen, is focused on, or is the measured series, it is neutral.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Means Failure Rule",
+        "body": "Red appears for 5xx and failure and nowhere decorative. A bar, cell, chip or window in red is an error condition.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light Theme Is Not Designed Rule",
+        "body": "No light tokens exist. Do not add `dark:` forks or light fallbacks by guesswork; a light theme is a new design task.",
+        "section": "colors"
+      },
+      {
+        "name": "The Figures Are Mono Rule",
+        "body": "Anything compared or scanned (counts, latencies, percentages, times, routes, methods, addresses) is Geist Mono with tabular numerals. Labels and sentences are Geist.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairlines Not Shadows Rule",
+        "body": "Surfaces separate with a 1px hairline and a tonal step. Only popovers (Def, chart readout) carry a shadow, because they float over other content.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Definitions Beside Numbers Rule",
+        "body": "A definition (Def) sits beside any number whose meaning is not obvious, and approximations such as percentiles are stated in a hint or footnote.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do use Electric Violet only for primary action, selected state, focus and the live series.",
+      "Do put a definition (Def) beside any number whose meaning is not obvious, and state approximations (percentiles) in a hint or footnote.",
+      "Do set figures, routes, methods, times and addresses in Geist Mono with tabular numerals; keep labels and prose in Geist.",
+      "Do separate surfaces with a 1px hairline and a one-step tonal change; reserve the shadow for popovers.",
+      "Do compare against the previous period with delta chips, keep Requests neutral, and keep latency changes under 5% neutral.",
+      "Do draw trends as small multiples on a shared scale, and label that scale.",
+      "Do keep red for 5xx and failure, amber for 4xx and warnings, cyan for 3xx, green for 2xx and good change.",
+      "Do keep corners at 4px (3px chips, 1-2px bars) and panels un-nested on the page grid.",
+      "Do disable animation under `prefers-reduced-motion`, as the global rule does."
+    ],
+    "donts": [
+      "Don't introduce a second accent hue or use violet for decoration, 4xx, or status.",
+      "Don't use red for anything that is not 5xx or failure, and don't use green or red for the Requests delta.",
+      "Don't add card shadows, glows, or gradients in the app; the hero atmosphere is landing-only.",
+      "Don't nest a panel inside a panel, or round corners beyond 4px.",
+      "Don't design or assume a light theme; none exists.",
+      "Don't claim chart annotations exist beyond automatic incident windows and the hover readout.",
+      "Don't hard-code colors in components; the logo's white bars are the one literal exception in the build and should move to tokens if the mark is reused."
+    ]
+  }
+}
