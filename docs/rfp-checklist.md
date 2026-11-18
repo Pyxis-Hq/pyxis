@@ -48,7 +48,7 @@ See [handover-build-plan.md](handover-build-plan.md) Part B for the steps.
 - [x] **D2** Code committed in logical commits and pushed to <https://github.com/Pyxis-Hq/pyxis> (2026-11-18)
 - [x] **D7** CI is green on GitHub Actions (install, typecheck, tests, build) on `main` (2026-11-18); link a badge or run from the README if wanted
 - [x] **H5** Public issue tracker with issue forms, a pull request template and labels (2026-11-18)
-- [ ] **G6** `[code]` Adopt a single-monorepo structure with npm workspaces (`sdk/*`). *Done when:* the app and packages build from the root
+- [x] **G6** Single monorepo with npm workspaces (`sdk/*`); the app and the SDK package build from the root (2026-11-18)
 - [x] **E9** Repository made public on 2026-11-18 after the license, private vulnerability reporting and a full-history secret scan; a clean clone typechecks, tests and builds
 - [x] Branch protection (CI must pass, a pull request and one review, linear history, no force pushes; administrators may bypass), Dependabot alerts and updates, secret scanning with push protection, and private vulnerability reporting are enabled; the maintainer note is gone from [SECURITY.md](../SECURITY.md)
 

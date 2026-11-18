@@ -32,7 +32,7 @@ Written 2026-11-18 from the repository and the live Railway project as they stan
 
 - The app is **built and deployed** to a testnet instance on Railway. It has never been used with a real wallet, real production traffic, or a real Umami.
 - The code has **never been pushed anywhere**. The local git repo has one commit (the Create Next App template) and about 38 changed or new paths uncommitted. There is no GitHub remote, and CI has never run.
-- There is no published SDK and no real Umami. (Update: an Apache-2.0 `LICENSE` was added on 2026-11-18.)
+- There is no real Umami. (Updates, 2026-11-18: an Apache-2.0 `LICENSE` was added, and `@pyxis-hq/wallets-kit@0.1.0-beta.0` was published to npm, covering the core client and the `/react` entry. The Stellar Wallets Kit adapter, the OpenTelemetry helper and publishing with provenance from GitHub Actions are still open.)
 - The visual redesign (dark, violet) is done and documented; do not redo it.
 - Your first hour should be Part A, then Part B, so nothing exists only on one laptop.
 
@@ -61,7 +61,7 @@ flowchart TD
 | Projects, members, roles, operator role | Built | `src/app/api/v1/projects/`, `src/app/operator/` |
 | Ingest keys (hashed, scoped, revocable) | Built | `src/server/keys.ts` |
 | OTLP/HTTP JSON metrics receiver, route normalization, histograms | Built, tested | `src/app/v1/metrics/`, `src/server/ingest/` |
-| Wallet-funnel endpoint and alpha SDK | Built (alpha); SDK is one unpublished file | `src/app/v1/wallet-events/`, `sdk/wallets-kit/` |
+| Wallet-funnel endpoint and SDK | Built; SDK published to npm as `@pyxis-hq/wallets-kit@0.1.0-beta.0` (2026-11-18) | `src/app/v1/wallet-events/`, `sdk/wallets-kit/` |
 | Web analytics (site enrollment, domain verification, Umami client, report UI) | Built against a **fake** Umami only | `src/server/domain.ts`, `src/server/umami.ts` |
 | Dashboards, settings and team, onboarding, operator view | Built; dark-first redesign | `src/app/projects/`, `src/components/pyxis/` |
 | Docs: README, TECHNICAL, CONTRIBUTING, SECURITY, PRODUCT, DESIGN, ROADMAP, SDK spec | Written | repo root and `docs/` |
@@ -397,7 +397,7 @@ Changes visible to users and integrators, all deliberate because there are no re
 | Session cookie `pulse_session` | `pyxis_session` | Everyone signs in again once |
 | Domain verification: DNS TXT host `_stellar-pulse.<domain>` and file `/.well-known/stellar-pulse.txt` | `_pyxis.<domain>` and `/.well-known/pyxis.txt` | Sites that were pending must publish at the new location (the stored token still works; its `sp-verify=` prefix is unchanged for existing rows, new rows use `pyxis-verify=`) |
 | Sign-in message `Stellar Pulse sign-in (testnet)` | `Pyxis sign-in (testnet)` | A challenge issued before the deploy and signed after it will fail once; retry |
-| SDK scope `@stellar-pulse/*` | `@pyxis-hq/*` (provisional until the npm scope is confirmed) | Nothing was published |
+| SDK scope `@stellar-pulse/*` | `@pyxis-hq/*` (the npm org `pyxis-hq` exists and the first package is published) | Nothing was published under the old scope |
 | Local dev database `pulse`, folder `.pulse-data` | `pyxis`, `.pyxis-data` | `npm run db:dev` creates a fresh database; the old `.pulse-data` folder can be deleted |
 | Environment variable `PULSE_APP_PASSWORD` | `PYXIS_APP_PASSWORD` | See step 1 |
 

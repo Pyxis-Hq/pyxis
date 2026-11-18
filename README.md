@@ -35,9 +35,9 @@ Built for the SCF RFP *Web and API Analytics for Stellar Ecosystem Projects*. Pl
 | Route normalization, mergeable histograms, p50 / p95 / p99 | Built | unit tests |
 | PostgreSQL row-level-security tenant isolation (non-owner runtime role) | Built | `tests/db.test.ts` on real PostgreSQL |
 | Dashboards: API metrics with previous-period deltas and incident windows, keys and setup, wallet funnel, settings and team, operator overview with audit log | Built, dark-first UI | build compiles; verified visually against a mock API with sample data, **not yet against real production data** |
-| Wallet funnel: alpha SDK, `/v1/wallet-events`, funnel panel, `/demo` testnet dApp | Built (alpha) | `tests/wallet.test.ts`, e2e; **`/demo` has not been run with a real wallet and a funded account** |
+| Wallet funnel: SDK, `/v1/wallet-events`, funnel panel, `/demo` testnet dApp | Built (SDK published as beta) | `tests/wallet.test.ts`, e2e; **`/demo` has not been run with a real wallet and a funded account** |
 | Site enrollment, domain verification (DNS TXT or well-known file, SSRF-guarded), Umami client, report UI | Built | `tests/web.test.ts` against a fake Umami; **never run against a real Umami release** |
-| Public SDK packages | Not started | specification in [docs/sdk-build-spec.md](docs/sdk-build-spec.md) |
+| Public SDK packages | Partial | `@pyxis-hq/wallets-kit@0.1.0-beta.0` is on npm (core and React); the Stellar Wallets Kit adapter and OpenTelemetry helper are not built; see [docs/sdk-build-spec.md](docs/sdk-build-spec.md) |
 | Umami deployment pinned by digest, tracker under an ad-blocker-neutral name | Not done (compose uses `latest`, untested) | ROADMAP M2 |
 | OTLP protobuf and gRPC, quotas UI, exports, erasure, 24-month rollups, bot detection, HA, load tests | Not started | ROADMAP M2 / M3 |
 
@@ -162,7 +162,7 @@ This is a dual export: keep your existing APM and add Pyxis as a second destinat
 
 ### Wallet funnel
 
-The alpha SDK lives in [sdk/wallets-kit/index.ts](sdk/wallets-kit/index.ts) and is used by the `/demo` page. It records nine allowlisted events (connect, sign and submit, each started, completed or failed, plus disconnect) and **never** accepts addresses, signatures or XDR. Wallet events are reported by your frontend and are **not** proof that a transaction reached the ledger. The package is not published yet; the build specification is [docs/sdk-build-spec.md](docs/sdk-build-spec.md).
+The SDK is published on npm as [`@pyxis-hq/wallets-kit`](https://www.npmjs.com/package/@pyxis-hq/wallets-kit) (`npm install @pyxis-hq/wallets-kit`). Its source is in [sdk/wallets-kit/](sdk/wallets-kit/) and the `/demo` page uses it. It has a core client and a `/react` entry. It records nine allowlisted events (connect, sign and submit, each started, completed or failed, plus disconnect) and **never** accepts addresses, signatures or XDR. Wallet events are reported by your frontend and are **not** proof that a transaction reached the ledger. The remaining SDK work (the Stellar Wallets Kit adapter and an OpenTelemetry helper) is specified in [docs/sdk-build-spec.md](docs/sdk-build-spec.md).
 
 ### Web analytics
 
@@ -193,7 +193,7 @@ src/
   server/                 db access, auth, keys, ingest parsing, queries, Umami and domain verification
 db/migrations/            SQL schema and row-level-security policies
 scripts/                  migrate, local Postgres, seed, e2e smoke, runtime-role password
-sdk/wallets-kit/          alpha wallet-funnel SDK
+sdk/wallets-kit/          @pyxis-hq/wallets-kit, the published wallet-funnel SDK
 tests/                    vitest suites
 docs/                     SDK build spec, design teardown
 ```
@@ -213,7 +213,7 @@ docs/                     SDK build spec, design teardown
 
 ## Testing
 
-`npm test` runs four suites: route normalization, histograms, OTLP parsing and key format (`unit`); tenant isolation and the key lifecycle on a real PostgreSQL (`db`); the wallet-event schema and the alpha SDK (`wallet`); domain normalization, the SSRF guard, domain verification and the Umami client against a fake server (`web`). CI runs install, typecheck, tests and build on every push and pull request ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
+`npm test` runs four suites: route normalization, histograms, OTLP parsing and key format (`unit`); tenant isolation and the key lifecycle on a real PostgreSQL (`db`); the wallet-event schema and the SDK (`wallet`, `sdk`); domain normalization, the SSRF guard, domain verification and the Umami client against a fake server (`web`). CI runs install, typecheck, tests and build on every push and pull request ([.github/workflows/ci.yml](.github/workflows/ci.yml)).
 
 ## Deployment
 
