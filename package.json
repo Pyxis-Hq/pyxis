@@ -9,7 +9,7 @@
     "test": "vitest run",
     "db:migrate": "tsx scripts/migrate.ts",
     "db:role": "tsx scripts/set-app-role.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "db:dev": "tsx scripts/dev-db.mts",
     "seed": "tsx scripts/seed.mts"
   },
