@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local embedded postgres
+.pyxis-data/
+
+# legacy local database folder from before the rename to Pyxis (safe to delete)
+.pulse-data/
+
+# local AI-assistant tooling (restore from skills-lock.json)
+/.agents/
+/.claude/
+/.github/agents/
+/.github/skills/
+# alternate Next.js build dirs used for verification
+/.next-verify/
