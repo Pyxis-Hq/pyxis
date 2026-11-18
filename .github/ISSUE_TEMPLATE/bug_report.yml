@@ -1,0 +1,54 @@
+name: Bug report
+description: Something in Pyxis does not work as documented
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Do not use this form for security problems.** Use the private route in SECURITY.md instead.
+        Never paste ingest keys, wallet secrets or real user data.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Dashboards and UI
+        - Sign-in and sessions
+        - Ingest API (/v1/metrics)
+        - Wallet events (/v1/wallet-events)
+        - Web analytics and domain verification
+        - Database and migrations
+        - SDK
+        - Docs
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you expect, and what did you see instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: A minimal request, script or click path.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "main at abc1234"
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Local or deployed, browser, Node version, wallet used (if relevant).
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove keys, tokens and personal data first.

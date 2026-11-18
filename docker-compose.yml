@@ -1,0 +1,26 @@
+# Reproducible evaluation stack. NOTE: not yet exercised in CI (no Docker daemon in the authoring environment);
+# `npm run db:dev` provides an equivalent embedded Postgres for local work. Treat this file as UNVERIFIED until a clean-room run is logged.
+services:
+  postgres:
+    image: postgres:17
+    environment: { POSTGRES_USER: postgres, POSTGRES_PASSWORD: postgres, POSTGRES_DB: pyxis }
+    ports: ["54329:5432"]
+    volumes: [pyxis-pg:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U postgres -d pyxis"], interval: 5s, retries: 10 }
+
+  umami-db:
+    image: postgres:17
+    environment: { POSTGRES_USER: umami, POSTGRES_PASSWORD: umami, POSTGRES_DB: umami }
+    volumes: [umami-pg:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U umami -d umami"], interval: 5s, retries: 10 }
+
+  # Separate database + credentials from Pyxis (docs/05 §1). TODO(ADR-001): pin by immutable digest after release selection.
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    depends_on: { umami-db: { condition: service_healthy } }
+    environment:
+      DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
+      APP_SECRET: change-me-in-real-deployments
+    ports: ["3200:3000"]
+
+volumes: { pyxis-pg: {}, umami-pg: {} }

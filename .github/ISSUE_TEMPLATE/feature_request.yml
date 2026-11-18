@@ -1,0 +1,44 @@
+name: Feature request
+description: Propose an improvement or a new capability
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Pyxis stores aggregates only and never personal data (see PRODUCT.md). Proposals that need personal data, traces, logs, wallet addresses or request bodies will not be accepted.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: Who is affected and what are they trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: dropdown
+    id: rfp
+    attributes:
+      label: Related SCF RFP requirement
+      description: See docs/rfp-acceptance-matrix.md
+      options:
+        - None
+        - General (3.1)
+        - Web analytics (3.2)
+        - API analytics (3.3)
+        - Hosting, support and handover (3.4)
+        - Deliverables (5)
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Checks
+      options:
+        - label: This does not require storing personal data or sending traces or logs
+          required: true
