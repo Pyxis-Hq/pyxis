@@ -243,7 +243,7 @@ stateDiagram-v2
 | T9 | Privilege escalation to operator | Operator derived from `OPERATOR_ACCOUNTS`; operator routes check the flag; every action audited | A removed operator keeps the flag until their next sign-in (section 12) |
 | T10 | Resource exhaustion | Body, point, batch, cardinality and range caps | No rate limiting or per-project quotas |
 | T11 | Injection (SQL, XSS) | Parameterized SQL; React escapes output; no `dangerouslySetInnerHTML` of user input found in the UI | No Content Security Policy as a second layer |
-| T12 | Supply-chain compromise | Lockfile, small dependency set, no third-party scripts loaded into the app | No automated dependency or secret scanning in CI |
+| T12 | Supply-chain compromise | Lockfile, small dependency set, no third-party scripts loaded into the app, Dependabot alerts and updates and GitHub secret scanning with push protection on the repository | No scanner or static analysis inside CI itself; transitive vulnerabilities in the wallet kit (section 12) |
 | T13 | A compromised operator or database owner | Aggregate-only operator API, audit log | Out of the threat model: these accounts are trusted by configuration |
 
 ## 12. Known weaknesses and hardening backlog
@@ -261,7 +261,9 @@ These are **known and unfixed**. They are disclosed so operators can mitigate th
 | Unpurged tables | `auth_challenges` and expired `sessions` accumulate | Periodic manual cleanup | Scheduled job |
 | No CSRF token | Protection relies on SameSite=Lax cookies | Keep deployments on HTTPS and modern browsers | Origin checks on mutating routes |
 | Server error logging | The sign-in challenge route logs the caught error object with `console.error` | Restrict log access | Log a sanitized code |
-| No automated dependency, secret or SAST scanning in CI | CI runs typecheck, tests and build only | Run `npm audit` and a secret scanner locally | Add scanners to CI |
+| No scanner or static analysis inside CI | Dependabot alerts and updates and GitHub secret scanning (with push protection) are enabled on the repository, but CI itself runs only typecheck, tests and build | Review Dependabot alerts; run `npm audit` locally | Add scanning and static analysis to CI |
+| Transitive vulnerabilities from `@creit.tech/stellar-wallets-kit` | `npm audit` reports about 20 findings (10 high) in libraries that the wallet kit pulls in for optional wallet modules (Reown, Coinbase, Solana and others). They load in the browser for wallet connection. No upstream fix is available; the only suggested remedy is an old major version of the kit. Pyxis does not store or handle wallet secrets | Limit the wallet modules offered; keep sign-in to a message signature (no transaction is sent) | Track upstream releases; pin or replace the wallet-connection layer; evaluate which modules are actually needed |
+| `shadcn` CLI listed as a dependency | `npm audit` reports moderate findings in the CLI's tooling (`ts-morph`, `minimatch`); the CLI is used only for a stylesheet import and component generation, not at runtime | None needed at runtime | Move it to `devDependencies` or vendor the stylesheet |
 | No third-party security audit; no SBOM or signed releases | Unreviewed beyond the project's own tests | Treat as testnet software | Commission an audit before mainnet use |
 | Umami integration untested against a real release; compose pins `latest` | Behavior and upgrade risk unverified | Pin Umami by digest in your deployment | Clean-room run and pinning |
 | No backup or restore procedure | Data loss risk | Use your platform's database backups | Document and rehearse restore |
