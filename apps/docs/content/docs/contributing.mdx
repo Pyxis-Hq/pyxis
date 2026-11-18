@@ -1,0 +1,38 @@
+---
+title: Contributing
+description: How to propose a change to Pyxis.
+---
+
+Pyxis is Apache-2.0. By contributing you agree that your work is licensed under the same terms.
+
+## Set up
+
+```bash
+git clone https://github.com/Pyxis-Hq/pyxis.git
+cd pyxis
+npm install --legacy-peer-deps
+npm run db:dev     # in one terminal
+npm run dev        # in another
+```
+
+## Before you open a pull request
+
+```bash
+npm run typecheck
+npm test
+npm run build
+```
+
+CI runs the same three on every push and pull request. `main` is protected: a pull request, passing CI and one review are required.
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `src/` | The Next.js app: routes, components, server code |
+| `db/migrations/` | SQL schema and row-level-security policies (applied files are frozen) |
+| `sdk/wallets-kit/` | The published SDK, `@pyxis-hq/wallets-kit` |
+| `apps/docs/` | This documentation site |
+| `tests/` | Vitest suites |
+
+For the full guide, including commit style and design rules, read [CONTRIBUTING.md](https://github.com/Pyxis-Hq/pyxis/blob/main/CONTRIBUTING.md) in the repository.

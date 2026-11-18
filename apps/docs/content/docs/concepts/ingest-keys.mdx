@@ -1,0 +1,19 @@
+---
+title: Ingest keys
+description: The write-only credential your services and browsers use.
+---
+
+An ingest key authorizes **writing** data to one project. It cannot read anything.
+
+```text
+pyx_live_<16 hex key id>.<43 base64url secret, 32 random bytes>
+```
+
+- The token is shown once, at creation. Only the SHA-256 of the secret is stored, and verification is constant-time.
+- Keys can be revoked immediately and can expire. They are rejected when the project is not `active`.
+- Authentication happens **before** the request body is read.
+- Send it as `Authorization: Bearer <token>`.
+
+<Callout title="Browser keys">
+  The wallet SDK runs in a browser, so its key is visible to anyone who opens your site. That is acceptable because an ingest key can only add counts. Use a separate key for the browser, and revoke it if it is abused.
+</Callout>

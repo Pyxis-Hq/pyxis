@@ -1,0 +1,72 @@
+---
+title: Track the wallet funnel
+description: Install the SDK and count where users drop off when connecting a wallet or signing.
+---
+
+`@pyxis-hq/wallets-kit` records the steps of a wallet flow as counts. It never accepts addresses, signatures, transaction XDR or free text.
+
+<Steps>
+  <Step>
+    ### Install
+
+    ```bash
+    npm install @pyxis-hq/wallets-kit
+    ```
+  </Step>
+  <Step>
+    ### Create a client
+
+    ```ts
+    import { createPyxisWallet } from "@pyxis-hq/wallets-kit";
+
+    export const pyxis = createPyxisWallet({
+      endpoint: "https://YOUR-PYXIS-HOST/v1/wallet-events",
+      ingestKey: "pyx_live_...", // a write-only ingest key
+      network: "public",
+    });
+    ```
+  </Step>
+  <Step>
+    ### Track events
+
+    ```ts
+    pyxis.track("wallet_connect_started");
+    pyxis.track("wallet_connected", { wallet_provider: "freighter" });
+    pyxis.track("transaction_sign_failed", {
+      wallet_provider: "freighter",
+      failure_category: "user_rejected",
+    });
+    ```
+  </Step>
+</Steps>
+
+## React
+
+```tsx
+import { PyxisProvider, usePyxis } from "@pyxis-hq/wallets-kit/react";
+
+function Root() {
+  return (
+    <PyxisProvider endpoint="https://YOUR-PYXIS-HOST/v1/wallet-events" ingestKey="pyx_live_..." network="public">
+      <App />
+    </PyxisProvider>
+  );
+}
+
+function ConnectButton() {
+  const { track } = usePyxis();
+  return <button onClick={() => track("wallet_connect_started")}>Connect</button>;
+}
+```
+
+## Privacy controls
+
+- Honours Do Not Track and Global Privacy Control by default (`respectDoNotTrack`).
+- Wire `enabled` or `setEnabled(false)` to your own consent control. Disabling clears the queue.
+- Nothing is written to cookies or storage. The queue lives in memory only.
+
+<Callout title="Reported by the frontend">
+  The funnel shows what the browser reported. It does not prove that a transaction reached the ledger, and the funnel API labels it `reported_by: "frontend"` and `verified_on_ledger: false`.
+</Callout>
+
+See the [SDK reference](/docs/reference/sdk) for every option and the [event reference](/docs/reference/wallet-events) for the allowed values.

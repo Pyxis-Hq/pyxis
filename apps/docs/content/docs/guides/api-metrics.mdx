@@ -1,0 +1,45 @@
+---
+title: Send API metrics
+description: Add Pyxis as a second OpenTelemetry destination for your API.
+---
+
+Pyxis accepts **OTLP/HTTP JSON** metrics at `POST /v1/metrics`. It reads the HTTP server request duration histogram, which most OpenTelemetry SDKs already produce.
+
+This is a **dual export**: keep your existing APM and add Pyxis as a second destination.
+
+## Configure the exporter
+
+The **Keys and setup** page generates these settings with your new key filled in.
+
+```bash
+export OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=http/json
+export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=https://YOUR-PYXIS-HOST/v1/metrics
+export OTEL_EXPORTER_OTLP_METRICS_HEADERS="Authorization=Bearer YOUR_INGEST_KEY"
+export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta
+export OTEL_SERVICE_NAME=my-api
+export OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=testnet
+```
+
+<Callout type="warn" title="Use delta temporality">
+  Cumulative temporality is dropped with the reason `cumulative_temporality_unsupported`. This is the most common mistake. Set `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE=delta`.
+</Callout>
+
+## What Pyxis needs on each data point
+
+| Attribute | Required | Notes |
+|---|---|---|
+| `service.name` (resource) | Yes | Otherwise `missing_service_name` |
+| `deployment.environment.name` (resource) | No | Defaults to `default` |
+| `http.response.status_code` | Yes | Integer 100 to 599 |
+| `http.request.method` | No | Unknown methods become `_OTHER` |
+| `http.route` | Preferred | Otherwise `url.path` is used and normalized |
+
+Routes are templated so identifiers do not explode your route list: UUIDs become `{uuid}`, Stellar `G` accounts `{stellar_account}`, `C` contracts `{contract_id}`, and all-digit segments `{id}`.
+
+## Limits
+
+Body size 1,000,000 bytes, 5,000 data points per request, 10 services per project and 200 routes per service. Traces and logs are not accepted and return `404 signal_not_supported`. See the [Ingest API reference](/docs/reference/ingest-api) for every reason code.
+
+## Verify
+
+Send a request, then open the project overview. A response of `200` with a `partialSuccess` body means some points were dropped; the reason codes say why.

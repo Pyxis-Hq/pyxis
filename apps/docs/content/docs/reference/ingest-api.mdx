@@ -1,0 +1,56 @@
+---
+title: Ingest API
+description: Endpoints, authentication, limits and error codes for sending data to Pyxis.
+---
+
+All ingest endpoints take `Authorization: Bearer pyx_live_<id>.<secret>` and require the key to have the `ingest` scope.
+
+| Method and path | Purpose |
+|---|---|
+| `POST /v1/metrics` | OTLP/HTTP JSON metrics |
+| `POST /v1/wallet-events` (and `OPTIONS`) | Wallet funnel events; CORS allows any origin |
+| `POST /v1/traces`, `POST /v1/logs` | Always `404 signal_not_supported` |
+
+## POST /v1/metrics
+
+Authentication happens before the body is read, and the response is sent only after the database commit.
+
+| Aspect | Rule | Reason code when violated |
+|---|---|---|
+| Metric | `http.server.request.duration` or `http.server.duration` | `metric_not_allowed` |
+| Type | Histogram | `wrong_metric_type` |
+| Temporality | Delta only | `cumulative_temporality_unsupported` |
+| Unit | `s`, `ms`, `us`, `ns` or empty (treated as ms) | `unsupported_unit` |
+| Service | Resource attribute `service.name` | `missing_service_name` |
+| Status | `http.response.status_code`, 100 to 599 | `invalid_status_code` |
+| Time | Not older than 24 h, not more than 5 min in the future | `timestamp_too_old`, `timestamp_in_future` |
+| Histogram shape | `bucketCounts` length equals `explicitBounds` length plus 1, counts non-negative | `malformed_histogram` |
+| Service quota | 10 (service, environment) pairs per project | `service_quota_exceeded` |
+| Route cardinality | 200 routes per service over 7 days; extras fold into `/_other` | `route_cardinality_capped` |
+
+Body limit is 1,000,000 bytes and 5,000 data points. A `200` can still carry a `partialSuccess` with dropped points.
+
+Source histograms are re-bucketed onto fixed upper bounds in milliseconds, assigned by their upper bound so latency is never under-reported: 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000 and +Inf.
+
+## POST /v1/wallet-events
+
+See [Wallet events](/docs/reference/wallet-events).
+
+## Errors
+
+Errors have one shape: `{ "code": "<machine_code>", "message": "<generic text>" }`.
+
+| Code | Meaning |
+|---|---|
+| `auth_malformed`, `auth_unknown`, `auth_bad_secret` | The key is missing, unknown or wrong |
+| `auth_revoked`, `auth_expired` | The key was revoked or has expired |
+| `auth_project_inactive` | The project is suspended or archived |
+| `auth_scope` | The key lacks the `ingest` scope |
+| `payload_too_large` | Body over the limit |
+| `invalid_json`, `unsupported_content_type` | Body is not JSON |
+| `too_many_data_points` | More than 5,000 data points |
+| `signal_not_supported` | You sent traces or logs |
+
+<Callout type="warn" title="No rate limiting yet">
+  The ingest endpoints are limited only by size caps. Per-key and per-IP rate limits are not implemented. See [Security](/docs/security).
+</Callout>

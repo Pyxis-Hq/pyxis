@@ -1,0 +1,29 @@
+---
+title: Configuration
+description: Environment variables for running Pyxis.
+---
+
+| Variable | Used by | Default | Purpose |
+|---|---|---|---|
+| `DATABASE_URL` | app runtime | `postgres://pyxis_app:pyxis_app@localhost:54329/pyxis` | Connection for the non-owner runtime role `pyxis_app` |
+| `ADMIN_DATABASE_URL` | `db:migrate`, `db:role` | `postgres://postgres:postgres@localhost:54329/pyxis` (migrate only) | Owner connection used to run migrations |
+| `PYXIS_APP_PASSWORD` | `db:role` | none (required there) | Replaces the development password of `pyxis_app` after migrating |
+| `OPERATOR_ACCOUNTS` | app runtime | empty | Stellar public keys that get the operator role at sign-in |
+| `UMAMI_URL` | app runtime | none | Base URL of the Umami instance; web analytics is off without it |
+| `UMAMI_USER`, `UMAMI_PASSWORD` | app runtime | none | Credentials for Umami's REST API |
+| `UMAMI_PUBLIC_URL` | app runtime | `UMAMI_URL` | Origin the tracker snippet loads `script.js` from |
+| `BACKEND_URL` | `next dev` / `next build` | none | Proxy API requests to a deployed backend |
+| `NEXT_DIST_DIR` | Next.js | `.next` | Separate build directory |
+
+## Scripts
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Next.js dev server |
+| `npm run build` / `npm start` | Production build and server |
+| `npm run typecheck` | Generate route types and run `tsc --noEmit` |
+| `npm test` | Vitest (starts its own embedded PostgreSQL) |
+| `npm run db:dev` | Embedded PostgreSQL on `:54329`, migrations applied |
+| `npm run db:migrate` | Apply `db/migrations/*.sql` (checksummed, transactional) |
+| `npm run db:role` | Set the `pyxis_app` password from `PYXIS_APP_PASSWORD` |
+| `npm run seed` | Load synthetic demo data and print ingest keys |

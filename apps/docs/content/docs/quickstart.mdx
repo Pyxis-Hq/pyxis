@@ -1,0 +1,52 @@
+---
+title: Quickstart
+description: Sign in, create a project and send your first data point.
+---
+
+<Steps>
+  <Step>
+    ### Sign in with a Stellar wallet
+
+    Pyxis has no passwords. You sign a short challenge with your wallet (a message signature; no transaction is sent) and receive a session cookie that lasts seven days.
+  </Step>
+  <Step>
+    ### Create a project
+
+    A project is the unit of isolation. The person who creates it is its **owner**.
+  </Step>
+  <Step>
+    ### Create an ingest key
+
+    Open **Keys and setup** and create a key. The token looks like `pyx_live_` followed by 16 hex characters, a dot and a 43-character secret, and it is shown **once**. Only its SHA-256 hash is stored, so a lost key cannot be recovered, only replaced.
+  </Step>
+  <Step>
+    ### Send data
+
+    Pick what you want to measure:
+
+    - **API metrics:** [Send API metrics](/docs/guides/api-metrics)
+    - **Wallet funnel:** [Track the wallet funnel](/docs/guides/wallet-funnel)
+    - **Website:** [Add web analytics](/docs/guides/web-analytics)
+  </Step>
+</Steps>
+
+## Try it locally
+
+Prerequisites: Node.js 22 and npm. An embedded PostgreSQL is included, so Docker is optional.
+
+```bash
+git clone https://github.com/Pyxis-Hq/pyxis.git
+cd pyxis
+npm install --legacy-peer-deps   # the flag is required by current peer ranges
+npm run db:dev                   # embedded PostgreSQL on :54329 (keep it running)
+npm run seed                     # SYNTHETIC demo data; prints ingest keys
+OPERATOR_ACCOUNTS=G... npm run dev
+```
+
+Open `http://localhost:3000`. `OPERATOR_ACCOUNTS` is a comma-separated list of Stellar public keys that receive the operator role at sign-in.
+
+## Check the pipe end to end
+
+```bash
+SMOKE_SECRET=S... npx tsx scripts/e2e-smoke.mts http://localhost:3000 <ingest-token>
+```

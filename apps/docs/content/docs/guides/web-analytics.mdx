@@ -1,0 +1,39 @@
+---
+title: Add web analytics
+description: Verify your domain and install the tracker snippet.
+---
+
+Web analytics is powered by [Umami](https://umami.is), run as a separate service. Without an Umami instance configured on the deployment, domains still verify but no tracker is issued.
+
+<Steps>
+  <Step>
+    ### Add the domain
+
+    Open **Web analytics** in your project and add the domain.
+  </Step>
+  <Step>
+    ### Prove you control it
+
+    Either publish a DNS TXT record at `_pyxis.YOUR-DOMAIN` with the token Pyxis shows you, or serve the same token at `/.well-known/pyxis.txt`.
+  </Step>
+  <Step>
+    ### Verify
+
+    Press **Verify**. Pyxis checks the record, then creates the website in Umami.
+  </Step>
+  <Step>
+    ### Install the snippet
+
+    Paste the issued script tag into your site's head:
+
+    ```html
+    <script defer src="https://YOUR-UMAMI/script.js" data-website-id="..." data-domains="your-domain.example"></script>
+    ```
+  </Step>
+</Steps>
+
+The tracker is served from the Umami instance that Pyxis operates. No third-party script is loaded.
+
+## What you see
+
+Page views, visitors, visits, bounce rate, average session length, the top 10 referrers, countries, browsers and devices. These follow Umami's own definitions.

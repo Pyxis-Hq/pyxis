@@ -1,0 +1,44 @@
+---
+title: Wallet events
+description: The event allowlist, limits and response of POST /v1/wallet-events.
+---
+
+`POST /v1/wallet-events` accepts a JSON body `{ "events": [ ... ] }`. The validator is a **strict allowlist**: any unknown property (an address, a signature, XDR) rejects that event.
+
+## Events
+
+| Event | Meaning |
+|---|---|
+| `wallet_connect_started` | The user began connecting a wallet |
+| `wallet_connected` | The wallet connected |
+| `wallet_disconnect` | The wallet disconnected |
+| `transaction_sign_started` | A signing request was shown |
+| `transaction_sign_completed` | The user signed |
+| `transaction_sign_failed` | Signing failed or was rejected |
+| `transaction_submit_started` | Submission began |
+| `transaction_submit_completed` | Submission reported success |
+| `transaction_submit_failed` | Submission reported failure |
+
+## Properties
+
+| Property | Allowed values |
+|---|---|
+| `event` | One of the events above (required) |
+| `wallet_provider` | `freighter`, `xbull`, `albedo`, `lobstr`, `rabet`, `hana`, `ledger`, `hot_wallet`, `other`. Anything else becomes `other` |
+| `network` | `testnet`, `public`, `other`. Anything else becomes `other` |
+| `failure_category` | Lowercase letters and underscore, 1 to 32 characters |
+| `flow`, `sdk_version`, `ts` | Accepted but not stored. The server always uses its own time |
+
+## Limits and response
+
+| Fact | Detail |
+|---|---|
+| Batch | At most 50 events; body at most 20,000 characters |
+| Status | `200` even when events are rejected; the body is `{ "accepted": n, "rejected": [{ "index": i, "reason": "..." }] }` |
+| Reject reasons | `not_an_object`, `prohibited_property`, `unknown_event`, `bad_failure_category` |
+| Batch errors | `400 events_array_required`, `400 batch_too_large`, `413` |
+| Stored | Counts per project, minute, event, provider category and network only |
+
+<Callout title="Reported, not verified">
+  Events come from the browser. They are never proof that a transaction reached the ledger.
+</Callout>

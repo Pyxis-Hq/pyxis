@@ -194,6 +194,7 @@ src/
 db/migrations/            SQL schema and row-level-security policies
 scripts/                  migrate, local Postgres, seed, e2e smoke, runtime-role password
 sdk/wallets-kit/          @pyxis-hq/wallets-kit, the published wallet-funnel SDK
+apps/docs/                documentation site (Fumadocs); `npm run dev --workspace @pyxis-hq/docs` serves it on :3100
 tests/                    vitest suites
 docs/                     SDK build spec, design teardown
 ```

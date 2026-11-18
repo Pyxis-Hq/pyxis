@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* Same tokens as the Pyxis app (src/app/globals.css): near-black violet ground, hairline borders,
+   electric violet as the single accent. fumadocs-ui/css/shadcn.css maps them onto the docs theme. */
+@theme inline {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+  /* Mission-control palette: near-black ground tinted toward violet, panels one step lighter, hairline borders.
+     Electric violet is the single accent (action, selection, focus, the live series). Red is 5xx and failure only,
+     amber is 4xx and warning, cyan is 3xx, green is success. */
+  --background: oklch(0.14 0.012 285);
+  --foreground: oklch(0.97 0.006 285);
+  --card: oklch(0.18 0.014 285);
+  --card-foreground: oklch(0.97 0.006 285);
+  --popover: oklch(0.2 0.016 285);
+  --popover-foreground: oklch(0.97 0.006 285);
+  --primary: oklch(0.55 0.22 292);
+  --primary-foreground: oklch(0.99 0.004 292);
+  --secondary: oklch(0.22 0.016 285);
+  --secondary-foreground: oklch(0.97 0.006 285);
+  --muted: oklch(0.21 0.015 285);
+  --muted-foreground: oklch(0.72 0.02 285);
+  --accent: oklch(0.25 0.03 290);
+  --accent-foreground: oklch(0.97 0.006 285);
+  --destructive: oklch(0.68 0.2 25);
+  --border: oklch(1 0 0 / 0.09);
+  --border-strong: oklch(1 0 0 / 0.17);
+  --input: oklch(1 0 0 / 0.16);
+  --ring: oklch(0.72 0.17 292);
+  --danger: oklch(0.68 0.2 25);
+  --warn: oklch(0.8 0.15 80);
+  --warn-ink: oklch(0.86 0.12 85);
+  --info: oklch(0.78 0.1 215);
+  --ok: oklch(0.76 0.15 155);
+  --series: oklch(0.65 0.15 292);
+  --violet-text: oklch(0.8 0.12 292);
+  --chart-1: oklch(0.7 0.16 292);
+  --chart-2: oklch(0.78 0.1 215);
+  --chart-3: oklch(0.8 0.15 80);
+  --chart-4: oklch(0.68 0.2 25);
+  --chart-5: oklch(0.76 0.15 155);
+  --radius: 0.25rem;
+  --sidebar: oklch(0.115 0.012 285);
+  --sidebar-foreground: oklch(0.97 0.006 285);
+  --sidebar-primary: oklch(0.55 0.22 292);
+  --sidebar-primary-foreground: oklch(0.99 0.004 292);
+  --sidebar-accent: oklch(0.24 0.04 290);
+  --sidebar-accent-foreground: oklch(0.97 0.006 285);
+  --sidebar-border: oklch(1 0 0 / 0.08);
+  --sidebar-ring: oklch(0.72 0.17 292);
+}
+
+
+html {
+  font-family: var(--font-sans);
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+}
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+body { font-feature-settings: "ss01", "cv11"; }
+p, li, dd, figcaption { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+code, kbd, pre { font-family: var(--font-mono); }
+::selection { background: oklch(0.6 0.22 292 / 0.35); color: var(--foreground); }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+/* Flat and square, like the app. */
+#nd-docs-layout, #nd-sidebar { --radius: 0.25rem; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

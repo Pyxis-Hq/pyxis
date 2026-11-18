@@ -1,0 +1,30 @@
+---
+title: How Pyxis works
+description: What is collected, what is rejected, and where the privacy boundary sits.
+---
+
+Pyxis is built around one rule: **store aggregates, never individuals.** Everything that enters is checked against an allowlist first.
+
+```text
+Your API (OpenTelemetry)  --> /v1/metrics         --+
+Your dApp (wallets-kit)     --> /v1/wallet-events    --+--> PostgreSQL (row-level security) --> Pyxis app
+Your website (tracker)      --> Umami ------------------------------------------------------> Pyxis app
+```
+
+## What is stored
+
+| Stored | Not stored |
+|---|---|
+| Request counters and latency histograms per route, per minute | Traces, logs, request or response bodies |
+| Wallet event counts per minute (event, provider category, network) | Wallet addresses, signatures, transaction XDR, free text |
+| SHA-256 of key secrets; project membership by Stellar public key | IP addresses, query strings, the key secrets themselves |
+
+Web analytics counts come from Umami and follow Umami's own definitions and data handling.
+
+## Tenant isolation
+
+Every project's rows carry a project id, and PostgreSQL **row-level security** enforces that a request can only see its own project. The application connects as a non-owner database role (`pyxis_app`), so the policies cannot be bypassed by the application. Each request sets its tenant for the duration of one transaction.
+
+<Callout title="Reported, not verified">
+  Wallet events are engagement signals reported by a browser. They say what the frontend claims happened, not what the ledger confirms.
+</Callout>

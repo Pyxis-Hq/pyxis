@@ -1,0 +1,34 @@
+---
+title: Security and privacy
+description: How Pyxis protects project data, and the gaps that are still open.
+---
+
+## Design
+
+| Concern | Control |
+|---|---|
+| Tenant isolation | PostgreSQL row-level security; the app connects as a non-owner role, and each request sets its tenant per transaction |
+| Credential theft | Ingest key secrets are 256-bit and stored only as SHA-256; verification is constant-time; keys are revocable and can expire |
+| Sign-in | A signed challenge from a Stellar wallet (a message signature, no transaction); session cookie lasts 7 days |
+| Existence leaks | Requests for another project's data return `404 not_found`, not `403` |
+| Over-collection | Strict allowlists on ingest; traces, logs, bodies, IPs and query strings are rejected or never read |
+| Resource exhaustion | Body, data-point, batch, service and route-cardinality caps |
+| Operator access | Operator reads and status changes are written to an audit log |
+| Supply chain | Lockfile, a small dependency set, Dependabot alerts and updates, secret scanning with push protection |
+
+## Known gaps
+
+<Callout type="warn" title="Be aware before you rely on it">
+  These are open. They are tracked in the repository's SECURITY.md.
+</Callout>
+
+| Gap | Impact | Mitigation today |
+|---|---|---|
+| No rate limiting on `/v1/*` | Abuse limited only by size caps | Revoke abused keys; add limits at the edge |
+| No scanner or static analysis inside CI | Vulnerabilities rely on Dependabot and manual review | Review Dependabot alerts; run `npm audit` locally |
+| Transitive vulnerabilities from `@creit.tech/stellar-wallets-kit` | `npm audit` reports about 20 findings in optional wallet-module libraries used by the demo; no upstream fix | The demo's sign-in is a message signature only; Pyxis stores no wallet secrets |
+| Wallet events are frontend-reported | They can be inflated by anyone who has the browser key | Treat the funnel as engagement, not proof |
+
+## Reporting a vulnerability
+
+Use GitHub's private vulnerability reporting: open the repository's **Security** tab and choose **Report a vulnerability**, or go to [github.com/Pyxis-Hq/pyxis/security/advisories/new](https://github.com/Pyxis-Hq/pyxis/security/advisories/new). Only the maintainers can see the report. Please do not open a public issue for a vulnerability.

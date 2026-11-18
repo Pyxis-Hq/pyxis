@@ -1,0 +1,14 @@
+---
+title: Projects and roles
+description: Who can see and change what.
+---
+
+| Role | Can do |
+|---|---|
+| viewer, analyst | Read the project's dashboards, sites and team list |
+| developer | Everything above, plus create and revoke ingest keys |
+| admin | Everything above, plus rename the project, add or remove members, add and verify sites |
+| owner | Everything an admin can do; cannot be removed. The creator of a project is its owner |
+| operator | A deployment-level role set by `OPERATOR_ACCOUNTS`. Reads aggregates across projects and can suspend or reinstate a project; every access is written to an audit log |
+
+Members are identified by their Stellar public key. A request for a project you cannot access returns `404 not_found`, so the existence of other projects is never revealed.

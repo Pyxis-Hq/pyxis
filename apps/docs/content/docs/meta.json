@@ -1,0 +1,4 @@
+{
+  "title": "Pyxis Docs",
+  "pages": ["index", "quickstart", "---Concepts---", "...concepts", "---Guides---", "...guides", "---Reference---", "...reference", "---Project---", "security", "self-hosting", "contributing"]
+}

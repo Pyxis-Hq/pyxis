@@ -1,0 +1,33 @@
+---
+title: Pyxis
+description: Privacy-first web and API analytics for Stellar projects, built to be read by the people who run the ecosystem.
+---
+
+Pyxis shows a Stellar project how its API and its website are used, without collecting anything that identifies a person. It is a multi-tenant service: each project gets its own dashboards, and a project's data is isolated from every other project's at the database level.
+
+<Callout type="warn" title="Status: testnet MVP">
+  Pyxis is an MVP. The data you see in a fresh checkout is synthetic. Wallet events are reported by your frontend and are **not** proof that a transaction reached the ledger.
+</Callout>
+
+## What it does
+
+| Area | What you get | How data gets in |
+|---|---|---|
+| API analytics | Request volume, status classes, error rate, and p50, p95 and p99 latency per route | OpenTelemetry metrics sent to `POST /v1/metrics` |
+| Web analytics | Page views, visitors, referrers, countries, browsers and devices | A tracker snippet served from an Umami instance, after you verify your domain |
+| Wallet funnel | Where users drop off when they connect a wallet, sign or submit | The `@pyxis-hq/wallets-kit` SDK |
+
+## Start here
+
+<Cards>
+  <Card title="Quickstart" href="/docs/quickstart">Send your first data point in a few minutes.</Card>
+  <Card title="How Pyxis works" href="/docs/concepts/how-it-works">What is collected, what is rejected, and why.</Card>
+  <Card title="Send API metrics" href="/docs/guides/api-metrics">Add Pyxis as a second OpenTelemetry destination.</Card>
+  <Card title="Wallet SDK" href="/docs/guides/wallet-funnel">Install `@pyxis-hq/wallets-kit` and track the wallet funnel.</Card>
+  <Card title="Ingest API reference" href="/docs/reference/ingest-api">Endpoints, limits and error codes.</Card>
+  <Card title="Security" href="/docs/security">The privacy and security model, and the known gaps.</Card>
+</Cards>
+
+## Open source
+
+Pyxis is released under the Apache License 2.0. The code, issues and security reports live at [github.com/Pyxis-Hq/pyxis](https://github.com/Pyxis-Hq/pyxis).

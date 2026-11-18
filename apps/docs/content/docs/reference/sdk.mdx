@@ -1,0 +1,56 @@
+---
+title: SDK reference
+description: API of @pyxis-hq/wallets-kit.
+---
+
+```bash
+npm install @pyxis-hq/wallets-kit
+```
+
+Zero runtime dependencies, ESM and CJS with types, SSR-safe. Currently `0.1.0-beta.0`.
+
+## Entry points
+
+| Import | Contents |
+|---|---|
+| `@pyxis-hq/wallets-kit` | `PyxisWallet`, `createPyxisWallet`, `isWalletEvent`, `WALLET_EVENTS`, `WALLET_PROVIDERS`, `NETWORKS`, `SDK_VERSION` and the types |
+| `@pyxis-hq/wallets-kit/react` | `PyxisProvider`, `usePyxis` |
+
+## Options
+
+| Option | Default | Description |
+|---|---|---|
+| `endpoint` | none | Full URL of `/v1/wallet-events` |
+| `ingestKey` | none | The `pyx_live_...` key |
+| `network` | `testnet` | `testnet`, `public` or `other` |
+| `enabled` | `true` | Wire to your consent control |
+| `respectDoNotTrack` | `true` | Honour Do Not Track and Global Privacy Control |
+| `maxQueue` | `100` | Oldest events are dropped beyond this |
+| `batchSize` | `20` | Events per request, 1 to 50 |
+| `flushIntervalMs` | `5000` | Periodic flush |
+| `debug` | `false` | Log decisions to the console; the key is never logged |
+| `fetchImpl` | global `fetch` | Custom fetch, for tests |
+
+## Methods
+
+| Method | Description |
+|---|---|
+| `track(event, props?)` | Queue an event. Never throws and never waits on the network |
+| `flush()` | Send queued events now. Never rejects |
+| `setEnabled(boolean)` | Turn tracking on or off; turning it off clears the queue |
+| `stats()` | `{ queued, sent, dropped, rejected, disabled, circuitOpen }` |
+| `destroy()` | Stop timers and listeners, clear the queue |
+| `queued`, `droppedCount` | Counters |
+
+## Delivery behaviour
+
+| Situation | What the SDK does |
+|---|---|
+| Page hidden or closed | Flushes with `keepalive` |
+| `5xx`, `429`, network error | Retries with backoff and jitter, up to 5 times, then drops |
+| `413` | Splits the batch and resends |
+| Other `4xx` | Drops the batch, no retry |
+| Three consecutive `401` or `403` | Opens a circuit breaker and stops sending (`stats().circuitOpen`) |
+| Server-side rendering | Nothing starts until the first `track`, so importing is safe |
+
+Not yet built: the Stellar Wallets Kit adapter that captures events automatically, and an OpenTelemetry helper.

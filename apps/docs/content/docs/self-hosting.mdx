@@ -1,0 +1,51 @@
+---
+title: Self-hosting
+description: Run Pyxis on your own infrastructure.
+---
+
+Pyxis is a Next.js app with PostgreSQL. Web analytics needs a separate Umami instance.
+
+## Requirements
+
+- Node.js 22 and npm
+- PostgreSQL 17 or 18 (an embedded one is included for local work)
+- Optional: an Umami instance for web analytics
+
+## Steps
+
+<Steps>
+  <Step>
+    ### Create the database and roles
+
+    Run migrations with the **owner** connection, then set the password of the non-owner runtime role:
+
+    ```bash
+    ADMIN_DATABASE_URL=postgres://owner:...@host/pyxis npm run db:migrate
+    ADMIN_DATABASE_URL=postgres://owner:...@host/pyxis PYXIS_APP_PASSWORD=... npm run db:role
+    ```
+
+    Migrations are checksummed. Editing an already-applied file aborts the run.
+  </Step>
+  <Step>
+    ### Configure the app
+
+    Point `DATABASE_URL` at the `pyxis_app` role, set `OPERATOR_ACCOUNTS`, and optionally the `UMAMI_*` variables. See [Configuration](/docs/reference/configuration).
+  </Step>
+  <Step>
+    ### Build and start
+
+    ```bash
+    npm install --legacy-peer-deps
+    npm run build
+    npm start
+    ```
+  </Step>
+</Steps>
+
+## Railway
+
+The repository includes a `railway.json` whose pre-deploy command is `npm run db:migrate && npm run db:role`. After the first deploy, verify that the migration ran; if it did not, run the same command inside the service.
+
+<Callout type="warn" title="Do not use the owner connection at runtime">
+  The app must connect as `pyxis_app`. If it connects as the table owner, row-level security does not apply and tenant isolation is lost.
+</Callout>
