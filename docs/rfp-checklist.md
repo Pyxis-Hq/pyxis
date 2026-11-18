@@ -45,12 +45,12 @@ Run `npm run typecheck`, `npm test` and `npm run build`, then the e2e script fro
 See [handover-build-plan.md](handover-build-plan.md) Part B for the steps.
 
 - [x] **G6** (license part) Apache-2.0 `LICENSE` added and stated in the README (2026-11-18). The monorepo-workspaces part of G6 stays open below
-- [ ] **D2** `[ops]` Commit the working tree in logical commits and push to GitHub (private first). *Done when:* `main` on GitHub contains the product and the docs
-- [ ] **D7** `[verify]` First CI run is green (install, typecheck, tests, build). *Done when:* a green run is linked from the README
-- [ ] **H5** `[ops]` Public issue tracker with issue templates and labels. *Done when:* anyone can open an issue and a template exists
+- [x] **D2** Code committed in logical commits and pushed to <https://github.com/Pyxis-Hq/pyxis> (2026-11-18)
+- [x] **D7** CI is green on GitHub Actions (install, typecheck, tests, build) on `main` (2026-11-18); link a badge or run from the README if wanted
+- [x] **H5** Public issue tracker with issue forms, a pull request template and labels (2026-11-18)
 - [ ] **G6** `[code]` Adopt a single-monorepo structure with npm workspaces (`sdk/*`). *Done when:* the app and packages build from the root
-- [ ] **E9** `[docs]` Make the repository public after the license, the security contact and a final secret scan. *Done when:* the repo is public and a clean clone builds
-- [ ] `[ops]` Enable branch protection, Dependabot, secret scanning and private vulnerability reporting; remove the maintainer note in [SECURITY.md](../SECURITY.md)
+- [x] **E9** Repository made public on 2026-11-18 after the license, private vulnerability reporting and a full-history secret scan; a clean clone typechecks, tests and builds
+- [x] Branch protection (CI must pass, a pull request and one review, linear history, no force pushes; administrators may bypass), Dependabot alerts and updates, secret scanning with push protection, and private vulnerability reporting are enabled; the maintainer note is gone from [SECURITY.md](../SECURITY.md)
 
 ## 4. Verify what is built but unproven
 

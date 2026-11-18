@@ -26,7 +26,7 @@ Pyxis is a **testnet MVP**. Nothing here is a certification, an audit result or 
 
 **Do not open a public issue, pull request or discussion for a security problem.** Public details put every deployment at risk before a fix exists.
 
-> **Maintainers: action required.** This repository does not yet publish a private contact. Before the project is announced publicly, enable GitHub's *private vulnerability reporting* (repository Settings, Security) or add a dedicated security email address here, and delete this note. Until then, contact the maintainers through the private channel listed on the repository or the project's grant submission.
+**How:** use GitHub's private vulnerability reporting. Open the repository's **Security** tab and choose **Report a vulnerability**, or go directly to <https://github.com/Pyxis-Hq/pyxis/security/advisories/new>. Only the maintainers can see the report.
 
 Include, as far as you can:
 

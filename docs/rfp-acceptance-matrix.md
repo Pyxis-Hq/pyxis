@@ -3,7 +3,7 @@
 Traceability from every requirement in the Stellar Community Fund RFP **"Web and API Analytics for Stellar Ecosystem Projects"** to what this repository does today, the evidence a reviewer can check, and what is still missing.
 
 - **Source:** <https://stellar.gitbook.io/scf-handbook/scf-awards/build-award/rfp-track#web-and-api-analytics-for-stellar-ecosystem-projects>
-- **Last reviewed:** 2026-11-18, against the working tree of this repository (commit `main` on GitHub).
+- **Last reviewed:** 2026-11-18, against `main` of the public repository <https://github.com/Pyxis-Hq/pyxis>.
 - **Companion:** the actionable list is in [rfp-checklist.md](rfp-checklist.md). Planning context is in [ROADMAP.md](../ROADMAP.md) and [handover-build-plan.md](handover-build-plan.md).
 
 > **How the RFP text was captured.** The requirement wording below was read from the live handbook page on the review date and condensed; it is a faithful outline but not a verbatim copy. Re-read the original page before submitting anything. [ROADMAP.md](../ROADMAP.md) separately notes that the proposal PDF could not be rendered and should be re-checked against the plan.
@@ -29,15 +29,15 @@ Phase refers to [ROADMAP.md](../ROADMAP.md): **MVP** (Tranche 1), **M0** (award 
 | General (3.1) | 4 | 0 | 3 | 1 | 1 | 9 |
 | Web analytics (3.2) | 0 | 2 | 4 | 9 | 0 | 15 |
 | API analytics (3.3) | 7 | 1 | 1 | 0 | 0 | 9 |
-| Hosting, support, handover (3.4) | 0 | 0 | 1 | 5 | 1 | 7 |
-| Expected deliverables (5) | 1 | 0 | 5 | 4 | 1 | 11 |
-| **All requirements** | **12** | **3** | **14** | **19** | **3** | **51** |
+| Hosting, support, handover (3.4) | 1 | 0 | 0 | 5 | 1 | 7 |
+| Expected deliverables (5) | 2 | 0 | 4 | 4 | 1 | 11 |
+| **All requirements** | **14** | **3** | **12** | **19** | **3** | **51** |
 
 ```mermaid
 pie showData title Requirement status (51 rows)
-  "Done" : 12
+  "Done" : 14
   "Built, unverified" : 3
-  "Partial" : 14
+  "Partial" : 12
   "Not started" : 19
   "Human task" : 3
 ```
@@ -101,7 +101,7 @@ Rows in sections 3 to 7 only. Section 8 (evaluation criteria) is scored on the p
 | H2 | Commitment: dashboard availability 99.90% | Not started | As H1 | As H1 | M3 |
 | H3 | Commitment: critical and high vulnerabilities patched within 24 hours | Not started | [SECURITY.md](../SECURITY.md) proposes response targets for reports, not a patch SLA; no dependency scanning in CI | Define the patch process, add scanning and alerts | M3 |
 | H4 | Commitment: tickets answered within 5 business days, resolved within 10 | Not started | None (only security-report handling is described) | Write the support policy and set up the public tracker | M3 |
-| H5 | No mandatory on-call; a public issue tracker is sufficient | Partial | [CONTRIBUTING.md](../CONTRIBUTING.md) describes issues and pull requests | Needs the GitHub repository and issue templates | M0 |
+| H5 | No mandatory on-call; a public issue tracker is sufficient | Done | The repository is public with issues enabled, bug and feature issue forms, a pull request template, labels, and private vulnerability reporting for security reports (`.github/`, [CONTRIBUTING.md](../CONTRIBUTING.md)) | A support policy with response times is still open (H4) | M0 |
 | H6 | 12-month hosting and support window after the final tranche | Human task | Not a software requirement | Contractual | n/a |
 | H7 | Handover (months 6 to 12): transfer repository ownership, migrate all data, transfer the domain or permanently redirect; infrastructure rebuildable from the monorepo; a community operator runs a fully working system | Not started | Only an **internal** engineer handover exists ([handover-build-plan.md](handover-build-plan.md)); no infrastructure-as-code, no data-migration procedure, no operator-handover plan | Write the community-operator handover plan; build infrastructure-as-code; rehearse it | M3 |
 
@@ -110,12 +110,12 @@ Rows in sections 3 to 7 only. Section 8 (evaluation criteria) is scored on the p
 | ID | Deliverable | Status | Evidence | Gap and next step | Phase |
 |---|---|---|---|---|---|
 | D1 | Fully functional multi-tenant web and API analytics platform meeting all requirements | Partial | Rows G, W, A above | See the gaps in sections 3 to 5 | MVP to M3 |
-| D2 | Monorepo: all application code | Partial | Complete in the working tree: `src/`, `db/`, `scripts/`, `sdk/`, `tests/` | Not on GitHub; see G6 | MVP |
+| D2 | Monorepo: all application code | Done | All application code is on `main` of the public repository <https://github.com/Pyxis-Hq/pyxis>: `src/`, `db/`, `scripts/`, `sdk/`, `tests/` | The monorepo-workspaces structure is tracked under G6 | MVP |
 | D3 | Monorepo: full infrastructure-as-code | Not started | Only [railway.json](../railway.json) and an unverified [docker-compose.yml](../docker-compose.yml) | Real infrastructure-as-code for a full deployment | M3 |
 | D4 | Monorepo: deployment documentation | Partial | [README.md](../README.md), [TECHNICAL.md](../TECHNICAL.md) section 15, [handover-build-plan.md](handover-build-plan.md) | A production deployment guide for a community operator | MVP, M3 |
 | D5 | Monorepo: operator runbooks | Not started | Fragments only (manual migration step, hardening checklist in [SECURITY.md](../SECURITY.md)) | Backup and restore, key and secret rotation, upgrades, incident handling | M3 |
 | D6 | Monorepo: tenant onboarding guide | Partial | In-app setup checklist and Keys and setup page; the README's "Get your first data point" | A standalone guide covering OpenTelemetry, the wallet SDK and domain verification | M3 |
-| D7 | Monorepo: automated test suite | Done | `tests/` (unit, database isolation, wallet, web) and `scripts/e2e-smoke.mts`; Verify: `npm test` | CI is configured but has never run; no UI or load tests | MVP |
+| D7 | Monorepo: automated test suite | Done | `tests/` (unit, database isolation, wallet, web) and `scripts/e2e-smoke.mts`; Verify: `npm test` | CI (typecheck, tests, build) passes on GitHub Actions on Linux; no UI or load tests | MVP |
 | D8 | Monorepo: security and privacy/compliance documentation | Partial | [SECURITY.md](../SECURITY.md), [TECHNICAL.md](../TECHNICAL.md) section 17, [PRODUCT.md](../PRODUCT.md) | No compliance document; the RFP's threat model and monitoring plan are due at Tranche 2 | M2 |
 | D9 | Monorepo: monitoring and alerting baseline | Not started | Audit tables only (`ingestion_audit`, `operator_audit_events`) | Service metrics, dashboards and alerts | M3 |
 | D10 | Live proof of adoption: 3 SCF-awarded projects on web analytics, 1 on API traffic, a live global operator view, and a tenant-perspective screen-capture video | Human task | The operator view exists; no pilots, consent letters or recordings. Demo data is labelled synthetic | Recruit pilots with written consent, instrument them, record both videos. Never fabricate | M2, M3 |

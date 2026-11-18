@@ -255,7 +255,7 @@ gh repo create <owner>/pyxis --private --source=. --remote=origin --description 
 git push -u origin main
 ```
 
-Start **private**. Make it public only after section 10's "before going public" items are done (a LICENSE, a security contact, and a final secret scan).
+Start **private**. Make it public only after section 10's "before going public" items are done (a LICENSE, a security contact, and a final secret scan). *Update 2026-11-18: all three were done and the repository `Pyxis-Hq/pyxis` is now public.*
 
 ### 5.5 Configure the repository
 
