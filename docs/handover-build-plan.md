@@ -32,7 +32,7 @@ Written 2026-11-18 from the repository and the live Railway project as they stan
 
 - The app is **built and deployed** to a testnet instance on Railway. It has never been used with a real wallet, real production traffic, or a real Umami.
 - The code has **never been pushed anywhere**. The local git repo has one commit (the Create Next App template) and about 38 changed or new paths uncommitted. There is no GitHub remote, and CI has never run.
-- There is **no LICENSE file**, no published SDK, no real Umami, and no private security contact.
+- There is no published SDK and no real Umami. (Update: an Apache-2.0 `LICENSE` was added on 2026-11-18.)
 - The visual redesign (dark, violet) is done and documented; do not redo it.
 - Your first hour should be Part A, then Part B, so nothing exists only on one laptop.
 
@@ -531,7 +531,7 @@ Do these before making the repository or the product public.
 
 | # | Item | Why | Estimate |
 |---|---|---|---|
-| 3.1 | Add `LICENSE` (planned: Apache-2.0, owner to confirm) and then the phrase "open-source" may return to the site | Legal clarity; currently avoided in copy | 0.25 d |
+| 3.1 | **Done 2026-11-18:** `LICENSE` (Apache-2.0) added. The phrase "open-source" may now return to the site copy once the repository is public | Legal clarity | 0.25 d |
 | 3.2 | Private security contact: enable GitHub private vulnerability reporting and edit [SECURITY.md](../SECURITY.md) | A reporter can reach you safely | 0.25 d |
 | 3.3 | Rate limiting for `/v1/*` and sign-in (proxy, WAF or middleware) | No limits exist today beyond size caps | 1 to 2 d |
 | 3.4 | HTTP security headers and a CSP in `next.config.ts` | None are set today | 1 d |
@@ -595,7 +595,7 @@ With two people: one takes Workstream 1, the other Workstream 2 after step 3.
 |---|---|---|---|
 | 1 | Who owns the Railway project and billing; transfer or recreate | Part C | Recreate in your own workspace |
 | 2 | GitHub organization or account and repository name | Part B | Private repo `pyxis` |
-| 3 | License | Before public (3.1) | Apache-2.0 (as stated in the ROADMAP) |
+| 3 | License | Before public (3.1) | Decided: Apache-2.0 |
 | 4 | npm scope and package names; who owns the npm account | Task 2.0 | `@pyxis-hq/wallets-kit` if available |
 | 5 | Commit the AI-assistant tooling folders or not | Part B | Do not commit (restore from `skills-lock.json`) |
 | 6 | Custom domain for the app and for Umami | Workstream 1 | Railway-generated hosts |

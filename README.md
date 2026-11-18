@@ -249,7 +249,6 @@ The repository includes a [railway.json](railway.json) (Railpack build, `npm run
 - OTLP protobuf and gRPC are not supported; JSON only.
 - Wallet-event requests do not update an API key's "last used" time, so a key used only for wallet events shows "never".
 - The `query` key scope exists but nothing consumes it; there is no public read API.
-- The repository has no `LICENSE` file yet, although the roadmap plans Apache-2.0. Until one is added, do not assume open-source terms.
 - Umami has not been run against a real release, and `docker-compose.yml` is unverified.
 - The UI is dark-only. No light theme has been designed.
 
@@ -272,6 +271,10 @@ The repository includes a [railway.json](railway.json) (Railpack build, `npm run
 ## Contributing
 
 Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md). Next.js 16 in this repo has breaking changes versus older versions: read [AGENTS.md](AGENTS.md) before writing framework code.
+
+## License
+
+Pyxis is released under the [Apache License 2.0](LICENSE). Contributions are accepted under the same license.
 
 ## Tech
 

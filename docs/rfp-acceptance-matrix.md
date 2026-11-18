@@ -3,7 +3,7 @@
 Traceability from every requirement in the Stellar Community Fund RFP **"Web and API Analytics for Stellar Ecosystem Projects"** to what this repository does today, the evidence a reviewer can check, and what is still missing.
 
 - **Source:** <https://stellar.gitbook.io/scf-handbook/scf-awards/build-award/rfp-track#web-and-api-analytics-for-stellar-ecosystem-projects>
-- **Last reviewed:** 2026-11-18, against the working tree of this repository (not yet committed to GitHub).
+- **Last reviewed:** 2026-11-18, against the working tree of this repository (commit `main` on GitHub).
 - **Companion:** the actionable list is in [rfp-checklist.md](rfp-checklist.md). Planning context is in [ROADMAP.md](../ROADMAP.md) and [handover-build-plan.md](handover-build-plan.md).
 
 > **How the RFP text was captured.** The requirement wording below was read from the live handbook page on the review date and condensed; it is a faithful outline but not a verbatim copy. Re-read the original page before submitting anything. [ROADMAP.md](../ROADMAP.md) separately notes that the proposal PDF could not be rendered and should be re-checked against the plan.
@@ -26,19 +26,19 @@ Phase refers to [ROADMAP.md](../ROADMAP.md): **MVP** (Tranche 1), **M0** (award 
 
 | Area | Done | Built, unverified | Partial | Not started | Human task | Total |
 |---|---|---|---|---|---|---|
-| General (3.1) | 4 | 0 | 2 | 2 | 1 | 9 |
+| General (3.1) | 4 | 0 | 3 | 1 | 1 | 9 |
 | Web analytics (3.2) | 0 | 2 | 4 | 9 | 0 | 15 |
 | API analytics (3.3) | 7 | 1 | 1 | 0 | 0 | 9 |
 | Hosting, support, handover (3.4) | 0 | 0 | 1 | 5 | 1 | 7 |
 | Expected deliverables (5) | 1 | 0 | 5 | 4 | 1 | 11 |
-| **All requirements** | **12** | **3** | **13** | **20** | **3** | **51** |
+| **All requirements** | **12** | **3** | **14** | **19** | **3** | **51** |
 
 ```mermaid
 pie showData title Requirement status (51 rows)
   "Done" : 12
   "Built, unverified" : 3
-  "Partial" : 13
-  "Not started" : 20
+  "Partial" : 14
+  "Not started" : 19
   "Human task" : 3
 ```
 
@@ -54,7 +54,7 @@ Rows in sections 3 to 7 only. Section 8 (evaluation criteria) is scored on the p
 | G3 | Self-service enrollment for any Stellar-built project | Done | Anyone who signs in with a Stellar wallet can create a project (`POST /api/v1/projects`); sign-in verified by e2e | Pyxis does not check that a project is Stellar-built; the RFP handles that by removal (G4) | MVP |
 | G4 | SCF can remove non-ecosystem projects | Partial | Operators can set `active`, `suspended` or `archived` with an audit row (`PATCH /api/v1/operator/projects/:id/status`); a suspended project's keys stop working | The UI offers only suspend and reinstate; no delete or erasure of a removed project's data; no documented removal policy | MVP, M2 |
 | G5 | Ability to later move to an approval-required model | Partial | The schema already has a `pending` project status | No approval workflow or UI; new projects start active | M2 |
-| G6 | All code under an OSI-approved license, in a single monorepo | Not started | None: there is no `LICENSE` file; the repo is one package with an `sdk/` folder and is not published | Add the license (Apache-2.0 is planned in the roadmap, owner to confirm), publish the repo, adopt npm workspaces ([handover plan](handover-build-plan.md) task 2.1) | M0 |
+| G6 | All code under an OSI-approved license, in a single monorepo | Partial | `LICENSE` (Apache-2.0, an OSI-approved license) added 2026-11-18; `package.json` declares it; the code is on GitHub (`Pyxis-Hq/pyxis`) | The repo is one package with an `sdk/` folder, not a true monorepo with workspaces ([handover plan](handover-build-plan.md) task 2.1) | M0 |
 | G7 | Zero fees to tenants, SCF or anyone else | Done | No billing, payment or metering code exists in `src/` or `db/` | State "no fees" explicitly in the README and onboarding docs | MVP |
 | G8 | SCF operators can generate and revoke API keys for downstream machine access to metrics | Not started | Keys are per project and member-only (`src/app/api/v1/projects/[id]/keys/`); the `query` key scope exists in the database but **no route consumes it**; no operator key UI; no read API | Design a read or export API with operator-issued, revocable keys ([sdk-build-spec.md](sdk-build-spec.md) section 12) | M2 |
 | G9 | Builders unknown to SCF are not eligible | Human task | Not a software requirement | Proposer eligibility, outside the code | n/a |

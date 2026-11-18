@@ -654,7 +654,6 @@ The security policy, scope, known weaknesses and hardening checklist are in [SEC
 | Operator overview runs one summary query per project | Slower as projects grow | Single grouped query |
 | `auth_challenges` and expired `sessions` are never purged | Slow table growth | Scheduled cleanup |
 | Umami never run against a real release; compose unverified and unpinned | Integration risk | Clean-room run, pin by digest |
-| No LICENSE file | Legal status unclear | Add the planned license |
 | No component or visual regression tests | UI regressions rely on manual review | Add Playwright or component tests |
 | No light theme | Dark only | Design a second token set if needed |
 | Pre-deploy migration did not run on one Railway deployment | Possible missing schema after deploy | Verify and fix the deploy configuration |

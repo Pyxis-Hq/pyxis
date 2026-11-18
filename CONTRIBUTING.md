@@ -265,7 +265,7 @@ sequenceDiagram
 ### Copy and documentation
 
 - Say "reported by the frontend", not "confirmed", for wallet events.
-- Do not add testimonials, customer logos, uptime or compliance claims, or the phrase "open-source" until a license is in the repository.
+- Do not add testimonials, customer logos, or uptime or compliance claims.
 - Use plain language, short sentences, and tables for reference material.
 
 ### Dependencies and security
@@ -287,7 +287,7 @@ AI assistants are welcome for drafting, but **you are responsible for what you s
 
 - Be kind, specific and patient. Assume good intent; critique code, not people.
 - Keep discussion on the issue or pull request so others can follow it.
-- Credit others' work. Do not copy code you cannot relicense; this repository has no license file yet, so do not add third-party code with incompatible terms.
+- Credit others' work. By contributing you agree your work is licensed under the Apache License 2.0 (see `LICENSE`). Do not copy code you cannot license that way, and do not add third-party code with incompatible terms.
 - If someone is behaving badly, tell a maintainer privately.
 
 ## 15. Quick checklist

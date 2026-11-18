@@ -221,7 +221,7 @@ Add: `createPyxisWallet(opts)` returning a lazy singleton keyed by `endpoint+ing
 - Targets: modern browsers, Node 18+, edge/worker runtimes (anything with `fetch`).
 - Size budget (suggested, enforce in CI with `size-limit`): core at most 2 KB min+gzip.
 - `engines`, `repository`, `license`, `publishConfig: { access: "public", provenance: true }`, `files` limited to `dist` and docs.
-- License: the ROADMAP states Apache-2.0 but **the repo currently has no LICENSE file** (**DECISION**; add before publishing).
+- License: Apache-2.0. The repository `LICENSE` file was added on 2026-11-18; set `"license": "Apache-2.0"` in each package.
 
 ### 7.5 Stellar Wallets Kit adapter (P1)
 
@@ -345,7 +345,7 @@ The SDK is done when all of the following are true and evidenced by a test run, 
 ## 14. Open decisions for a human (do not guess)
 
 1. **npm scope and package names.** `@pyxis-hq/*` is provisional and unregistered as far as this repo shows. The product name itself is provisional (PRODUCT.md). Confirm availability or choose another scope.
-2. **License.** ROADMAP says Apache-2.0; no LICENSE file exists. Add it, or choose otherwise, before any publish. The public site copy currently avoids the phrase "open-source" for this reason.
+2. **License.** Decided: Apache-2.0 (the `LICENSE` file exists as of 2026-11-18). The public site copy still avoids the phrase "open-source" until the owner confirms it should return.
 3. **Store `flow`?** The server accepts a `flow` property but discards it. Do we want per-flow funnels (for example "swap" vs "deposit")? If yes, the server needs a column and the dashboard needs a filter before the SDK exposes `flow`.
 4. **Public-network use.** The product is a testnet MVP. Should the SDK default `network` stay `"testnet"` and should docs mention `"public"` at all yet?
 5. **OTLP protobuf.** If integrators need `http/protobuf` (the OTel SDK default), the server must support it first. Until then the helper must pin JSON.

@@ -44,7 +44,7 @@ Run `npm run typecheck`, `npm test` and `npm run build`, then the e2e script fro
 
 See [handover-build-plan.md](handover-build-plan.md) Part B for the steps.
 
-- [ ] **G6** `[human]` Owner confirms the license (Apache-2.0 is planned); `[code]` add `LICENSE`. *Done when:* the file is in the repo root and the README states the license
+- [x] **G6** (license part) Apache-2.0 `LICENSE` added and stated in the README (2026-11-18). The monorepo-workspaces part of G6 stays open below
 - [ ] **D2** `[ops]` Commit the working tree in logical commits and push to GitHub (private first). *Done when:* `main` on GitHub contains the product and the docs
 - [ ] **D7** `[verify]` First CI run is green (install, typecheck, tests, build). *Done when:* a green run is linked from the README
 - [ ] **H5** `[ops]` Public issue tracker with issue templates and labels. *Done when:* anyone can open an issue and a template exists
