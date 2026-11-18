@@ -53,3 +53,6 @@ next-env.d.ts
 /.github/skills/
 # alternate Next.js build dirs used for verification
 /.next-verify/
+
+# package build output
+sdk/*/dist

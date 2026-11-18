@@ -11,7 +11,7 @@ import { Asset, BASE_FEE, Horizon, Networks, Operation, TransactionBuilder } fro
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PyxisWallet, type WalletProvider } from "../../../sdk/wallets-kit";
+import { PyxisWallet, type WalletProvider } from "@pyxis-hq/wallets-kit";
 
 const HORIZON = "https://horizon-testnet.stellar.org";
 type Line = { t: string; text: string; kind: "info" | "ok" | "err" };

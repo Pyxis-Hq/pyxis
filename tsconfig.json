@@ -23,9 +23,9 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@pyxis-hq/wallets-kit": ["./sdk/wallets-kit/src/index.ts"],
+      "@pyxis-hq/wallets-kit/react": ["./sdk/wallets-kit/src/react.tsx"]
     }
   },
   "include": [

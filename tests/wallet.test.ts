@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { validateWalletBatch } from "@/server/wallet-events";
-import { PyxisWallet } from "../sdk/wallets-kit";
+import { PyxisWallet } from "@pyxis-hq/wallets-kit";
 
 const G = "GBRPYHIL2CI3FNQ4BXLFMNDLFJUNPU2HY3ZMFSHONUCEOASW7QC7OX2H";
 
