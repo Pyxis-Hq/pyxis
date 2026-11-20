@@ -47,7 +47,7 @@ These contradict the project's own documents. They are small, but **this audit d
 |---|---|
 | DOC-01 | Reword "generic errors" in `TECHNICAL.md` and `SECURITY.md`, or make the ingest codes generic (SEC-08) |
 | DOC-02 and SEC-03 | Either add the missing operator audit row for `/wallet` or correct "every access is audited" in `README.md` and `TECHNICAL.md` |
-| DOC-03 | **FIXED** after the screenshots were taken: the "pinned" wording was removed from the web analytics page, the landing page, the README intro and the `src/server/umami.ts` comment. The dashboard screenshot in `evidence/dashboard/` still shows the old wording because it predates the fix. Remaining: `TECHNICAL.md` and the compose file still say `latest`/unpinned |
+| DOC-03 | **FIXED** after the screenshots were taken: the "pinned" wording was removed from the web analytics page, the landing page, the README intro and the `src/server/umami.ts` comment. The first-run dashboard screenshot that showed the old wording has since been removed. Remaining: `TECHNICAL.md` and the compose file still say `latest`/unpinned |
 | New: sign-in abuse | The unauthenticated challenge endpoint writes a row per call with no rate limit; list rate limiting as a planned deliverable (already in tranche 1.2) |
 | New: wallet provider | The demo dApp reports every wallet as `other`; either map the wallet module to a provider or do not claim a per-wallet breakdown |
 | DOC-04 | State the measured advisory count (22, 10 high) in `SECURITY.md` and the docs site |

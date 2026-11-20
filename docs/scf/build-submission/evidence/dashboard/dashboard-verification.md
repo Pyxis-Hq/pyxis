@@ -22,7 +22,7 @@ Project `Demo Project`, network `testnet`, provider category `other`, every buck
 - **Correction:** an earlier note said no events existed. That check ran before this session and used `last_used_at`, which the wallet endpoint never updates (only the metrics endpoint does). The 05:38 events above are the first real run.
 
 ## Web analytics page: VERIFIED against Umami (screenshot)
-File: `screenshots/pyxis-web-analytics.png`, captured by the team on 2026-11-20 after the session (about 06:40 local time; no timestamp is visible in the image), from `usepyxis.xyz` for project "Demo Project", site `pyxis-demo-dapp.vercel.app` shown as Verified. Real data, not seeded.
+The screenshot (`pyxis-web-analytics.png`) was removed because it showed unrelated browser tabs and has been deleted; the table below records what it showed and was cross-checked with Umami's API. A newer capture is in `../api-and-web-capture/screenshots/05-web-analytics.png`. It was captured by the team on 2026-11-20 after the session (about 06:40 local time; no timestamp is visible in the image), from `usepyxis.xyz` for project "Demo Project", site `pyxis-demo-dapp.vercel.app` shown as Verified. Real data, not seeded.
 
 | Pyxis shows | Umami API (read by the auditor) | Match |
 |---|---|---|
@@ -38,7 +38,7 @@ File: `screenshots/pyxis-web-analytics.png`, captured by the team on 2026-11-20 
 Observations: the page copy says "pinned, self-hosted Umami". The server image is pinned to a tag, but the tracker snippet has no version, so the wording overstates it (see DOC-03). The dashboard does not show custom events or OS. The sidebar shows the signed-in account as `GB7H…65E5`, which is **not** the demo dApp wallet (`GA2C…6NGP`), so the sign-in and the demo used different accounts. This also confirms an authenticated session on the live app but is not a recorded sign-in.
 
 ## API metrics page (screenshot)
-File: `screenshots/pyxis-api-metrics-overview.png`. Shows the Demo Project with **0 requests** and empty latency and status panels, and the onboarding checklist at "2 of 4 done". No API (OTLP) data was sent in this test. This is honest empty state, not a failure, and it is not API-analytics evidence.
+The screenshot (`pyxis-api-metrics-overview.png`) was removed because it showed unrelated browser tabs and has been deleted; a newer empty-state capture is in `../api-and-web-capture/screenshots/02-api-dashboard-before.png`. It showed the Demo Project with **0 requests** and empty latency and status panels, and the onboarding checklist at "2 of 4 done". No API (OTLP) data was sent in this test. This is honest empty state, not a failure, and it is not API-analytics evidence.
 
 ## Wallet funnel page: VERIFIED (screenshot)
 The first-run screenshot (project "Demo Project", range 7d) was removed because it showed unrelated browser tabs and has been deleted; the figures below come from the stored counts above and match what it showed. The second run's funnel is in `../wallet-run/screenshots/15-wallet-funnel.png`.
