@@ -9,7 +9,8 @@ export async function migrate(adminUrl: string, dir = join(process.cwd(), "db", 
   await c.query("CREATE TABLE IF NOT EXISTS _migrations (name TEXT PRIMARY KEY, checksum TEXT NOT NULL, applied_at TIMESTAMPTZ DEFAULT now())");
   for (const f of readdirSync(dir).filter((x) => x.endsWith(".sql")).sort()) {
     const sql = readFileSync(join(dir, f), "utf8");
-    const sum = createHash("sha256").update(sql).digest("hex");
+    // Line endings must not change the checksum: the same file is LF in git and CRLF in a Windows checkout.
+    const sum = createHash("sha256").update(sql.replace(/\r\n/g, "\n")).digest("hex");
     const prev = await c.query("SELECT checksum FROM _migrations WHERE name=$1", [f]);
     if (prev.rowCount) {
       if (prev.rows[0].checksum !== sum) throw new Error(`Migration ${f} was modified after being applied`);
