@@ -1,0 +1,13 @@
+target https://usepyxis.xyz at 2026-11-20T05:51:29.298Z
+PASS T1 signature from a different key over the correct message -> HTTP 401 auth_failed
+PASS T2 correct key signs a different message -> HTTP 401 auth_failed
+PASS T3 correct signature with one byte altered -> HTTP 401 auth_failed
+PASS T4 malformed signature (empty) -> HTTP 401 auth_failed
+PASS T4 malformed signature (not base64) -> HTTP 401 auth_failed
+PASS T4 malformed signature (too short) -> HTTP 401 auth_failed
+PASS T4 malformed signature (too long) -> HTTP 401 auth_failed
+PASS T5 unknown nonce -> HTTP 401 auth_failed
+PASS T6 correct signature replayed after a failed attempt consumed the nonce -> HTTP 401 auth_failed
+PASS T7 challenge issued for account A used for account B -> HTTP 401 auth_failed
+PASS T8 challenge for an invalid account -> HTTP 400 invalid_account
+PASS T9 verify with missing fields -> HTTP 400 invalid_request

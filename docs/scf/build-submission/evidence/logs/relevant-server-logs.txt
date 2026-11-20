@@ -1,0 +1,24 @@
+# These are NOT raw Railway server logs. No server log capture was made. They are the outputs of the read-only checks the auditor ran on 2026-11-20.
+
+## 1. Pyxis wallet_event_buckets (read-only SELECT through the web service, project "Demo Project")
+05:38  wallet_connect_started       other testnet 1
+05:38  wallet_connected             other testnet 1
+05:38  transaction_sign_started     other testnet 1
+05:39  transaction_sign_completed   other testnet 1
+05:39  transaction_submit_started   other testnet 1
+05:39  transaction_submit_completed other testnet 1
+
+## 2. Horizon Testnet
+tx 9909a163...0322: successful=true ledger=5825901 created_at=2026-11-20T05:39:05Z fee_charged=100 op_count=1
+operation: payment native 1.0000000 from GA2C7E7S...6NGP to GA2C7E7S...6NGP
+ledger 5825901 closed_at 2026-11-20T05:39:05Z
+network_passphrase: Test SDF Network ; September 2015
+
+## 3. Umami API (website e23233f9-a2fe-4aad-ba10-5908704cce83, last 2 hours)
+stats: pageviews 7, visitors 1, visits 1, bounces 0, totaltime 16
+browser edge-chromium 1; os Windows 10 1; device laptop 1; country NG 1; referrer none
+events: demo_cta_click 10
+urls (events list): / x2, /about x2, /pricing x1, /wallet x2
+
+## 4. Earlier check (superseded)
+A lookup on the key before the run found no rows and last_used_at null; last_used_at is never updated by the wallet endpoint, so that result carried no meaning for wallet events.

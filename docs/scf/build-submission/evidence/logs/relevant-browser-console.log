@@ -1,0 +1,9 @@
+# Source: the demo page's own "Activity" list, pasted by the user. This is NOT the browser developer console.
+# Times are the browser clock, which ran about 28 seconds behind the Stellar ledger clock.
+2026-11-20T05:38:17.274Z Wallet connected (frontend-reported), provider category: other
+2026-11-20T05:38:23.060Z Friendbot funded the account.
+2026-11-20T05:38:23.060Z SDK stats: {"queued":0,"sent":2,"dropped":0,"rejected":0,"disabled":false,"circuitOpen":false}
+2026-11-20T05:38:32.192Z Signed in wallet (frontend-reported).
+2026-11-20T05:38:36.865Z Submitted. Full hash: 9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322
+2026-11-20T05:38:37.371Z LEDGER-VERIFIED via Horizon: successful=true ledger=5825901 created_at=2026-11-20T05:39:05Z
+2026-11-20T05:38:37.371Z SDK stats: {"queued":0,"sent":5,"dropped":0,"rejected":0,"disabled":false,"circuitOpen":false}
