@@ -218,7 +218,7 @@ docs/                     SDK build spec, design teardown
 
 ## Deployment
 
-The live service is at <https://usepyxis.xyz> (Railway, with the domain registered at Namecheap).
+The live service is at <https://usepyxis.xyz> and the documentation is at <https://docs.usepyxis.xyz> (two Railway services; the domain is registered at Namecheap). The docs service deploys `apps/docs` on its own: from `apps/docs`, run `railway up --service docs`.
 
 
 The repository includes a [railway.json](railway.json) (Railpack build, `npm run db:migrate && npm run db:role` before deploy, `npm start`, health check on `/`). A working setup is one app service plus a PostgreSQL service, with `DATABASE_URL` pointing at the runtime role and `ADMIN_DATABASE_URL` and `PYXIS_APP_PASSWORD` set for the migration step. Note: on one deployment the pre-deploy step did not run, so confirm migrations after the first deploy and run `npm run db:migrate && npm run db:role` inside the service if needed.

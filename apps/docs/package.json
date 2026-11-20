@@ -12,7 +12,11 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.5",
     "@types/mdx": "^2.0.14",
-    "tailwindcss": "4.3.5"
+    "tailwindcss": "4.3.5",
+    "typescript": "^5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/node": "^20"
   },
   "dependencies": {
     "fumadocs-core": "16.19.4",

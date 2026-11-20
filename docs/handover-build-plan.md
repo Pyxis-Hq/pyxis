@@ -84,6 +84,7 @@ flowchart TD
 | Railway project | named `stellar-pulse` in Railway (the product is now Pyxis; renaming the Railway project is optional), id `9ef394bc-9458-4c1c-bf04-7371f2ace85a`, environment `production` |
 | Services | `web` (the Next.js app) and `Postgres` (Railway's PostgreSQL) |
 | Public URL | `https://usepyxis.xyz` (custom domain on Namecheap, ALIAS `@` to the Railway target plus a `_railway-verify` TXT record; the original `https://web-production-3c4c1c5f.up.railway.app` still works) |
+| Documentation site | `https://docs.usepyxis.xyz`, a second Railway service named `docs` deployed from `apps/docs` (CNAME `docs` plus a `_railway-verify.docs` TXT record at Namecheap). Deploy with `cd apps/docs && railway up --service docs -p <project> -e production` |
 | Web variables (names only) | `DATABASE_URL`, `ADMIN_DATABASE_URL`, `PYXIS_APP_PASSWORD`, `OPERATOR_ACCOUNTS` (empty) |
 | Umami | **not deployed**; the app shows "web analytics engine is not configured" |
 | How it was deployed | `railway up --service web --ci` from a laptop (uploads the working folder, not GitHub) |
