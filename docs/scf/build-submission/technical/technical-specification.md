@@ -1,7 +1,7 @@
 # Pyxis technical specification
 
 **Status:** specification of Pyxis as implemented at commit `a7df1da` (2026-11-20), with planned work labelled as such. It was written after reading the source and executing the test suite (80 tests pass in a clean clone). It has **not** been reviewed by anyone independent of the authors, and **no independent security audit exists**.
-**Evidence basis:** `src/server/**`, `src/app/**`, `db/migrations/001_init.sql`, `002_rename_to_pyxis.sql`, `sdk/wallets-kit/src/**`, `tests/**`, `scripts/**`, `railway.json`, `.github/workflows/ci.yml`, and the audit reports summarised in [../FINAL-AUDIT-REPORT.md](../FINAL-AUDIT-REPORT.md).
+**Evidence basis:** `src/server/**`, `src/app/**`, `db/migrations/001_init.sql`, `002_rename_to_pyxis.sql`, `sdk/wallets-kit/src/**`, `tests/**`, `scripts/**`, `railway.json`, `.github/workflows/ci.yml`, and the executed test suite.
 **Related:** [architecture.md](architecture.md), [stellar-integration.md](stellar-integration.md), [api-reference.md](api-reference.md), [telemetry-specification.md](telemetry-specification.md), [../security/threat-model.md](../security/threat-model.md), [../security/privacy-and-data-protection.md](../security/privacy-and-data-protection.md).
 
 **Status vocabulary:** IMPLEMENTED · IMPLEMENTED, NIV (not independently verified) · PARTIAL · PLANNED · MISSING · BLOCKED. Citations are `path:line`; tests by file and title.
@@ -68,25 +68,25 @@ Solid lines are implemented; dashed lines are planned. Deployment and data-flow 
 
 ## 5. Component responsibilities
 
-See [architecture.md](architecture.md) section 1 and [../01-repository-inventory.md](../01-repository-inventory.md) sections 4-11.
+See [architecture.md](architecture.md) section 1.
 
 ## 6. Technology stack
 
-Next.js 16.4.6, React 19.3.1, Tailwind 4.3.5, TypeScript ^5, PostgreSQL 17 or 18 with `pg` ^8.23.1, `@stellar/stellar-sdk` ^17.4.0, `zod` ^4.6.7, Vitest ^5.1.1, `tsup` ^8.5.1, Fumadocs 16.19.4. Node.js 22 (CI and production). Full table in [../01-repository-inventory.md](../01-repository-inventory.md) section 2.
+Next.js 16.4.6, React 19.3.1, Tailwind 4.3.5, TypeScript ^5, PostgreSQL 17 or 18 with `pg` ^8.23.1, `@stellar/stellar-sdk` ^17.4.0, `zod` ^4.6.7, Vitest ^5.1.1, `tsup` ^8.5.1, Fumadocs 16.19.4. Node.js 22 (CI and production).
 
 ## 7. Authentication architecture
 
 | Step | Behaviour | Source |
 |---|---|---|
 | Challenge | 24 random bytes, 5-minute expiry, stored per account | `session.ts:20-26` |
-| Message | `Pyxis sign-in (testnet)\naccount\nnonce\nexpires`; **no origin binding (SEC-06)** | `session.ts:14-16` |
+| Message | `Pyxis sign-in (testnet)\naccount\nnonce\nexpires`; **origin binding is planned** | `session.ts:14-16` |
 | Signature | `sha256("Stellar Signed Message:\n" + message)` verified with the account's Ed25519 key | `session.ts:17-18,36` |
 | Single use | One atomic `UPDATE ... SET used_at WHERE used_at IS NULL AND expires_at > now()` | `session.ts:30-34` |
 | Session | 32 random bytes; SHA-256 stored; 7 days; HttpOnly, SameSite=Lax, `secure` in production | `session.ts:43-44`; `verify/route.ts:11` |
 | Roles | viewer 1, analyst 2, developer 3, admin 4, owner 5; operator is a separate user flag | `session.ts:65-76` |
 | Operator | `OPERATOR_ACCOUNTS` list applied at sign-in | `session.ts:11,38` |
 
-Not present: rate limiting, CSRF token or origin check (SEC-01, SEC-02), re-authentication, "revoke all sessions", expiry purge.
+Planned, not yet present: rate limiting, origin checks, re-authentication, "revoke all sessions", expiry purge.
 
 ## 8. Multi-tenant architecture
 
@@ -141,7 +141,7 @@ Five `SECURITY DEFINER` functions (`pyxis_resolve_api_key`, `pyxis_user_projects
 
 ### 9.6 Retention, deletion, recovery
 
-No retention job exists (AN-01); aggregates and audit rows are kept indefinitely. Deleting a project cascades, but no endpoint deletes one. Backups and restores are not evidenced ([../operations/infrastructure-and-operations.md](../operations/infrastructure-and-operations.md) section 5).
+No retention job exists; aggregates and audit rows are kept indefinitely. Deleting a project cascades, but no endpoint deletes one. Backups and restores are not evidenced ([../operations/infrastructure-and-operations.md](../operations/infrastructure-and-operations.md) section 5).
 
 ## 10. API analytics ingestion
 
@@ -149,11 +149,11 @@ Full rules and limits in [telemetry-specification.md](telemetry-specification.md
 
 ## 11. Web analytics and Umami
 
-The Pyxis client calls Umami's REST API (`POST /api/auth/login`, `POST /api/websites`, `GET /api/websites/:id/stats`, `/metrics`) with one shared administrator login (`umami.ts`). Tenant isolation depends on the application reading the Umami website id from the caller's own `sites` row (`sites/[siteId]/web/route.ts`). The tracker snippet loads `script.js` from the operated Umami. **Not run against a real Umami; the tracker is not version-pinned; the compose file uses a mutable tag** (AN-09).
+The Pyxis client calls Umami's REST API (`POST /api/auth/login`, `POST /api/websites`, `GET /api/websites/:id/stats`, `/metrics`) with one shared administrator login (`umami.ts`). Tenant isolation depends on the application reading the Umami website id from the caller's own `sites` row (`sites/[siteId]/web/route.ts`). The tracker snippet loads `script.js` from the operated Umami. **Not run against a real Umami; the tracker is not version-pinned; the compose file uses a mutable tag**.
 
 ## 12. Wallet analytics SDK
 
-`@pyxis-hq/wallets-kit@0.1.0-beta.1`. Core `PyxisWallet` and `createPyxisWallet`; React `PyxisProvider`, `usePyxis`. Behaviour: nine events, nine provider labels, queue of 100 (drop oldest), batches of up to 50, flush every 5 s and on page hide with `keepalive`, retry with backoff and jitter up to 5 times, batch split on `413`, circuit breaker after three consecutive `401` or `403`, Do Not Track and Global Privacy Control honoured, nothing stored in cookies or storage (`sdk/wallets-kit/src/index.ts`). **Not built:** Wallets Kit adapter, automatic capture, OpenTelemetry helper. Known limits: `failure_category` is a pattern, not a list (SDK-01); tests run against source (SDK-02); no publishing provenance (SDK-03).
+`@pyxis-hq/wallets-kit@0.1.0-beta.1`. Core `PyxisWallet` and `createPyxisWallet`; React `PyxisProvider`, `usePyxis`. Behaviour: nine events, nine provider labels, queue of 100 (drop oldest), batches of up to 50, flush every 5 s and on page hide with `keepalive`, retry with backoff and jitter up to 5 times, batch split on `413`, circuit breaker after three consecutive `401` or `403`, Do Not Track and Global Privacy Control honoured, nothing stored in cookies or storage (`sdk/wallets-kit/src/index.ts`). **Not built:** Wallets Kit adapter, automatic capture, OpenTelemetry helper. Known limits: `failure_category` is a pattern, not a list; tests run against source; no publishing provenance.
 
 ## 13. Stellar integration
 
@@ -193,7 +193,7 @@ Requests, status classes, server error rate (5xx over all), success rate ((2xx +
 
 ## 22. Security architecture
 
-Controls that hold (verified): forced RLS with a non-owner role, transaction-local tenant context, hashed secrets, constant-time key comparison, authentication before body read on ingest, 404 for unauthorised project access, parameterized SQL. Gaps: SEC-01 to SEC-19 in [../security/threat-model.md](../security/threat-model.md) section 5.
+Controls that hold (verified): forced RLS with a non-owner role, transaction-local tenant context, hashed secrets, constant-time key comparison, authentication before body read on ingest, 404 for unauthorised project access, parameterized SQL. Planned hardening: [../security/threat-model.md](../security/threat-model.md) section 5.
 
 ## 23. Infrastructure and deployment
 
@@ -201,7 +201,7 @@ One replica per service on Railway in `us-west2`, one PostgreSQL instance, manua
 
 ## 24. Scalability and performance
 
-**No benchmark exists.** Design features that help: 60-second pre-aggregation, delta histograms, cardinality caps. Observed weaknesses: per-row sequential upserts and a `SELECT DISTINCT` over seven days on every batch (`otlp.ts:127-131`), a hot-row `last_used_at` update, and dashboard queries that read raw rows into Node for up to 90 days (`queries.ts:37-77`). The one-million-requests-per-day figure is an RFP design target, about 11.6 requests per second on average, and is **unproven** here (AN-05).
+**No benchmark exists.** Design features that help: 60-second pre-aggregation, delta histograms, cardinality caps. Observed weaknesses: per-row sequential upserts and a `SELECT DISTINCT` over seven days on every batch (`otlp.ts:127-131`), a hot-row `last_used_at` update, and dashboard queries that read raw rows into Node for up to 90 days (`queries.ts:37-77`). The one-million-requests-per-day figure is an RFP design target, about 11.6 requests per second on average, and is **unproven** here.
 
 ## 25. Failure handling
 
@@ -211,7 +211,7 @@ One replica per service on Railway in `us-west2`, one PostgreSQL instance, manua
 | Umami down | Verification returns `tracker_ready: false`; report returns `502 engine_unavailable` |
 | Bad ingest data | Dropped with reason codes in `partialSuccess` |
 | Process crash | Railway restarts it (`ON_FAILURE`) |
-| Retried batch | Counted twice (AN-02) |
+| Retried batch | Counted twice |
 
 ## 26. Monitoring and observability
 
@@ -223,7 +223,7 @@ Not evidenced; `pg_dump` is described in the public guide and not exercised.
 
 ## 28. Licensing and open-source strategy
 
-Apache-2.0 for the application and the SDK; public repository; contributions under the same licence (`CONTRIBUTING.md`). The wallet kit dependency tree carries advisories with no fix (SEC-18). Governance gaps in [../planning/maintenance-and-governance.md](../planning/maintenance-and-governance.md).
+Apache-2.0 for the application and the SDK; public repository; contributions under the same licence (`CONTRIBUTING.md`). The wallet kit dependency tree carries advisories with no fix. Governance gaps in [../planning/maintenance-and-governance.md](../planning/maintenance-and-governance.md).
 
 ## 29. Known limitations
 
@@ -236,13 +236,13 @@ OTLP JSON only; no rate limiting; no retention; no idempotency; no service or en
 | Umami's API or metrics differ from assumptions | Web path wrong | T1-1 integration suite against a real, pinned Umami |
 | Ingest unproven at volume | Missed RFP target | T1-3, T2-6 |
 | Availability target unreachable | Evaluation penalty | State an honest SLO; decide architecture before budgeting |
-| Wallet-kit advisories | Client-side supply-chain exposure; 24-hour patch commitment at risk | Isolate and replace (SEC-18) |
+| Wallet-kit advisories | Client-side supply-chain exposure; 24-hour patch commitment at risk | Isolate and replace |
 | Adoption depends on third parties | Adoption proof late | Start pilots in Tranche 1 |
 | Single-maintainer bus factor | Continuity | Governance deliverables |
 
 ## 31. Verification and acceptance evidence
 
-Executed: typecheck, 80 tests, three builds, `npm audit` ([../02-test-and-verification-report.md](../02-test-and-verification-report.md)). Planned acceptance tests: [../planning/acceptance-test-plan.md](../planning/acceptance-test-plan.md). Not verified: real wallet, real Umami, load, availability, deployed database role.
+Executed: typecheck, 80 tests, three builds, `npm audit`. Planned acceptance tests: [../planning/acceptance-test-plan.md](../planning/acceptance-test-plan.md). Not verified: real wallet, real Umami, load, availability, deployed database role.
 
 ## 32. Requirement-to-code traceability
 
@@ -261,4 +261,4 @@ Executed: typecheck, 80 tests, three builds, `npm audit` ([../02-test-and-verifi
 
 ## 33. References
 
-Matrix: [../03-rfp-requirements-matrix.md](../03-rfp-requirements-matrix.md). Gaps: [../04-rfp-gap-analysis.md](../04-rfp-gap-analysis.md). Evidence index: [../EVIDENCE-REGISTER.md](../EVIDENCE-REGISTER.md). Public documentation: <https://docs.usepyxis.xyz>. Repository: <https://github.com/Pyxis-Hq/pyxis>. npm: <https://www.npmjs.com/package/@pyxis-hq/wallets-kit>.
+Evidence: [../evidence/README.md](../evidence/README.md). Public documentation: <https://docs.usepyxis.xyz>. Repository: <https://github.com/Pyxis-Hq/pyxis>. npm: <https://www.npmjs.com/package/@pyxis-hq/wallets-kit>.

@@ -26,5 +26,5 @@
 2. **Docs gap:** with the stock Node SDK the default trace exporter keeps failing against `localhost:4318` unless `OTEL_TRACES_EXPORTER=none` and `OTEL_METRICS_EXPORTER=otlp` are set; the guide does not say so.
 3. **UI:** the request-volume chart's x-axis labels overlap ("20 Nov, 10:00" printed over itself).
 4. **Docs:** the SDK reference says "Currently 0.1.0-beta.0"; the published version is 0.1.0-beta.1.
-5. **Error codes reveal key state** (`auth_revoked`), contrary to the "generic errors" wording in the docs (known as DOC-01 / SEC-08).
+5. **Error codes reveal key state** (`auth_revoked`), contrary to the "generic errors" wording in the docs.
 6. **Evidence in the public repository:** the team's wallet screenshots under `docs/scf/build-submission/evidence/` show unrelated browser tabs (one names another project) and partial wallet addresses. They should be cropped and re-committed.

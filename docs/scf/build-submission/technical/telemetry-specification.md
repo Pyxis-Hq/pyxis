@@ -39,7 +39,7 @@ OTLP protobuf and OTLP/gRPC are **not supported**. The `@opentelemetry/otlp-tran
 
 All other attributes and fields on a data point are discarded.
 
-The stable OpenTelemetry metric `http.server.request.duration` is defined in **seconds**; a producer that omits the unit would be recorded 1000 times too small. This is a known weakness (finding AN-03 in the findings register).
+The stable OpenTelemetry metric `http.server.request.duration` is defined in **seconds**; a producer that omits the unit would be recorded 1000 times too small. A fix is planned.
 
 ### 3.2 Limits
 

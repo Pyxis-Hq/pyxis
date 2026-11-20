@@ -2,7 +2,7 @@
 
 **Status:** describes what Pyxis collects, stores, processes and discards **today**, and the gaps against the RFP's privacy requirements. **This document makes no legal-compliance claim.** No lawyer has reviewed it, and the RFP requirements on GDPR, data residency and erasure are not implemented.
 **Evidence basis:** `db/migrations/001_init.sql`, `src/server/ingest/*`, `src/server/wallet-events.ts`, `src/server/auth/session.ts`, `sdk/wallets-kit/src/index.ts`, and the code-level audits.
-**Related:** [../technical/telemetry-specification.md](../technical/telemetry-specification.md), [threat-model.md](threat-model.md), [../03-rfp-requirements-matrix.md](../03-rfp-requirements-matrix.md) rows W2, W9-W13, D11.
+**Related:** [../technical/telemetry-specification.md](../technical/telemetry-specification.md), [threat-model.md](threat-model.md).
 
 ## 1. Design position
 
@@ -38,7 +38,7 @@ Pyxis aims to measure how services are used **without profiling the people using
 | SDK uses no cookies or browser storage | IMPLEMENTED | source search |
 | Secrets stored only as hashes | IMPLEMENTED | `keys.ts`, `session.ts` |
 | Tenant isolation in the database | IMPLEMENTED | `tests/db.test.ts` |
-| Operator access to tenant data is aggregate-only and audited | IMPLEMENTED, with one gap | wallet funnel read is not audited (SEC-03) |
+| Operator access to tenant data is aggregate-only and audited | IMPLEMENTED, with one gap | wallet funnel read is not audited |
 
 ## 5. Gaps against the RFP
 
@@ -48,7 +48,7 @@ Pyxis aims to measure how services are used **without profiling the people using
 | Data-residency declaration (W11) | MISSING | A decision. The live app is deployed in Railway region `us-west2` (observed in the deployment manifest); no statement exists |
 | Minimize erasure exposure and provide a tenant-triggered erasure workflow (W12) | MISSING | No endpoint deletes a project, a member or visitor data; no purge reaches Umami |
 | Bot and fraud mitigation (W2) | MISSING | Strategy and configuration |
-| Retention (A6) | PARTIAL | Aggregates are kept forever; no policy, no rollup, no purge of sessions or challenges (AN-01, SEC-10) |
+| Retention (A6) | PARTIAL | Aggregates are kept forever; no policy, no rollup, no purge of sessions or challenges |
 | Disclosure of what Umami stores | MISSING | Review of the chosen Umami release and settings |
 
 ## 6. Retention today

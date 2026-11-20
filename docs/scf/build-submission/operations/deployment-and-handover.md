@@ -2,7 +2,7 @@
 
 **Status:** how a qualified community operator could deploy and run Pyxis, and how the project would be handed over. Sections marked **TESTED** were run during this work; **UNTESTED** sections are standard practice or proposals that have not been exercised; **PLANNED** sections do not exist yet. **Nobody outside the team has followed this plan.**
 **Evidence basis:** the public guide <https://docs.usepyxis.xyz/docs/guides/run-in-production> (source `apps/docs/content/docs/guides/run-in-production.mdx`), `docs/handover-build-plan.md`, and the deployment performed on 2026-11-20.
-**Related:** [infrastructure-and-operations.md](infrastructure-and-operations.md), [../04-rfp-gap-analysis.md](../04-rfp-gap-analysis.md) B-7, RFP rows H7, D3-D5.
+**Related:** [infrastructure-and-operations.md](infrastructure-and-operations.md).
 
 The RFP defines handover as complete only when **a community-appointed operator runs a working system**: repository ownership transferred, all data migrated, and the domain transferred or permanently redirected. Today that cannot be demonstrated.
 
@@ -22,7 +22,7 @@ The RFP defines handover as complete only when **a community-appointed operator 
 
 ## 2. Umami setup (UNTESTED, PLANNED to verify)
 
-Run Umami as its own service with its own database and credentials; set `UMAMI_URL`, `UMAMI_USER`, `UMAMI_PASSWORD` (and `UMAMI_PUBLIC_URL` if the tracker should load from another origin). **Pin the Umami release by digest**; the repository's compose file uses the mutable `postgresql-latest` tag and must not be copied into production. The integration has never been run against a real Umami (AN-09).
+Run Umami as its own service with its own database and credentials; set `UMAMI_URL`, `UMAMI_USER`, `UMAMI_PASSWORD` (and `UMAMI_PUBLIC_URL` if the tracker should load from another origin). **Pin the Umami release by digest**; the repository's compose file uses the mutable `postgresql-latest` tag and must not be copied into production. The integration has never been run against a real Umami.
 
 ## 3. Credential rotation
 
@@ -30,13 +30,13 @@ Run Umami as its own service with its own database and credentials; set `UMAMI_U
 |---|---|---|
 | `pyxis_app` password | Change `PYXIS_APP_PASSWORD` and `DATABASE_URL` together, run `npm run db:role`, restart | TESTED for the initial set; rotation not rehearsed |
 | Ingest key | Create a new key, update the exporter, revoke the old key (immediate) | TESTED (`tests/db.test.ts`, smoke script) |
-| Operator list | Edit `OPERATOR_ACCOUNTS`; **existing operators keep the flag until they next sign in, up to 7 days (SEC-07)** | UNTESTED |
+| Operator list | Edit `OPERATOR_ACCOUNTS`; **existing operators keep the flag until they next sign in, up to 7 days** | UNTESTED |
 | Umami credentials | Change in Umami and in the variables | UNTESTED |
 | Session invalidation | Delete rows from `sessions` | UNTESTED; no admin tool |
 
 ## 4. Project administration
 
-Roles are set in the app: owners and admins manage members, developers manage keys, admins manage sites. Operators can set a project `active`, `suspended` or `archived`; suspension stops ingest immediately. **There is no project deletion, no data export and no ownership transfer** (SEC-19).
+Roles are set in the app: owners and admins manage members, developers manage keys, admins manage sites. Operators can set a project `active`, `suspended` or `archived`; suspension stops ingest immediately. **There is no project deletion, no data export and no ownership transfer**.
 
 ## 5. Monitoring, backup, restore, upgrade, incident response
 
@@ -45,7 +45,7 @@ Roles are set in the app: owners and admins manage members, developers manage ke
 | Monitoring | None | T2-2: probes, metrics, alerts, a DB-aware health endpoint |
 | Backup | Manual `pg_dump` described; not exercised | T2-2: scheduled backups and a demonstrated restore |
 | Restore | None performed | T2-2: restore into a scratch database, verified with the test suite and the smoke script |
-| Upgrade | Pull, build, `db:migrate` then `db:role`, restart (in the guide; **CLI deploys need the migration run by hand**, OPS-05) | T1-6: automated, with rollback notes |
+| Upgrade | Pull, build, `db:migrate` then `db:role`, restart (in the guide; **CLI deploys need the migration run by hand**) | T1-6: automated, with rollback notes |
 | Incident response | None | T2-2: written procedure, exercised once |
 
 ## 6. Data export and migration (PLANNED)

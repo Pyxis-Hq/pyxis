@@ -56,3 +56,6 @@ next-env.d.ts
 
 # package build output
 sdk/*/dist
+
+# Local demo captures, videos and capture harness (not for the repository)
+/artifacts/

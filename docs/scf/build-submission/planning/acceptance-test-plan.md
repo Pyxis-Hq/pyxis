@@ -1,8 +1,8 @@
 # Acceptance test plan
 
 **Status:** proposed. Every milestone deliverable in [roadmap-and-milestones.md](roadmap-and-milestones.md) has at least one test that an SCF reviewer can run or read independently. Numeric thresholds marked **[confirm]** are proposals for the team to set; none is presented as a measured result.
-**Evidence basis:** the gaps in [../04-rfp-gap-analysis.md](../04-rfp-gap-analysis.md); the existing test suite ([../02-test-and-verification-report.md](../02-test-and-verification-report.md)).
-**Related:** [../03-rfp-requirements-matrix.md](../03-rfp-requirements-matrix.md).
+**Evidence basis:** the planned deliverables in [roadmap-and-milestones.md](roadmap-and-milestones.md); the existing test suite (80 automated tests, run in CI).
+**Related:** [roadmap-and-milestones.md](roadmap-and-milestones.md).
 
 ## 1. Rules for all acceptance tests
 

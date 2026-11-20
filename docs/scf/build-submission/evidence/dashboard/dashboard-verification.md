@@ -35,7 +35,7 @@ The screenshot (`pyxis-web-analytics.png`) was removed because it showed unrelat
 | Device laptop 1 | laptop 1 | Yes |
 | Referrers: none | none | Yes |
 
-Observations: the page copy says "pinned, self-hosted Umami". The server image is pinned to a tag, but the tracker snippet has no version, so the wording overstates it (see DOC-03). The dashboard does not show custom events or OS. The sidebar shows the signed-in account as `GB7H…65E5`, which is **not** the demo dApp wallet (`GA2C…6NGP`), so the sign-in and the demo used different accounts. This also confirms an authenticated session on the live app but is not a recorded sign-in.
+Observations: the page copy says "pinned, self-hosted Umami". The server image is pinned to a tag, but the tracker snippet has no version, so the wording overstates it. The dashboard does not show custom events or OS. The sidebar shows the signed-in account as `GB7H…65E5`, which is **not** the demo dApp wallet (`GA2C…6NGP`), so the sign-in and the demo used different accounts. This also confirms an authenticated session on the live app but is not a recorded sign-in.
 
 ## API metrics page (screenshot)
 The screenshot (`pyxis-api-metrics-overview.png`) was removed because it showed unrelated browser tabs and has been deleted; a newer empty-state capture is in `../api-and-web-capture/screenshots/02-api-dashboard-before.png`. It showed the Demo Project with **0 requests** and empty latency and status panels, and the onboarding checklist at "2 of 4 done". No API (OTLP) data was sent in this test. This is honest empty state, not a failure, and it is not API-analytics evidence.

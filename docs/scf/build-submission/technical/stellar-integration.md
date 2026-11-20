@@ -2,7 +2,7 @@
 
 **Status:** lists every actual Stellar touchpoint in the repository at commit `a7df1da`, then the Soroban gap analysis. **There is no Soroban contract, no Soroban RPC or Horizon read-back, no event indexing and no ledger verification in Pyxis today.**
 **Evidence basis:** repository-wide search for `@stellar/stellar-sdk`, `stellar-wallets-kit`, Horizon, Soroban, RPC, contract and SEP references, and reading of the files cited below.
-**Related:** [technical-specification.md](technical-specification.md), [../04-rfp-gap-analysis.md](../04-rfp-gap-analysis.md).
+**Related:** [technical-specification.md](technical-specification.md).
 
 ## 1. Summary
 

@@ -1,6 +1,6 @@
 # Evidence directory
 
-Real-run evidence for the Pyxis SCF Build submission, collected 2026-11-20. Start with [FINAL-VERIFICATION-REPORT.md](FINAL-VERIFICATION-REPORT.md). Earlier planning: [PREFLIGHT-REPORT.md](PREFLIGHT-REPORT.md).
+Real-run evidence for the Pyxis SCF Build submission, collected 2026-11-20. Start with [FINAL-VERIFICATION-REPORT.md](FINAL-VERIFICATION-REPORT.md).
 
 | Area | Files |
 |---|---|

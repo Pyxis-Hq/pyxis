@@ -26,7 +26,7 @@
 
 | Variable | Required | Notes |
 |---|---|---|
-| `DATABASE_URL` | Yes | Runtime role `pyxis_app`. **If unset the code falls back to `postgres://pyxis_app:pyxis_app@localhost:54329/pyxis`, so a missing production value does not fail fast (SEC-15)** |
+| `DATABASE_URL` | Yes | Runtime role `pyxis_app`. **If unset the code falls back to `postgres://pyxis_app:pyxis_app@localhost:54329/pyxis`, so a missing production value does not fail fast** |
 | `ADMIN_DATABASE_URL` | For migrations | Owner connection; not used at runtime |
 | `PYXIS_APP_PASSWORD` | For `db:role` | Replaces the development password of `pyxis_app` |
 | `OPERATOR_ACCOUNTS` | Recommended | Comma-separated Stellar public keys |
@@ -44,7 +44,7 @@ Stored as Railway service variables. No secret manager, no rotation schedule and
 
 | Capability | Status |
 |---|---|
-| Health check | `GET /` returns 200. It does **not** check the database (OPS-02) |
+| Health check | `GET /` returns 200. It does **not** check the database |
 | Logging | Console output only; no structured logging, no log shipping, no retention policy |
 | Monitoring | **MISSING**: no uptime probe, no metrics, no dashboards |
 | Alerting | **MISSING** |
@@ -65,7 +65,7 @@ Stored as Railway service variables. No secret manager, no rotation schedule and
 |---|---|---|
 | Deploy failed with no logs, repeatedly | A Windows checkout uploads CRLF files; the stored LF checksum of `001_init.sql` no longer matched | Checksums now ignore line endings (`scripts/migrate.ts`) |
 | `npm install` failed with `ERESOLVE` on Railway | Peer-dependency conflicts without the flag | `.npmrc` with `legacy-peer-deps=true` |
-| Pre-deploy migration did not run on CLI deploys | Railway ignored the pre-deploy command for `railway up` uploads | Run `npm run db:migrate && npm run db:role` by hand over `railway ssh` after a deploy that adds a migration (OPS-05) |
+| Pre-deploy migration did not run on CLI deploys | Railway ignored the pre-deploy command for `railway up` uploads | Run `npm run db:migrate && npm run db:role` by hand over `railway ssh` after a deploy that adds a migration |
 | `railway ssh` picked the wrong key | Several keys on the developer machine | Pass `-i <key>` |
 | Linking a new service changed the CLI's linked service | CLI behaviour | Name the service on every command |
 
@@ -77,7 +77,7 @@ Stored as Railway service variables. No secret manager, no rotation schedule and
 | Database scaling | One instance; the app pool is 10 connections per process |
 | Background workers | None exist; retention, rollup and purge jobs would be new components |
 | Failure recovery | On crash Railway restarts the process (`restartPolicyType: ON_FAILURE`); there is no standby database and no ingest buffer, so exporters must retry through an outage |
-| Availability assumption | **None can be supported.** See the arithmetic in [../04-rfp-gap-analysis.md](../04-rfp-gap-analysis.md) B-4 |
+| Availability assumption | **None can be supported.** A single replica and a single database cannot support a high-availability target; the planned approach is in [../planning/roadmap-and-milestones.md](../planning/roadmap-and-milestones.md) |
 
 ## 8. Portability
 
@@ -95,4 +95,4 @@ No incident-response procedure exists. The RFP requires one to be written and ex
 
 ## 10. Cost and capacity
 
-Not measured. The audit did not inspect Railway usage or billing. A cost model for the hosting obligation (RFP H6) is a team input listed in [../planning/budget-assumptions.md](../planning/budget-assumptions.md).
+Not measured. The audit did not inspect Railway usage or billing. A cost model for the hosting obligation (RFP H6) is a planning input.
