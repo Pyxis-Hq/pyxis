@@ -70,7 +70,7 @@ These exist in code but have never run against the real thing. Record the result
 - [ ] **G7** `[docs]` State "no fees" explicitly in the README and onboarding docs
 - [ ] **W3** `[docs]` Integration guides for static HTML, SPAs and SSR (React, Next.js) with a tested snippet each
 - [ ] **A1** `[docs]` Make the OpenTelemetry JSON and delta settings impossible to miss in onboarding (default OTel exporters use protobuf and cumulative)
-- [ ] **D6** `[docs]` Write the standalone tenant onboarding guide (OpenTelemetry, wallet SDK, domain verification)
+- [x] **D6** Standalone tenant onboarding guide (OpenTelemetry, wallet SDK, domain verification) published at <https://docs.usepyxis.xyz> (2026-11-20)
 - [ ] **D4** `[docs]` Production deployment guide for a community operator (not only the engineer handover)
 
 ## 6. Web analytics strategy and compliance (M2)
