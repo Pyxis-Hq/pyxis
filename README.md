@@ -6,7 +6,7 @@ Shared, multi-tenant analytics for Stellar projects. A builder signs in with a S
 - **Web analytics:** page views, referrers, countries, browsers and devices from a self-hosted [Umami](https://umami.is), issued only after the owner proves control of the domain.
 - **Wallet funnel:** how many people get from "connect wallet" to a reported transaction submission, counted from event names alone.
 
-Built for the SCF RFP *Web and API Analytics for Stellar Ecosystem Projects*. Plan and SCF mapping: [ROADMAP.md](ROADMAP.md). Product truth and constraints: [PRODUCT.md](PRODUCT.md).
+Built for the SCF RFP *Web and API Analytics for Stellar Ecosystem Projects*. **SCF reviewers: start at [docs/scf/README.md](docs/scf/README.md)** (architecture, RFP compliance matrix, deliverables, threat model, evidence). Plan and SCF mapping: [ROADMAP.md](ROADMAP.md). Product truth and constraints: [PRODUCT.md](PRODUCT.md).
 
 > **Testnet MVP.** The name "Pyxis" and the wording "testnet MVP" are provisional. All seeded data is synthetic and labelled as such. Nothing here claims customers, adoption, uptime or compliance.
 >
@@ -196,7 +196,7 @@ scripts/                  migrate, local Postgres, seed, e2e smoke, runtime-role
 sdk/wallets-kit/          @pyxis-hq/wallets-kit, the published wallet-funnel SDK
 apps/docs/                documentation site (Fumadocs); `npm run dev --workspace @pyxis-hq/docs` serves it on :3100
 tests/                    vitest suites
-docs/                     SDK build spec, design teardown
+docs/                     documentation index (docs/README.md); SCF submission documents in docs/scf/; SDK build spec, design teardown
 ```
 
 ## Scripts
@@ -268,7 +268,8 @@ The repository includes a [railway.json](railway.json) (Railpack build, `npm run
 | [PRODUCT.md](PRODUCT.md) | Users, purpose, constraints, principles |
 | [DESIGN.md](DESIGN.md) | Visual system: tokens, components, rules |
 | [ROADMAP.md](ROADMAP.md) | MVP definition and the full-project plan |
-| [docs/rfp-acceptance-matrix.md](docs/rfp-acceptance-matrix.md) | Every SCF RFP requirement mapped to status, evidence and gaps |
+| [docs/scf/README.md](docs/scf/README.md) | **SCF Build submission index:** architecture, deliverables, threat model, privacy, operations, traction evidence |
+| [docs/scf/rfp-compliance-matrix.md](docs/scf/rfp-compliance-matrix.md) | Every SCF RFP requirement mapped to status, evidence and the funded deliverable |
 | [docs/rfp-checklist.md](docs/rfp-checklist.md) | Actionable delivery checklist for the SCF RFP |
 | [docs/handover-build-plan.md](docs/handover-build-plan.md) | Handover guide: setup, GitHub, live deployment, and the build plan for the SDK and Umami |
 | [docs/sdk-build-spec.md](docs/sdk-build-spec.md) | Specification for building the public SDK |

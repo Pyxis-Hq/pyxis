@@ -27,4 +27,4 @@
 3. **UI:** the request-volume chart's x-axis labels overlap ("20 Nov, 10:00" printed over itself).
 4. **Docs:** the SDK reference says "Currently 0.1.0-beta.0"; the published version is 0.1.0-beta.1.
 5. **Error codes reveal key state** (`auth_revoked`), contrary to the "generic errors" wording in the docs.
-6. **Evidence in the public repository:** the team's wallet screenshots under `docs/scf/build-submission/evidence/` show unrelated browser tabs (one names another project) and partial wallet addresses. They should be cropped and re-committed.
+6. **Resolved:** the first-run wallet and dashboard screenshots that showed unrelated browser tabs were removed from the repository; the second-run evidence in `docs/scf/evidence/wallet-run/` replaces them.

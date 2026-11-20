@@ -479,7 +479,7 @@ sequenceDiagram
 | Failure when Umami is down | Domain is reported verified but no tracker is ready; retry later | `sites/[siteId]/verify/route.ts` |
 | Tracker snippet | `<script defer src="{UMAMI_PUBLIC_URL}/script.js" data-website-id=... data-domains=...>`, served from the operated Umami, no third-party script | `Umami.snippet` |
 | Reports | Page views, visitors, visits, bounce rate, average session, top 10 referrers, countries, browsers, devices | `Umami.report` |
-| Real-run status | On 2026-11-20 this path ran once against a **real Umami 2.20.2** (`ghcr.io/umami-software/umami:postgresql-v2.20.2`, Railway, own PostgreSQL). Login, domain verification (well-known file) and website creation worked, and the dashboard figures for one controlled internal session (7 page views, 1 visitor, 0 bounces, 16 s, NG, Edge, laptop) matched Umami's own API. Not exercised: referrers (none in the session), a returning visitor, any external traffic, SPA-vs-refresh distinction, load. Pyxis does not display custom events or OS. Evidence: `docs/scf/build-submission/evidence/umami/` and `evidence/dashboard/` | Evidence files |
+| Real-run status | On 2026-11-20 this path ran once against a **real Umami 2.20.2** (`ghcr.io/umami-software/umami:postgresql-v2.20.2`, Railway, own PostgreSQL). Login, domain verification (well-known file) and website creation worked, and the dashboard figures for one controlled internal session (7 page views, 1 visitor, 0 bounces, 16 s, NG, Edge, laptop) matched Umami's own API. Not exercised: referrers (none in the session), a returning visitor, any external traffic, SPA-vs-refresh distinction, load. Pyxis does not display custom events or OS. Evidence: `docs/scf/evidence/umami/` and `evidence/dashboard/` | Evidence files |
 | Tracker pinning | The Umami **server image tag** is pinned in the demonstration deployment. The tracker snippet carries no version or integrity hash, so the tracker is **not** version-pinned | `Umami.snippet` |
 
 ## 11. Querying and the dashboards
@@ -611,7 +611,7 @@ flowchart LR
 | Web | `tests/web.test.ts` | Domain normalization, SSRF guard, verification, Umami client against a fake server | no |
 | End to end | `scripts/e2e-smoke.mts` | Against a running instance: ingest with a valid key, an unknown key, traces and malformed JSON; a SEP-43-style signed sign-in, bad-signature and replay rejection; further API checks after sign-in | running app, `SMOKE_SECRET`, an ingest token |
 
-Manual evidence runs (2026-11-20, not automated and not in CI): a real Varial wallet sign-in; 14 sign-in checks including a positive control against the live sign-in (`docs/scf/build-submission/evidence/wallet/forged-signature-test.cjs`); a ledger-verified Testnet payment; the wallet funnel; and one real Umami session (see `docs/scf/build-submission/evidence/`).
+Manual evidence runs (2026-11-20, not automated and not in CI): a real Varial wallet sign-in; 14 sign-in checks including a positive control against the live sign-in (`docs/scf/evidence/wallet/forged-signature-test.cjs`); a ledger-verified Testnet payment; the wallet funnel; and one real Umami session (see `docs/scf/evidence/`).
 
 What is not tested automatically: the real browser wallet flow, the real Umami integration (the Web suite still uses a fake server), the UI components (no component tests), load and rate limits, and challenge expiry.
 
