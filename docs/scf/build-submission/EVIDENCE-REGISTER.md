@@ -83,7 +83,7 @@
 | EV-070 | Any SCF-awarded project uses Pyxis | none | none | **ABSENT** |
 | EV-071 | Any external user, customer or pilot commitment | none | none | **ABSENT** |
 | EV-072 | The team's SCF and SDF history and open-source maintainer record | none in the repository | to be supplied | **ABSENT** |
-| EV-073 | Real wallet sign-in recorded | five screenshots | [evidence/wallet/](evidence/wallet/authentication-verification.md) | **PRESENT (2026-11-20)** |
+| EV-073 | Real wallet sign-in recorded | prompt-by-prompt screenshots (second run); first-run screenshots removed | [evidence/wallet-run/](evidence/wallet-run/README.md) | **PRESENT (2026-11-20)** |
 | EV-074 | A real Umami run | Umami API and dashboard screenshot | [evidence/umami/](evidence/umami/analytics-verification.md) | **PRESENT (2026-11-20), one internal session** |
 | EV-075 | A load test or availability measurement | none | to be produced | **ABSENT** |
 

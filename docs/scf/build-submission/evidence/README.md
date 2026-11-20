@@ -10,6 +10,6 @@ Real-run evidence for the Pyxis SCF Build submission, collected 2026-11-20. Star
 | Logs | [activity log](logs/relevant-browser-console.log), [check outputs](logs/relevant-server-logs.txt) (not raw server logs) |
 | Index | [evidence-manifest.json](manifests/evidence-manifest.json) |
 
-Screenshots: `dashboard/screenshots/` holds three genuine team captures (web analytics, API metrics overview, wallet funnel). `wallet/screenshots/` holds five sign-in captures. `umami/screenshots` is **empty**. Do not describe missing ones as existing.
+Screenshots: `dashboard/screenshots/` holds two team captures (web analytics, API metrics overview); the first-run wallet funnel and sign-in screenshots were removed because they showed unrelated browser tabs, and are replaced by `wallet-run/screenshots/`. `umami/screenshots` is **empty**. Do not describe missing ones as existing.
 
 Provenance labels used throughout: **frontend-reported** (sent by the browser SDK), **ledger-verified** (read back from Horizon by the auditor), **server-stored** (read from the Pyxis or Umami store by the auditor).

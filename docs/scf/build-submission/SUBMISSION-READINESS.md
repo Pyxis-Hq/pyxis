@@ -33,7 +33,7 @@ Legend: **READY** (can be used as is) · **DRAFT** (written, needs team review) 
 
 | Evidence | Effort | Why |
 |---|---|---|
-| A recorded real-wallet sign-in and a Testnet demo run with a transaction hash | **DONE 2026-11-20** | Varial sign-in (5 screenshots), 14-check live sign-in test (positive control included), ledger-verified payment `9909a163…0322` (ledger 5825901). Internal only; expiry untested ([evidence](evidence/FINAL-VERIFICATION-REPORT.md)) |
+| A recorded real-wallet sign-in and a Testnet demo run with a transaction hash | **DONE 2026-11-20** | Varial sign-in (second run, every prompt screenshotted), 14-check live sign-in test (positive control included), ledger-verified payment `9909a163…0322` (ledger 5825901). Internal only; expiry untested ([evidence](evidence/FINAL-VERIFICATION-REPORT.md)) |
 | A real Umami run against the code, with the result recorded | **DONE 2026-11-20 (one session)** | Umami 2.20.2; Pyxis created the website; Pyxis page matched Umami's API. Not in CI; referrers and custom events not shown by Pyxis; the demonstration instance has no backups or monitoring |
 | Letters of intent from SCF-awarded projects | Weeks, third parties | The RFP requires adoption proof; intent letters show a plan |
 | An honest availability position and a costed hosting plan | Days | The RFP evaluates SLA realism |
@@ -62,7 +62,7 @@ These contradict the project's own documents. They are small, but **this audit d
 | Public repository with licence and README | **READY** |
 | CI green on `main` | **READY** (run 44662475801) |
 | Documentation site | **READY** (live) |
-| `docs/scf/build-submission/` committed and pushed (now including `evidence/`, three dashboard and five sign-in screenshots, and `traction-evidence.md`) | **MISSING** (created, not committed, as instructed) |
+| `docs/scf/build-submission/` committed and pushed (now including `evidence/`, dashboard and wallet-run screenshots, and `traction-evidence.md`) | **MISSING** (created, not committed, as instructed) |
 | The demo dApp (`scf-rfp-projects/pyxis-demo-dapp`, live at pyxis-demo-dapp.vercel.app) | **DECISION**: it is outside the repository; commit it (for example under `examples/`) or state that it is a separate demonstration |
 | Demonstration Umami on Railway (`umami`, `umami-db`) | **DECISION**: keep, or replace with the production plan; rotate its `APP_SECRET` (it appeared in a command output) and add backups before relying on it |
 | Package on npm with a README | **READY** |

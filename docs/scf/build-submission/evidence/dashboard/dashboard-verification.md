@@ -41,7 +41,7 @@ Observations: the page copy says "pinned, self-hosted Umami". The server image i
 File: `screenshots/pyxis-api-metrics-overview.png`. Shows the Demo Project with **0 requests** and empty latency and status panels, and the onboarding checklist at "2 of 4 done". No API (OTLP) data was sent in this test. This is honest empty state, not a failure, and it is not API-analytics evidence.
 
 ## Wallet funnel page: VERIFIED (screenshot)
-File: `screenshots/pyxis-wallet-funnel.png`, range 7d, project "Demo Project", signed in as `GB7H…65E5`. Real data.
+The first-run screenshot (project "Demo Project", range 7d) was removed because it showed unrelated browser tabs and has been deleted; the figures below come from the stored counts above and match what it showed. The second run's funnel is in `../wallet-run/screenshots/15-wallet-funnel.png`.
 - Shows Connect started 1, Connected 1, Sign started 1, Signed 1, Submit started 1, Submit reported OK 1 (each step 100% of the one above), Failures reported 0. This equals the six stored buckets queried above.
 - The page carries the warning "Frontend-reported, not ledger-confirmed" and "Event counts only. No addresses, signatures or transactions are stored." The labelling matches the provenance used in this evidence.
 - No `wallet_disconnect` row is displayed (the page does not list it), and the failure count is an aggregate of 0.

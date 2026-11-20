@@ -3,7 +3,7 @@
 **Status:** OBSERVED (successful sign-in with a real wallet, screenshots) plus a user-cancelled attempt, and server-side behaviour **tested live** (14 of 14 in the corrected v2 test, with a positive control and a replay of an accepted signature; the first 12-check run was flawed and is withdrawn, see [forged-signature-test.md](forged-signature-test.md)). Challenge expiry was not tested.
 **Date:** 2026-11-20. **App:** <https://usepyxis.xyz/signin>. **Network:** Testnet.
 
-## Sequence (screenshots in `screenshots/`)
+## Sequence (first-run screenshots **removed** because they showed unrelated browser tabs; the second run, every prompt screenshotted, is in [../wallet-run/README.md](../wallet-run/README.md))
 
 | # | File | What it shows |
 |---|---|---|
