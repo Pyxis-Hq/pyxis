@@ -15,13 +15,20 @@ One real 1 XLM Testnet payment (account to itself) through a connected wallet is
 `@pyxis-hq/wallets-kit@0.1.0-beta.1` is on npm. In the run above its browser SDK reported six funnel events, which the Pyxis server stored as counts with no address, signature or XDR. Those events are frontend-reported; only the transaction in C is ledger-verified.
 
 ## E. Real Umami analytics session: Demonstrated
-A real Umami 2.20.2 instance was deployed. Pyxis verified a domain and created the Umami website itself. A controlled internal browser session produced 7 page views, 1 visitor, a custom event and device and country data in Umami. See [evidence/umami/analytics-verification.md](evidence/umami/analytics-verification.md). Not external traffic.
+A real Umami 2.20.2 instance was deployed. Pyxis verified a domain and created the Umami website itself. Two controlled internal browser sessions (7 page views on the first site, 6 on a second) produced visitors, a custom event and device and country data in Umami. See [evidence/umami/analytics-verification.md](evidence/umami/analytics-verification.md). Not external traffic.
 
-## F. Dashboard verification: partial
-The Pyxis web analytics page shows 7 page views, 1 visitor, 0.0% bounce, 16 s average session, country NG, Edge and laptop. These match the values read from Umami's own API ([screenshot](evidence/dashboard/screenshots/pyxis-web-analytics.png)). The wallet funnel page shows the six events once each with 0 failures and states "Frontend-reported, not ledger-confirmed" ([screenshot](evidence/dashboard/screenshots/pyxis-wallet-funnel.png)); it matches the stored counts. The API metrics page correctly shows 0 requests because no API data was sent.
+## F. Real API ingestion: Demonstrated (internal test workload)
+On 2026-11-20 a local service instrumented with the **stock OpenTelemetry Node SDK**, configured only with the settings in Pyxis' own guide (OTLP/HTTP JSON, delta temporality, an ingest key), sent 270 requests in two runs. Pyxis counted all 270, with the status classes matching the client's own counts exactly (2xx 242, 4xx 22, 5xx 6), and showed p50 92.9 ms, p95 550 ms and p99 910 ms plus a per-route table ([screenshots](evidence/api-and-web-capture/screenshots/), [report](evidence/api-and-web-capture/tested-workflows.md)). Limits: the service was built for the test and its latencies are artificial delays, so this proves ingestion and aggregation, not API performance or reliability. Route templating works with Express instrumentation; with plain Node `http` instrumentation routes appear as `/_unmatched`. A revoked ingest key was rejected on its next request (401). No external traffic.
 
-## G. External adoption and pilots: none
+## G. Dashboard verification
+- **Web analytics:** a second, independent session on a new verified site (`pyxis-capture-site.vercel.app`) produced 6 page views, 1 visitor, 15 s, Chrome on desktop, country NG; Pyxis matched Umami's own API ([screenshot](evidence/api-and-web-capture/screenshots/05-web-analytics.png)). The earlier session matched too ([screenshot](evidence/dashboard/screenshots/pyxis-web-analytics.png)).
+- **Wallet funnel:** six events once each, 0 failures, with the banner "Frontend-reported, not ledger-confirmed" ([screenshot](evidence/dashboard/screenshots/pyxis-wallet-funnel.png)); matches the stored counts.
+- **API metrics:** empty state before ingestion, 270 requests after ([before](evidence/api-and-web-capture/screenshots/02-api-dashboard-before.png), [after](evidence/api-and-web-capture/screenshots/04-api-live-metrics.png)).
+
+## H. External adoption and pilots: none
 **No external project has onboarded.** No letters of intent, pilots, customers or external users exist. The npm download count (247 on 2026-11-20) is not evidence of adoption. All runs above are internal tests.
 
-## Wording for the form
-"Pyxis is live at usepyxis.xyz (open source, Apache-2.0, 80 passing tests). In an internal Testnet demonstration, a real wallet connected to a demo dApp, submitted a Testnet payment confirmed on the ledger (hash and explorer link), and reported its funnel through our published SDK; a real Umami instance recorded a controlled browser session. We have no external adopters yet; onboarding SCF projects is the purpose of this proposal."
+## Wording for the form (85 words, as SCF delegates asked for brevity)
+"Pyxis is live at usepyxis.xyz and open source (Apache-2.0), with a wallet SDK published on npm. In internal Testnet demonstrations, a real wallet signed in, a Testnet payment was confirmed on the ledger (explorer link below), the SDK's wallet funnel was stored and displayed, a stock OpenTelemetry SDK sent 270 requests that Pyxis counted exactly, and a real Umami session matched Pyxis's dashboard. Wallet funnel events are frontend-reported, not ledger-confirmed. We have no external adopters yet; onboarding SCF projects is the purpose of this proposal."
+
+Links to put under it: <https://usepyxis.xyz> · <https://github.com/Pyxis-Hq/pyxis> · <https://www.npmjs.com/package/@pyxis-hq/wallets-kit> · <https://stellar.expert/explorer/testnet/tx/9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322>.

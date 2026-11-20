@@ -18,7 +18,9 @@ Real-run evidence now exists in [evidence/](evidence/README.md) and changes seve
 - One Testnet payment (1 XLM, account to itself) is ledger-verified: `9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322`, ledger 5825901.
 - The browser SDK's six funnel events were stored by Pyxis and shown on the wallet funnel page (frontend-reported).
 - A real Umami 2.20.2 was deployed; Pyxis created a website in it; a controlled browser session produced data that the Pyxis web analytics page showed identically to Umami's own API.
-- Still true: no external users, pilots or letters; no Soroban; Umami is a demonstration instance; the tracker is not version-pinned; none of this runs in CI.
+- **API ingestion is now demonstrated (internal workload):** a stock OpenTelemetry Node SDK, configured only with the guide's settings, sent 270 requests; Pyxis counted all 270 with the right status split and showed p50/p95/p99. The service was built for the test, so latencies are artificial and this is not an API-reliability claim. A revoked ingest key was rejected (401).
+- A second web analytics session on a new verified site also matched Umami's API.
+- Still true: no external users, pilots or letters; no Soroban; Umami is a demonstration instance; the tracker is not version-pinned; none of this runs in CI; routes show as `/_unmatched` unless a framework instrumentation sets `http.route`; ingestion is OTLP JSON only.
 Full wording: [traction-evidence.md](traction-evidence.md).
 
 ## SECTION A · Submission information
@@ -53,7 +55,7 @@ Use the specification in this package:
 <https://github.com/Pyxis-Hq/pyxis> (public, Apache-2.0).
 
 ### A9 · Video URL (optional)
-**MISSING.** The form wants a video under 3 minutes, 16:9, on YouTube or Vimeo. To create one: record (1) 15 seconds on the problem (Stellar projects cannot see how their APIs and sites are used without profiling users); (2) a live walkthrough: sign in with a wallet on the Testnet app, create a project and an ingest key, send one OpenTelemetry batch, see the dashboard with p50 and p95; (3) the team on camera; (4) the ask. **Show only what works today.** You can now show, from real runs: the wallet sign-in with the wallet's signature prompt; the demo dApp connecting a wallet and sending the 1 XLM Testnet payment with the ledger check; the wallet funnel page; and the web analytics page for the demo site. Label them "Testnet demonstration, internal session, one visitor". Do not show API (OTLP) data as if it were from a user; the Demo Project has 0 requests unless you send a batch first. Do not claim the Umami instance is the production plan.
+**MISSING.** The form wants a video under 3 minutes, 16:9, on YouTube or Vimeo. To create one: record (1) 15 seconds on the problem (Stellar projects cannot see how their APIs and sites are used without profiling users); (2) a live walkthrough: sign in with a wallet on the Testnet app, create a project and an ingest key, send one OpenTelemetry batch, see the dashboard with p50 and p95; (3) the team on camera; (4) the ask. **Show only what works today.** You can now show, from real runs: the wallet sign-in with the wallet's signature prompt; the demo dApp connecting a wallet and sending the 1 XLM Testnet payment with the ledger check; the wallet funnel page; and the web analytics page for the demo site. Label them "Testnet demonstration, internal session, one visitor". The API dashboard can now be shown with real data, but label it as a local test workload, not a user's API. A silent 2:18 cut already exists in `artifacts/scf-demo/final/pyxis-scf-demo.mp4` (not committed, not uploaded); the URL for this field stays **MISSING** until it is uploaded to YouTube or Vimeo. Do not claim the Umami instance is the production plan.
 
 ### A10 · Products & Services (required)
 Describe only what this award funds. Each item follows: delivered, exists today, improved, how Stellar is used, ecosystem value, how completion is verified.
@@ -68,7 +70,7 @@ Describe only what this award funds. Each item follows: delivered, exists today,
 
 **2. Production API analytics over OpenTelemetry.**
 - *Delivered:* ingestion that accepts stock OpenTelemetry exporters, stores only metric aggregates, and serves tenant and operator dashboards at the RFP's design volume.
-- *Exists today:* OTLP/HTTP **JSON** ingestion with delta histograms, route templating (including Stellar accounts, contracts and muxed accounts), tenant isolation in PostgreSQL, and p50, p95, p99 dashboards. 80 automated tests pass.
+- *Exists today:* OTLP/HTTP **JSON** ingestion with delta histograms, route templating (including Stellar accounts, contracts and muxed accounts), tenant isolation in PostgreSQL, and p50, p95, p99 dashboards. 80 automated tests pass. On 2026-11-20 a stock OpenTelemetry Node SDK, configured only with the guide's settings (OTLP/HTTP JSON, delta temporality, ingest key), sent 270 requests from a local test service and Pyxis counted all 270 with the correct status-class split ([evidence](evidence/api-and-web-capture/tested-workflows.md)). Known gaps from that run: routes appear as `/_unmatched` unless a framework instrumentation sets `http.route` (the guide says the URL path is used), and the Node SDK needs `OTEL_TRACES_EXPORTER=none` to avoid failing trace exports.
 - *Improved:* OTLP protobuf and gzip; rate limiting; rollups and a 24-month retention policy; a published load test.
 - *Stellar:* Stellar-aware route normalisation; built for Stellar API operators.
 - *Value:* API visibility without storing traces or request bodies.
@@ -84,7 +86,7 @@ Describe only what this award funds. Each item follows: delivered, exists today,
 - *Stellar:* wallet connect, sign and submit funnel for Stellar dApps.
 - *Improved (stretch):* Stellar Wallets Kit adapter; publishing with provenance.
 
-**Honest risks (reviewers assume you missed any you omit):** the web path has run against a real Umami in one controlled internal session only and is not tested in CI; the sign-in challenge endpoint and ingestion have no rate limiting or retention today; availability targets need an architecture decision; adoption depends on partner projects; the team's SCF track record must be shown; Stellar's role is the sign-in identity and ecosystem context, **not an on-chain function**, which the guide's "Stellar must be core" test may question.
+**Honest risks (reviewers assume you missed any you omit):** the web and API paths have run only on controlled internal test traffic (two Umami sessions, one local 270-request workload) and are not tested in CI; the sign-in challenge endpoint and ingestion have no rate limiting or retention today; availability targets need an architecture decision; adoption depends on partner projects; the team's SCF track record must be shown; Stellar's role is the sign-in identity and ecosystem context, **not an on-chain function**, which the guide's "Stellar must be core" test may question.
 
 ### A11 · Traction Evidence (required): actual evidence only
 
@@ -97,16 +99,19 @@ Describe only what this award funds. Each item follows: delivered, exists today,
 | Wallet sign-in | A real Varial wallet signed in on Testnet; five screenshots; a 14-check live sign-in test (correct signature accepted, forged variants rejected) | VERIFIED ([evidence](evidence/wallet/authentication-verification.md)). Internal test; challenge expiry untested; no HTTP logs captured |
 | Stellar Testnet transaction | Hash `9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322`, ledger 5825901, successful, one 1 XLM payment (account to itself); <https://stellar.expert/explorer/testnet/tx/9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322> | VERIFIED on Horizon by the auditor. **No contract ID** (Pyxis has no contract); Testnet only; self-payment |
 | Wallet funnel | Six events stored and shown on the wallet funnel page (screenshot) | VERIFIED. Frontend-reported, not ledger-confirmed; one internal run |
-| Web analytics session | Real Umami 2.20.2; 7 page views, 1 visitor, 16 s session, NG, Edge, laptop, one custom event; the Pyxis page matched Umami's API | VERIFIED ([evidence](evidence/umami/analytics-verification.md)). One internal visitor; demo site `pyxis-demo-dapp.vercel.app`; referrers untested |
+| Web analytics session | Real Umami 2.20.2; 7 page views, 1 visitor, 16 s session, NG, Edge, laptop, one custom event; the Pyxis page matched Umami's API | VERIFIED ([evidence](evidence/umami/analytics-verification.md)). One internal visitor per session; a second session on a new site (`pyxis-capture-site.vercel.app`, 6 views) also matched ([screenshot](evidence/api-and-web-capture/screenshots/05-web-analytics.png)); referrers untested |
+| API ingestion | A stock OpenTelemetry Node SDK (documented settings) sent 270 requests; Pyxis counted all 270; p50 92.9 ms, p95 550 ms, p99 910 ms; status classes matched the client exactly; a revoked key returned 401 | VERIFIED ([evidence](evidence/api-and-web-capture/tested-workflows.md), [screenshots](evidence/api-and-web-capture/screenshots/)). Local test service with artificial latencies; no external traffic; OTLP JSON only |
 | User validation | none | **MISSING.** To obtain: onboard two or three real projects, record what they did and what broke |
 | Pilot commitments | none | **MISSING.** To obtain: letters of intent from the SCF-awarded projects the RFP wants instrumented (three for web, one for API) |
 | Previously funded | none | `[TEAM INPUT]` |
 
 Suggested wording for the field (it says what the evidence is):
 
-> Pyxis is live at usepyxis.xyz (open source, Apache-2.0, 80 passing tests, CI green). In an internal Testnet demonstration, a real wallet signed in to the app, a demo dApp submitted a Testnet payment confirmed on the ledger (hash and explorer link), and our published SDK reported the wallet funnel, which Pyxis stored and displayed. A real Umami instance recorded a controlled browser session that Pyxis displayed identically. The server accepted a correct signature and rejected every forged variant in a 14-check test. We have no external adopters yet; onboarding SCF projects is the purpose of this proposal.
+> Pyxis is live at usepyxis.xyz and open source (Apache-2.0), with a wallet SDK published on npm. In internal Testnet demonstrations, a real wallet signed in, a Testnet payment was confirmed on the ledger (explorer link below), the SDK's wallet funnel was stored and displayed, a stock OpenTelemetry SDK sent 270 requests that Pyxis counted exactly, and a real Umami session matched Pyxis's dashboard. Wallet funnel events are frontend-reported, not ledger-confirmed. We have no external adopters yet; onboarding SCF projects is the purpose of this proposal.
 
-Do not write: "used by", "trusted by", "production users", "processed N requests", "on-chain verified" for the funnel events.
+(85 words: SCF delegates asked for a short traction field. Put the four links under it: usepyxis.xyz, the GitHub repository, the npm package and the Stellar Expert transaction. Keep the detail for the architecture document and supporting files.)
+
+Do not write: "used by", "trusted by", "production users", "processed N requests" as if it were customer traffic (the 270 requests are a local test workload), "handles N requests per day", "on-chain verified" for the funnel events, "supports OpenTelemetry" without "JSON".
 
 ### A12 · Resubmission Feedback
 Leave blank for a first submission. `[TEAM INPUT if this is a resubmission]`.
@@ -208,7 +213,7 @@ Also decide: **submitter type** (individual, team or entity), the named **Repres
 
 "Supports OpenTelemetry" without "JSON"; "version-pinned" (only the Umami server image tag is pinned; the tracker is not, and the Pyxis web analytics page still says "pinned"); "GDPR compliant"; "handles one million requests a day"; "99.99% available"; "verified on-chain" for funnel events; "independently audited"; "used by"; any users, volumes, revenue or partnerships.
 
-Now allowed, with the qualifier "internal Testnet demonstration": "tested with a real wallet" (Varial, sign-in; the payment wallet brand is unknown), "web analytics verified against a real Umami" (one controlled session).
+Now allowed, with the qualifier "internal Testnet demonstration": "tested with a real wallet" (Varial, sign-in; the payment wallet brand is unknown), "web analytics verified against a real Umami" (two controlled sessions), "a stock OpenTelemetry SDK's metrics are ingested and aggregated" (JSON, delta temporality, a local 270-request test workload).
 
 ## Information the team must still provide
 
