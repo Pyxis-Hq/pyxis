@@ -83,7 +83,7 @@ flowchart TD
 | Railway workspace | the previous owner's **personal** Railway workspace (ask them for its name) |
 | Railway project | named `stellar-pulse` in Railway (the product is now Pyxis; renaming the Railway project is optional), id `9ef394bc-9458-4c1c-bf04-7371f2ace85a`, environment `production` |
 | Services | `web` (the Next.js app) and `Postgres` (Railway's PostgreSQL) |
-| Public URL | `https://web-production-3c4c1c5f.up.railway.app` |
+| Public URL | `https://usepyxis.xyz` (custom domain on Namecheap, ALIAS `@` to the Railway target plus a `_railway-verify` TXT record; the original `https://web-production-3c4c1c5f.up.railway.app` still works) |
 | Web variables (names only) | `DATABASE_URL`, `ADMIN_DATABASE_URL`, `PYXIS_APP_PASSWORD`, `OPERATOR_ACCOUNTS` (empty) |
 | Umami | **not deployed**; the app shows "web analytics engine is not configured" |
 | How it was deployed | `railway up --service web --ci` from a laptop (uploads the working folder, not GitHub) |
@@ -306,7 +306,7 @@ How the current deployment is configured ([railway.json](../railway.json)):
 | Health check | `/` |
 | Restart policy | on failure |
 
-**Known issue:** on the first deployment the pre-deploy step did **not** run (it was deployed with `railway up` from a laptop). The schema had to be applied by hand with `railway ssh`. Config-as-code files like `railway.json` are also flagged by Railway as deprecated, working until 2026-12-01. After you connect GitHub, confirm the pre-deploy step runs; if it does not, apply migrations by hand (6.5) and consider migrating the config with `railway config migrate`.
+**Known issue (2026-11-20 update):** deploying from a Windows laptop with `railway up` uploads files with CRLF line endings. Until commit `fix(db): ignore line endings when checksumming migrations`, that made the stored checksum of `001_init.sql` mismatch and the deployment fail without useful logs. Migration checksums now ignore line endings. Also, Railway's plain `npm install` needs `legacy-peer-deps`, which the committed `.npmrc` provides. The pre-deploy step still did not run on `railway up`; after any deploy that adds a migration, run `railway ssh -i ~/.ssh/<key> --service web -- sh -c "npm run db:migrate && npm run db:role"`. Original note: on the first deployment the pre-deploy step did **not** run (it was deployed with `railway up` from a laptop). The schema had to be applied by hand with `railway ssh`. Config-as-code files like `railway.json` are also flagged by Railway as deprecated, working until 2026-12-01. After you connect GitHub, confirm the pre-deploy step runs; if it does not, apply migrations by hand (6.5) and consider migrating the config with `railway config migrate`.
 
 ### 6.2 Option 1: keep the existing Railway project
 
@@ -378,7 +378,7 @@ Expected output: `applied 001_init.sql` (first time) and `pyxis_app password upd
 
 ### 6.5a After the rename to Pyxis: required changes on the live deployment
 
-The product was renamed from "Stellar Pulse" to "Pyxis" (2026-11-18). The deployed service still runs the old code and still uses the old names. **Do these in order before deploying the renamed code**, otherwise the app cannot connect to its database.
+The product was renamed from "Stellar Pulse" to "Pyxis" (2026-11-18). **Done on 2026-11-20:** the renamed code is live at `https://usepyxis.xyz`, migration `002` is applied and the old `PULSE_APP_PASSWORD` variable is removed. The steps below are kept as the record of what was done and for anyone repeating it on another environment. Do them in order before deploying the renamed code, otherwise the app cannot connect to its database.
 
 | Step | Change | Why |
 |---|---|---|

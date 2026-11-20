@@ -218,6 +218,9 @@ docs/                     SDK build spec, design teardown
 
 ## Deployment
 
+The live service is at <https://usepyxis.xyz> (Railway, with the domain registered at Namecheap).
+
+
 The repository includes a [railway.json](railway.json) (Railpack build, `npm run db:migrate && npm run db:role` before deploy, `npm start`, health check on `/`). A working setup is one app service plus a PostgreSQL service, with `DATABASE_URL` pointing at the runtime role and `ADMIN_DATABASE_URL` and `PYXIS_APP_PASSWORD` set for the migration step. Note: on one deployment the pre-deploy step did not run, so confirm migrations after the first deploy and run `npm run db:migrate && npm run db:role` inside the service if needed.
 
 `docker-compose.yml` defines PostgreSQL, Umami and Umami's database for an evaluation stack. It is **unverified**: it has not been run in a clean room, and Umami uses `latest` rather than a pinned digest.

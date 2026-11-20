@@ -592,7 +592,7 @@ flowchart LR
 |---|---|
 | CI | `.github/workflows/ci.yml`: checkout, Node 22, `npm ci --legacy-peer-deps`, `npm run typecheck`, `npm test`, `npm run build` |
 | Production process | `next start`; health check path `/` (`railway.json`) |
-| Migration on deploy | `railway.json` sets a pre-deploy command `npm run db:migrate && npm run db:role`. On one deployment it did not run; verify after the first deploy and run the same command in the service if needed |
+| Migration on deploy | `railway.json` sets a pre-deploy command `npm run db:migrate && npm run db:role`. It did not run on `railway up` deployments; after any deploy that adds a migration, run the same command in the service with `railway ssh`, and verify after the first deploy and run the same command in the service if needed |
 | Runtime database role | `DATABASE_URL` must use `pyxis_app` with the password from `PYXIS_APP_PASSWORD` (the migration creates the role with a development password that must be replaced) |
 | Private networking | On Railway the app reaches PostgreSQL over the private domain; no public database proxy is required |
 | Evaluation stack | `docker-compose.yml`: PostgreSQL 17, Umami and Umami's database. **Unverified**; Umami is `latest`, not pinned |
