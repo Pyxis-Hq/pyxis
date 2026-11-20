@@ -33,7 +33,7 @@ Legend: **READY** (can be used as is) · **DRAFT** (written, needs team review) 
 
 | Evidence | Effort | Why |
 |---|---|---|
-| A recorded real-wallet sign-in and a Testnet demo run with a transaction hash | **DONE 2026-11-20** | Varial sign-in (5 screenshots), 12 of 12 forged-signature checks, ledger-verified payment `9909a163…0322` (ledger 5825901). Internal only; expiry untested ([evidence](evidence/FINAL-VERIFICATION-REPORT.md)) |
+| A recorded real-wallet sign-in and a Testnet demo run with a transaction hash | **DONE 2026-11-20** | Varial sign-in (5 screenshots), 14-check live sign-in test (positive control included), ledger-verified payment `9909a163…0322` (ledger 5825901). Internal only; expiry untested ([evidence](evidence/FINAL-VERIFICATION-REPORT.md)) |
 | A real Umami run against the code, with the result recorded | **DONE 2026-11-20 (one session)** | Umami 2.20.2; Pyxis created the website; Pyxis page matched Umami's API. Not in CI; referrers and custom events not shown by Pyxis; the demonstration instance has no backups or monitoring |
 | Letters of intent from SCF-awarded projects | Weeks, third parties | The RFP requires adoption proof; intent letters show a plan |
 | An honest availability position and a costed hosting plan | Days | The RFP evaluates SLA realism |

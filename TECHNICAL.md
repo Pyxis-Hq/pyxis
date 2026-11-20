@@ -611,7 +611,7 @@ flowchart LR
 | Web | `tests/web.test.ts` | Domain normalization, SSRF guard, verification, Umami client against a fake server | no |
 | End to end | `scripts/e2e-smoke.mts` | Against a running instance: ingest with a valid key, an unknown key, traces and malformed JSON; a SEP-43-style signed sign-in, bad-signature and replay rejection; further API checks after sign-in | running app, `SMOKE_SECRET`, an ingest token |
 
-Manual evidence runs (2026-11-20, not automated and not in CI): a real Varial wallet sign-in; 12 forged-signature checks against the live sign-in (`docs/scf/build-submission/evidence/wallet/forged-signature-test.cjs`); a ledger-verified Testnet payment; the wallet funnel; and one real Umami session (see `docs/scf/build-submission/evidence/`).
+Manual evidence runs (2026-11-20, not automated and not in CI): a real Varial wallet sign-in; 14 sign-in checks including a positive control against the live sign-in (`docs/scf/build-submission/evidence/wallet/forged-signature-test.cjs`); a ledger-verified Testnet payment; the wallet funnel; and one real Umami session (see `docs/scf/build-submission/evidence/`).
 
 What is not tested automatically: the real browser wallet flow, the real Umami integration (the Web suite still uses a fake server), the UI components (no component tests), load and rate limits, and challenge expiry.
 

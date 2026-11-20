@@ -1,6 +1,6 @@
 # Pyxis wallet authentication
 
-**Status:** OBSERVED (successful sign-in with a real wallet, screenshots) plus a user-cancelled attempt, and server-side rejection of forged, altered, malformed and replayed signatures **tested live** (12 of 12). Challenge expiry and a successful-signature replay were not tested.
+**Status:** OBSERVED (successful sign-in with a real wallet, screenshots) plus a user-cancelled attempt, and server-side behaviour **tested live** (14 of 14 in the corrected v2 test, with a positive control and a replay of an accepted signature; the first 12-check run was flawed and is withdrawn, see [forged-signature-test.md](forged-signature-test.md)). Challenge expiry was not tested.
 **Date:** 2026-11-20. **App:** <https://usepyxis.xyz/signin>. **Network:** Testnet.
 
 ## Sequence (screenshots in `screenshots/`)
@@ -21,7 +21,7 @@
 - The cancelled attempt leaves the user signed out with a generic, non-revealing message and no session.
 
 ## Server-side negative test
-Image 5 is a client-side cancel (no signature reached the server). The server-side rejection was tested separately: [forged-signature-test.md](forged-signature-test.md), 12 of 12 checks passed on the live app (forged, altered, wrong-key, malformed, unknown, replayed and cross-account all rejected). Expiry was not tested.
+Image 5 is a client-side cancel (no signature reached the server). The server-side rejection was tested separately: [forged-signature-test.md](forged-signature-test.md), 14 of 14 checks passed on the live app (forged, altered, wrong-key, malformed, unknown, replayed and cross-account all rejected). Expiry was not tested.
 
 ## What this does not establish
 - The 200 responses, session cookie and backend logs were not captured.
@@ -30,4 +30,4 @@ Image 5 is a client-side cancel (no signature reached the server). The server-si
 - No claim is made about the nonce being single-use from these screenshots; that comes from source (`used_at IS NULL` in the update at `session.ts:31`) and the manual script only.
 
 ## Remaining gap
-Challenge expiry (5 minutes) and a replay of an accepted signature were not tested.
+Challenge expiry (5 minutes) was not tested.

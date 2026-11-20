@@ -52,7 +52,7 @@
 | EV-042 | No Soroban contract, RPC read-back or ledger verification exists | Repository search | whole repository | VERIFIED (absence) | |
 | EV-043 | Testnet or Mainnet contract IDs | n/a | none (Pyxis has no contract) | **ABSENT** | Not required by the RFP |
 | EV-044 | A Testnet payment is on the ledger: `9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322`, ledger 5825901 | Horizon query | [evidence/wallet/transaction-verification.md](evidence/wallet/transaction-verification.md) | VERIFIED | Self-payment, internal test |
-| EV-045 | A real Varial wallet signed in; the server rejects 12 of 12 forged-signature checks | Screenshots; live script | [evidence/wallet/authentication-verification.md](evidence/wallet/authentication-verification.md), [forged-signature-test.md](evidence/wallet/forged-signature-test.md) | VERIFIED | Expiry untested; no HTTP logs for the real sign-in |
+| EV-045 | A real Varial wallet signed in; the live server passed a 14-check sign-in test (correct signature accepted, every forged variant rejected) | Screenshots; live script | [evidence/wallet/authentication-verification.md](evidence/wallet/authentication-verification.md), [forged-signature-test.md](evidence/wallet/forged-signature-test.md) | VERIFIED | Corrected v2 (first run flawed); expiry untested; no HTTP logs for the real sign-in |
 | EV-046 | Six wallet funnel events stored and shown; web analytics page matches Umami | Query, screenshots, Umami API | [evidence/dashboard/dashboard-verification.md](evidence/dashboard/dashboard-verification.md) | VERIFIED | Frontend-reported; one internal visitor |
 
 ## 5. Security and privacy

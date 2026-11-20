@@ -14,7 +14,7 @@
 ## Evidence update (2026-11-20, later the same day)
 
 Real-run evidence now exists in [evidence/](evidence/README.md) and changes several answers below. Summary, all **internal tests by the team, not external adoption**:
-- A real Varial wallet signed in to the live app on Testnet; the server rejected 12 of 12 forged, altered, malformed, replayed and cross-account signatures (challenge expiry untested).
+- A real Varial wallet signed in to the live app on Testnet; the server accepted a correct signature and rejected every forged, altered, malformed, replayed and cross-account variant (corrected 14-check test) (challenge expiry untested).
 - One Testnet payment (1 XLM, account to itself) is ledger-verified: `9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322`, ledger 5825901.
 - The browser SDK's six funnel events were stored by Pyxis and shown on the wallet funnel page (frontend-reported).
 - A real Umami 2.20.2 was deployed; Pyxis created a website in it; a controlled browser session produced data that the Pyxis web analytics page showed identically to Umami's own API.
@@ -94,7 +94,7 @@ Describe only what this award funds. Each item follows: delivered, exists today,
 | Repository | <https://github.com/Pyxis-Hq/pyxis>: Apache-2.0, 26 commits, CI green on `main`, branch protection | VERIFIED. Created 2026-11-18; 0 stars |
 | npm | <https://www.npmjs.com/package/@pyxis-hq/wallets-kit> `0.1.0-beta.1` | VERIFIED. 247 downloads in two days **are not adoption** (mirrors and scanners); do not cite them as users |
 | Tests | 80 passing tests; typecheck; builds; CI run <https://github.com/Pyxis-Hq/pyxis/actions/runs/44662475801> | VERIFIED |
-| Wallet sign-in | A real Varial wallet signed in on Testnet; five screenshots; 12 of 12 forged-signature checks rejected by the live server | VERIFIED ([evidence](evidence/wallet/authentication-verification.md)). Internal test; challenge expiry untested; no HTTP logs captured |
+| Wallet sign-in | A real Varial wallet signed in on Testnet; five screenshots; a 14-check live sign-in test (correct signature accepted, forged variants rejected) | VERIFIED ([evidence](evidence/wallet/authentication-verification.md)). Internal test; challenge expiry untested; no HTTP logs captured |
 | Stellar Testnet transaction | Hash `9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322`, ledger 5825901, successful, one 1 XLM payment (account to itself); <https://stellar.expert/explorer/testnet/tx/9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322> | VERIFIED on Horizon by the auditor. **No contract ID** (Pyxis has no contract); Testnet only; self-payment |
 | Wallet funnel | Six events stored and shown on the wallet funnel page (screenshot) | VERIFIED. Frontend-reported, not ledger-confirmed; one internal run |
 | Web analytics session | Real Umami 2.20.2; 7 page views, 1 visitor, 16 s session, NG, Edge, laptop, one custom event; the Pyxis page matched Umami's API | VERIFIED ([evidence](evidence/umami/analytics-verification.md)). One internal visitor; demo site `pyxis-demo-dapp.vercel.app`; referrers untested |
@@ -104,7 +104,7 @@ Describe only what this award funds. Each item follows: delivered, exists today,
 
 Suggested wording for the field (it says what the evidence is):
 
-> Pyxis is live at usepyxis.xyz (open source, Apache-2.0, 80 passing tests, CI green). In an internal Testnet demonstration, a real wallet signed in to the app, a demo dApp submitted a Testnet payment confirmed on the ledger (hash and explorer link), and our published SDK reported the wallet funnel, which Pyxis stored and displayed. A real Umami instance recorded a controlled browser session that Pyxis displayed identically. The server rejected 12 of 12 forged-signature tests. We have no external adopters yet; onboarding SCF projects is the purpose of this proposal.
+> Pyxis is live at usepyxis.xyz (open source, Apache-2.0, 80 passing tests, CI green). In an internal Testnet demonstration, a real wallet signed in to the app, a demo dApp submitted a Testnet payment confirmed on the ledger (hash and explorer link), and our published SDK reported the wallet funnel, which Pyxis stored and displayed. A real Umami instance recorded a controlled browser session that Pyxis displayed identically. The server accepted a correct signature and rejected every forged variant in a 14-check test. We have no external adopters yet; onboarding SCF projects is the purpose of this proposal.
 
 Do not write: "used by", "trusted by", "production users", "processed N requests", "on-chain verified" for the funnel events.
 

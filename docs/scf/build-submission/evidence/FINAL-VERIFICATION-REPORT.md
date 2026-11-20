@@ -16,7 +16,7 @@
 
 ## 2-5. Wallet, authentication, transaction
 - Connection: account `GA2C7E7S6PM7DA2KL6SAFWPKU6LFPVGXVC5TWNXXJPS2HL5QUVHZ6NGP` on Testnet at about 05:38 UTC. Wallet brand not captured.
-- Authentication: Varial wallet, account `GB7H…65E5`, challenge issued about 05:48:04 UTC, signature approved manually, `/projects` reached; a second attempt cancelled by the user. See [authentication-verification.md](wallet/authentication-verification.md). Forged, altered, wrong-key, malformed, replayed and cross-account signatures were rejected by the live server in a 12-check test ([forged-signature-test.md](wallet/forged-signature-test.md)); challenge expiry was not tested.
+- Authentication: Varial wallet, account `GB7H…65E5`, challenge issued about 05:48:04 UTC, signature approved manually, `/projects` reached; a second attempt cancelled by the user. See [authentication-verification.md](wallet/authentication-verification.md). Forged, altered, wrong-key, malformed, replayed and cross-account signatures were rejected by the live server in a 14-check test ([forged-signature-test.md](wallet/forged-signature-test.md)); challenge expiry was not tested.
 - Transaction: hash `9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322`, ledger 5825901, 2026-11-20T05:39:05Z, successful, one `payment` operation of 1 XLM from the account to itself, fee 100 stroops. Verified directly on Horizon. Link: <https://stellar.expert/explorer/testnet/tx/9909a163c03a8ecc3e725b559656e10c22cc0bcb55dc136d4672b8f765540322>.
 
 ## 6. Wallet SDK events
