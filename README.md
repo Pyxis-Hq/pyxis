@@ -218,6 +218,8 @@ docs/                     SDK build spec, design teardown
 
 ## Deployment
 
+Running your own instance? Follow the production guide: <https://docs.usepyxis.xyz/docs/guides/run-in-production> (source in `apps/docs/content/docs/guides/run-in-production.mdx`).
+
 The live service is at <https://usepyxis.xyz> and the documentation is at <https://docs.usepyxis.xyz> (two Railway services; the domain is registered at Namecheap). The docs service deploys `apps/docs` on its own: from `apps/docs`, run `railway up --service docs`.
 
 

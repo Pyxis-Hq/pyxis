@@ -71,7 +71,7 @@ These exist in code but have never run against the real thing. Record the result
 - [ ] **W3** `[docs]` Integration guides for static HTML, SPAs and SSR (React, Next.js) with a tested snippet each
 - [ ] **A1** `[docs]` Make the OpenTelemetry JSON and delta settings impossible to miss in onboarding (default OTel exporters use protobuf and cumulative)
 - [x] **D6** Standalone tenant onboarding guide (OpenTelemetry, wallet SDK, domain verification) published at <https://docs.usepyxis.xyz> (2026-11-20)
-- [ ] **D4** `[docs]` Production deployment guide for a community operator (not only the engineer handover)
+- [x] **D4** Production deployment guide for a community operator published at <https://docs.usepyxis.xyz/docs/guides/run-in-production> (2026-11-20). Still open: a Docker image and a verified compose file, and a dry run by someone outside the team
 
 ## 6. Web analytics strategy and compliance (M2)
 

@@ -1,0 +1,241 @@
+---
+title: Run Pyxis in production
+description: "Deploy and operate your own Pyxis: requirements, configuration, first boot, verification, upgrades and troubleshooting."
+---
+
+This guide is for someone who runs Pyxis for a community or a set of projects. It covers a deployment on **any host that can run Node.js and PostgreSQL**, and the exact steps we use on **Railway**.
+
+<Callout title="What has been tested">
+  The steps below were run: a production build and start against PostgreSQL with the migration and role steps, and the live service on Railway. A Docker image, infrastructure-as-code, high availability and a backup and restore runbook do **not** exist yet. See [What is not covered](#what-is-not-covered).
+</Callout>
+
+## What you are deploying
+
+| Part | Role | Notes |
+|---|---|---|
+| Pyxis app | One Next.js process (`next start`) serving the UI, the session API and the ingest endpoints | Stateless; all state is in PostgreSQL |
+| PostgreSQL 17 or 18 | Stores aggregates, projects, members and key hashes | Needs **two** database roles (below) |
+| Umami (optional) | Web analytics, run as a **separate** service with its own database | Without it, domains still verify but no tracker is issued |
+
+### Two database roles
+
+| Role | Used for | Connection variable |
+|---|---|---|
+| Owner (for example `postgres`) | Running migrations and setting the runtime role's password | `ADMIN_DATABASE_URL` |
+| `pyxis_app` (non-owner) | Everything the running app does | `DATABASE_URL` |
+
+<Callout type="warn" title="Never run the app as the owner">
+  Tenant isolation relies on PostgreSQL row-level security. The table owner bypasses it. The app must connect as `pyxis_app`, and the owner connection is only for migrations.
+</Callout>
+
+## Requirements
+
+- Node.js 22 and npm
+- A PostgreSQL 17 or 18 database you can connect to as its owner
+- **HTTPS** in front of the app (see the next section)
+- A host that keeps a Node process running and gives it a `PORT`
+
+<Callout type="warn" title="HTTPS is required">
+  In production the session cookie is marked `secure`, so browsers only keep it over HTTPS. Over plain HTTP, wallet sign-in appears to succeed but you are signed out immediately. Terminate TLS at your proxy or platform.
+</Callout>
+
+## Configuration
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `DATABASE_URL` | Yes | Runtime connection as `pyxis_app` |
+| `ADMIN_DATABASE_URL` | For migrations | Owner connection used by `db:migrate` and `db:role` |
+| `PYXIS_APP_PASSWORD` | For `db:role` | The password to give `pyxis_app`. Use a long random value |
+| `OPERATOR_ACCOUNTS` | Recommended | Comma-separated Stellar public keys that get the operator role at sign-in |
+| `UMAMI_URL` | For web analytics | Base URL of your Umami instance |
+| `UMAMI_USER`, `UMAMI_PASSWORD` | For web analytics | Credentials for Umami's REST API |
+| `UMAMI_PUBLIC_URL` | No | Origin the tracker snippet loads from; defaults to `UMAMI_URL` |
+| `PORT` | Usually set by the host | The port `next start` listens on |
+
+Keep `DATABASE_URL`, `ADMIN_DATABASE_URL` and `PYXIS_APP_PASSWORD` in your platform's secret store. `DATABASE_URL` must contain the same password as `PYXIS_APP_PASSWORD`.
+
+## First boot
+
+<Steps>
+  <Step>
+    ### Provision PostgreSQL
+
+    Create an empty database and note the owner connection string. Set it as `ADMIN_DATABASE_URL`.
+  </Step>
+  <Step>
+    ### Get the code and install
+
+    ```bash
+    git clone https://github.com/Pyxis-Hq/pyxis.git
+    cd pyxis
+    npm install --legacy-peer-deps
+    ```
+
+    The repository ships an `.npmrc` with `legacy-peer-deps=true`, so a plain `npm install` also works.
+  </Step>
+  <Step>
+    ### Apply the migrations
+
+    ```bash
+    ADMIN_DATABASE_URL=postgres://owner:...@host:5432/pyxis npm run db:migrate
+    ```
+
+    Migrations run in filename order, each in a transaction, with a SHA-256 checksum recorded. Re-running is safe. Line endings do not affect the checksum.
+  </Step>
+  <Step>
+    ### Set the runtime role's password
+
+    The migrations create `pyxis_app` with a development password. Replace it before anything else:
+
+    ```bash
+    ADMIN_DATABASE_URL=postgres://owner:...@host:5432/pyxis \
+    PYXIS_APP_PASSWORD='a-long-random-secret' npm run db:role
+    ```
+
+    Then set `DATABASE_URL=postgres://pyxis_app:a-long-random-secret@host:5432/pyxis` for the app.
+  </Step>
+  <Step>
+    ### Build and start
+
+    ```bash
+    npm run build
+    npm start
+    ```
+
+    Put your TLS-terminating proxy or platform in front of the port.
+  </Step>
+  <Step>
+    ### Verify
+
+    Run the checks in the next section.
+  </Step>
+</Steps>
+
+## Verify the deployment
+
+Replace `HOST` with your public URL.
+
+| Check | Command | Expect |
+|---|---|---|
+| App is up | `curl -s -o /dev/null -w "%{http_code}" https://HOST/` | `200` |
+| Database reachable as `pyxis_app` | `curl -s -X POST https://HOST/api/v1/auth/challenge -H "content-type: application/json" -d '{"account":"G..."}'` with a real Stellar public key | `200` and a `nonce` |
+| Ingest rejects bad keys | `curl -s -X POST https://HOST/v1/metrics -H "authorization: Bearer pyx_live_0000000000000000.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" -d '{}'` | `401` with `auth_unknown` |
+
+Then sign in with a wallet listed in `OPERATOR_ACCOUNTS`, create a project and a key, and run the end-to-end script from the repository:
+
+```bash
+SMOKE_SECRET=S... npx tsx scripts/e2e-smoke.mts https://HOST <ingest-token>
+```
+
+<Callout title="Sign-in returns 503?">
+  `service_unavailable` on the challenge means the app cannot reach the database. Check `DATABASE_URL`, that its password matches `PYXIS_APP_PASSWORD`, and that you ran both `db:migrate` and `db:role`.
+</Callout>
+
+## Deploy on Railway
+
+This is how the reference deployment runs: one app service and one PostgreSQL service in the same project.
+
+<Steps>
+  <Step>
+    ### Create the project and services
+
+    Add a PostgreSQL service and an app service. The app reaches the database over Railway's private network, so no public database address is needed.
+  </Step>
+  <Step>
+    ### Set the variables on the app service
+
+    ```text
+    DATABASE_URL        postgresql://pyxis_app:<password>@postgres.railway.internal:5432/railway
+    ADMIN_DATABASE_URL  postgresql://postgres:<owner password>@postgres.railway.internal:5432/railway
+    PYXIS_APP_PASSWORD  <password>
+    OPERATOR_ACCOUNTS   G...,G...
+    ```
+  </Step>
+  <Step>
+    ### Deploy
+
+    ```bash
+    railway up --service web
+    ```
+
+    The build uses Railpack (`npm install`, then `npm run build`) and starts `npm run start`. The repository's `railway.json` sets a health check on `/`.
+  </Step>
+  <Step>
+    ### Run the migration by hand
+
+    On `railway up` deployments the pre-deploy command in `railway.json` did **not** run. Run it once, and after any deploy that adds a migration:
+
+    ```bash
+    railway ssh --service web -- sh -c "npm run db:migrate && npm run db:role"
+    ```
+
+    If SSH picks the wrong key, add `-i ~/.ssh/<your key>`.
+  </Step>
+  <Step>
+    ### Attach a domain
+
+    Add the domain in Railway and publish the DNS records it shows. A subdomain takes a `CNAME`. An apex domain cannot use a `CNAME`, so use your DNS provider's `ALIAS` or `ANAME` record. You also add a `_railway-verify` TXT record. Railway issues the HTTPS certificate once the domain verifies.
+  </Step>
+</Steps>
+
+<Callout type="warn" title="Two problems we hit">
+  Deploying from a Windows machine uploads files with CRLF line endings. Older versions then failed with `Migration 001_init.sql was modified after being applied`; current versions ignore line endings. Also, Railway runs a plain `npm install`, which fails on peer-dependency conflicts without the repository's `.npmrc`.
+</Callout>
+
+## Web analytics (Umami)
+
+Run Umami as its **own service with its own database and credentials**, never inside the Pyxis database. Then set `UMAMI_URL`, `UMAMI_USER` and `UMAMI_PASSWORD` on the Pyxis app, and `UMAMI_PUBLIC_URL` if the tracker should load from a different origin than the API. Pin a specific Umami version instead of `latest`.
+
+The repository's `docker-compose.yml` starts PostgreSQL, Umami and Umami's database for evaluation. It is **unverified** and uses `latest`. Treat it as a starting point, not a production setup.
+
+## Upgrade
+
+1. Read the release notes for new migrations or variables.
+2. Take a database backup (below).
+3. Pull the new code, then `npm install`, `npm run build`.
+4. Run `npm run db:migrate` then `npm run db:role` with the owner connection.
+5. Restart the app and run the [verification](#verify-the-deployment) again.
+
+Migrations only move forward. Never edit a migration that has been applied. Pyxis refuses to run if its checksum no longer matches.
+
+## Back up
+
+Pyxis has no backup tooling of its own. Use standard PostgreSQL tools on the owner connection, for example:
+
+```bash
+pg_dump "$ADMIN_DATABASE_URL" --format=custom --file=pyxis-$(date +%F).dump
+```
+
+Test a restore into a scratch database before you rely on it. A full backup and restore runbook is still to be written.
+
+## Harden
+
+| Area | What to do |
+|---|---|
+| Rate limiting | There is none on `/v1/*`. Only size caps apply. Put a rate limit in front of the ingest paths and revoke abused keys |
+| Secrets | Long random `PYXIS_APP_PASSWORD`; store secrets in your platform's secret store; rotate by changing the variable and re-running `db:role` |
+| Operators | Keep `OPERATOR_ACCOUNTS` short. Operator reads and status changes are written to an audit log |
+| Browser keys | A key shipped in a browser is public. Use a separate key for it and revoke it if abused |
+| Network | Do not expose PostgreSQL publicly. Use a private network between the app and the database |
+| Updates | Watch your dependency alerts and apply security updates promptly |
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Sign-in loops or you are signed out at once | Served over HTTP; the cookie is `secure` | Serve over HTTPS |
+| `503 service_unavailable` on sign-in, `500` on ingest | App cannot use the database, or migrations were not applied | Check `DATABASE_URL`, run `db:migrate` and `db:role` |
+| `Migration ... was modified after being applied` | An applied migration was edited, or an old version hit CRLF line endings | Do not edit migrations; upgrade to a current version |
+| `npm install` fails with `ERESOLVE` | Peer-dependency conflict | Use the repository's `.npmrc`, or `--legacy-peer-deps` |
+| `401` with `auth_revoked` or `auth_expired` | The ingest key was revoked or expired | Create a new key |
+| `200` but fewer points than sent | Some data points were dropped | Read the `partialSuccess` reasons in the response |
+| Deploy fails with no logs | Often the migration step | Reproduce `npm run db:migrate` against the same database |
+
+## What is not covered
+
+- A Docker image and a verified compose file for the whole stack
+- Infrastructure-as-code
+- High availability and an availability commitment. Pyxis makes no uptime claim
+- A backup and restore runbook, secret-rotation runbook and incident handling guide
+
+These are tracked in the acceptance matrix (D3 and D5).

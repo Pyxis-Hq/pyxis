@@ -1,1 +1,1 @@
-{ "title": "Guides", "pages": ["api-metrics", "wallet-funnel", "web-analytics"] }
+{ "title": "Guides", "pages": ["api-metrics", "wallet-funnel", "web-analytics", "run-in-production"] }

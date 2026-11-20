@@ -30,14 +30,14 @@ Phase refers to [ROADMAP.md](../ROADMAP.md): **MVP** (Tranche 1), **M0** (award 
 | Web analytics (3.2) | 0 | 2 | 4 | 9 | 0 | 15 |
 | API analytics (3.3) | 7 | 1 | 1 | 0 | 0 | 9 |
 | Hosting, support, handover (3.4) | 1 | 0 | 0 | 5 | 1 | 7 |
-| Expected deliverables (5) | 3 | 0 | 3 | 4 | 1 | 11 |
-| **All requirements** | **16** | **3** | **10** | **19** | **3** | **51** |
+| Expected deliverables (5) | 4 | 0 | 2 | 4 | 1 | 11 |
+| **All requirements** | **17** | **3** | **9** | **19** | **3** | **51** |
 
 ```mermaid
 pie showData title Requirement status (51 rows)
-  "Done" : 16
+  "Done" : 17
   "Built, unverified" : 3
-  "Partial" : 10
+  "Partial" : 9
   "Not started" : 19
   "Human task" : 3
 ```
@@ -112,7 +112,7 @@ Rows in sections 3 to 7 only. Section 8 (evaluation criteria) is scored on the p
 | D1 | Fully functional multi-tenant web and API analytics platform meeting all requirements | Partial | Rows G, W, A above | See the gaps in sections 3 to 5 | MVP to M3 |
 | D2 | Monorepo: all application code | Done | All application code is on `main` of the public repository <https://github.com/Pyxis-Hq/pyxis>: `src/`, `db/`, `scripts/`, `sdk/`, `tests/` | The monorepo-workspaces structure is tracked under G6 | MVP |
 | D3 | Monorepo: full infrastructure-as-code | Not started | Only [railway.json](../railway.json) and an unverified [docker-compose.yml](../docker-compose.yml) | Real infrastructure-as-code for a full deployment | M3 |
-| D4 | Monorepo: deployment documentation | Partial | [README.md](../README.md), [TECHNICAL.md](../TECHNICAL.md) section 15, [handover-build-plan.md](handover-build-plan.md) | A production deployment guide for a community operator | MVP, M3 |
+| D4 | Monorepo: deployment documentation | Done | The production guide "Run Pyxis in production" (<https://docs.usepyxis.xyz/docs/guides/run-in-production>, source `apps/docs/content/docs/guides/run-in-production.mdx`): requirements, configuration, first boot, verification, Railway steps, upgrades, hardening, troubleshooting. Its generic steps were run against PostgreSQL (migrate, role, build, production start). Also [README.md](../README.md), [TECHNICAL.md](../TECHNICAL.md) section 15, [handover-build-plan.md](handover-build-plan.md) | Not yet followed end to end by someone outside the team; no Docker image or verified compose file (D3) | MVP |
 | D5 | Monorepo: operator runbooks | Not started | Fragments only (manual migration step, hardening checklist in [SECURITY.md](../SECURITY.md)) | Backup and restore, key and secret rotation, upgrades, incident handling | M3 |
 | D6 | Monorepo: tenant onboarding guide | Done | The documentation site <https://docs.usepyxis.xyz> (source in `apps/docs/`): a Quickstart plus guides for sending API metrics over OpenTelemetry, tracking the wallet funnel with the SDK, and verifying a domain for web analytics; also the in-app setup checklist and Keys and setup page | A pilot-tested version with a real project (D10) | MVP |
 | D7 | Monorepo: automated test suite | Done | `tests/` (unit, database isolation, wallet, web) and `scripts/e2e-smoke.mts`; Verify: `npm test` | CI (typecheck, tests, build) passes on GitHub Actions on Linux; no UI or load tests | MVP |
