@@ -61,6 +61,7 @@ export default function Home() {
             <a href="#setup" className="hover:text-foreground">Setup</a>
             <a href="#privacy" className="hover:text-foreground">What it stores</a>
             <a href="#definitions" className="hover:text-foreground">Definitions</a>
+            <a href="https://docs.usepyxis.xyz" className="hover:text-foreground">Docs</a>
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <span className="hidden items-center gap-1.5 text-xs text-muted-foreground sm:flex"><NetworkStellar variant="mono" size={14} /> Testnet MVP</span>
@@ -237,7 +238,10 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs text-muted-foreground lg:px-8">
           <span className="flex items-center gap-2"><Logo className="size-4" /> Pyxis · Testnet MVP</span>
           <span>Numbers in the sample above are synthetic.</span>
-          <Link href="/demo" className="hover:text-foreground">Wallet funnel demo</Link>
+          <span className="flex items-center gap-4">
+            <a href="https://docs.usepyxis.xyz" className="hover:text-foreground">Docs</a>
+            <Link href="/demo" className="hover:text-foreground">Wallet funnel demo</Link>
+          </span>
         </div>
       </footer>
     </div>
