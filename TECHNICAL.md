@@ -479,6 +479,8 @@ sequenceDiagram
 | Failure when Umami is down | Domain is reported verified but no tracker is ready; retry later | `sites/[siteId]/verify/route.ts` |
 | Tracker snippet | `<script defer src="{UMAMI_PUBLIC_URL}/script.js" data-website-id=... data-domains=...>`, served from the operated Umami, no third-party script | `Umami.snippet` |
 | Reports | Page views, visitors, visits, bounce rate, average session, top 10 referrers, countries, browsers, devices | `Umami.report` |
+| Real-run status | On 2026-11-20 this path ran once against a **real Umami 2.20.2** (`ghcr.io/umami-software/umami:postgresql-v2.20.2`, Railway, own PostgreSQL). Login, domain verification (well-known file) and website creation worked, and the dashboard figures for one controlled internal session (7 page views, 1 visitor, 0 bounces, 16 s, NG, Edge, laptop) matched Umami's own API. Not exercised: referrers (none in the session), a returning visitor, any external traffic, SPA-vs-refresh distinction, load. Pyxis does not display custom events or OS. Evidence: `docs/scf/build-submission/evidence/umami/` and `evidence/dashboard/` | Evidence files |
+| Tracker pinning | The Umami **server image tag** is pinned in the demonstration deployment. The tracker snippet carries no version or integrity hash, so the tracker is **not** version-pinned | `Umami.snippet` |
 
 ## 11. Querying and the dashboards
 
@@ -596,6 +598,7 @@ flowchart LR
 | Runtime database role | `DATABASE_URL` must use `pyxis_app` with the password from `PYXIS_APP_PASSWORD` (the migration creates the role with a development password that must be replaced) |
 | Private networking | On Railway the app reaches PostgreSQL over the private domain; no public database proxy is required |
 | Evaluation stack | `docker-compose.yml`: PostgreSQL 17, Umami and Umami's database. **Unverified**; Umami is `latest`, not pinned |
+| Demonstration Umami | Railway services `umami` (image tag `postgresql-v2.20.2`, `PORT=3000` to match the public domain target) and `umami-db` (separate PostgreSQL). `web` reaches it through `UMAMI_URL` over the private network and shows the public `UMAMI_PUBLIC_URL` in the tracker snippet. Admin password changed from the default before use. No backups, monitoring or access limits beyond Umami's login; not the production plan |
 | Local development | `npm run db:dev` (embedded PostgreSQL), `npm run seed`, `npm run dev` |
 
 ## 16. Testing
@@ -608,7 +611,9 @@ flowchart LR
 | Web | `tests/web.test.ts` | Domain normalization, SSRF guard, verification, Umami client against a fake server | no |
 | End to end | `scripts/e2e-smoke.mts` | Against a running instance: ingest with a valid key, an unknown key, traces and malformed JSON; a SEP-43-style signed sign-in, bad-signature and replay rejection; further API checks after sign-in | running app, `SMOKE_SECRET`, an ingest token |
 
-What is not tested: the real browser wallet flow, a real Umami release, the UI components (no component tests), load and rate limits.
+Manual evidence runs (2026-11-20, not automated and not in CI): a real Varial wallet sign-in; 12 forged-signature checks against the live sign-in (`docs/scf/build-submission/evidence/wallet/forged-signature-test.cjs`); a ledger-verified Testnet payment; the wallet funnel; and one real Umami session (see `docs/scf/build-submission/evidence/`).
+
+What is not tested automatically: the real browser wallet flow, the real Umami integration (the Web suite still uses a fake server), the UI components (no component tests), load and rate limits, and challenge expiry.
 
 ## 17. Security design
 
@@ -653,7 +658,7 @@ The security policy, scope, known weaknesses and hardening checklist are in [SEC
 | `apiSummary` loads bucket rows and merges histograms in application code | Cost grows with range and cardinality (up to 90 days) | Aggregate in SQL or add rollup tables (roadmap: 24-month rollups) |
 | Operator overview runs one summary query per project | Slower as projects grow | Single grouped query |
 | `auth_challenges` and expired `sessions` are never purged | Slow table growth | Scheduled cleanup |
-| Umami never run against a real release; compose unverified and unpinned | Integration risk | Clean-room run, pin by digest |
+| Umami ran against a real release once, by hand (2.20.2, 2026-11-20); no automated test against a real Umami, compose still `latest` and unverified, tracker not pinned | Integration regressions would go unnoticed | Add an integration suite against a pinned image digest in CI; pin the tracker |
 | No component or visual regression tests | UI regressions rely on manual review | Add Playwright or component tests |
 | No light theme | Dark only | Design a second token set if needed |
 | Pre-deploy migration did not run on one Railway deployment | Possible missing schema after deploy | Verify and fix the deploy configuration |
