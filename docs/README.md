@@ -9,4 +9,4 @@
 | [sdk-build-spec.md](sdk-build-spec.md) | Specification for building the public SDK |
 | [design-teardown.md](design-teardown.md) | Competitor and reference design research |
 
-User documentation (quickstart, guides, reference) lives on the docs site, <https://docs.usepyxis.xyz>, and in [`apps/docs/`](../apps/docs/). Project-level documents are in the repository root: [README](../README.md), [TECHNICAL](../TECHNICAL.md), [SECURITY](../SECURITY.md), [CONTRIBUTING](../CONTRIBUTING.md), [PRODUCT](../PRODUCT.md), [DESIGN](../DESIGN.md), [ROADMAP](../ROADMAP.md).
+User documentation (quickstart, guides, reference) lives on the docs site, <https://docs.usepyxis.xyz>, and in [`apps/docs/`](../apps/docs/). Project-level documents are in the repository root: [README](../README.md), [TECHNICAL](../TECHNICAL.md), [SECURITY](../SECURITY.md), [CONTRIBUTING](../CONTRIBUTING.md), [CODE_OF_CONDUCT](../CODE_OF_CONDUCT.md), [CHANGELOG](../CHANGELOG.md), [PRODUCT](../PRODUCT.md), [DESIGN](../DESIGN.md), [ROADMAP](../ROADMAP.md).

@@ -264,6 +264,8 @@ The repository includes a [railway.json](railway.json) (Railpack build, `npm run
 |---|---|
 | [TECHNICAL.md](TECHNICAL.md) | Architecture, request flows, data model, security design, API reference, operations |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Step-by-step guide to contributing |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards (Contributor Covenant 2.1) and how to report conduct issues |
+| [CHANGELOG.md](CHANGELOG.md) | Notable changes to the application and the wallet SDK |
 | [SECURITY.md](SECURITY.md) | How to report a vulnerability, security model, threat model, known weaknesses, hardening checklist |
 | [PRODUCT.md](PRODUCT.md) | Users, purpose, constraints, principles |
 | [DESIGN.md](DESIGN.md) | Visual system: tokens, components, rules |
@@ -277,7 +279,7 @@ The repository includes a [railway.json](railway.json) (Railpack build, `npm run
 
 ## Contributing
 
-Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md). Next.js 16 in this repo has breaking changes versus older versions: read [AGENTS.md](AGENTS.md) before writing framework code.
+Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md); participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md), and notable changes are recorded in the [CHANGELOG](CHANGELOG.md). Next.js 16 in this repo has breaking changes versus older versions: read [AGENTS.md](AGENTS.md) before writing framework code.
 
 ## License
 

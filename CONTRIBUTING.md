@@ -1,6 +1,6 @@
 # Contributing to Pyxis
 
-Thank you for helping. This guide walks you from "I want to help" to a merged change, step by step. It is written for people who have never seen the codebase. If something here is unclear or wrong, fixing this file is a valid first contribution.
+Thank you for helping. This guide walks you from "I want to help" to a merged change, step by step. It is written for people who have never seen the codebase. If something here is unclear or wrong, fixing this file is a valid first contribution. By taking part you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Contents
 
