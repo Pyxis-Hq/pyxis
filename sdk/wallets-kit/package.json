@@ -1,7 +1,7 @@
 {
   "name": "@pyxis-hq/wallets-kit",
-  "version": "0.1.0-beta.0",
-  "description": "Privacy-first wallet funnel analytics for Stellar dApps. Counts only: no addresses, signatures or free text.",
+  "version": "0.1.0-beta.1",
+  "description": "Privacy-first wallet analytics SDK for Stellar and Soroban dApps. Track wallet connect, sign and submit funnels as counts only, with no addresses or signatures. React and vanilla JS, zero dependencies.",
   "license": "Apache-2.0",
   "type": "module",
   "sideEffects": false,
@@ -42,9 +42,24 @@
   "keywords": [
     "stellar",
     "soroban",
-    "analytics",
+    "stellar-wallets-kit",
+    "stellar-analytics",
+    "freighter",
+    "xbull",
+    "albedo",
+    "lobstr",
     "wallet",
+    "wallet-analytics",
+    "wallet-funnel",
+    "funnel",
+    "analytics",
     "privacy",
+    "privacy-first",
+    "web3",
+    "dapp",
+    "sdk",
+    "react",
+    "typescript",
     "pyxis"
   ],
   "repository": {
@@ -53,7 +68,7 @@
     "directory": "sdk/wallets-kit"
   },
   "bugs": "https://github.com/Pyxis-Hq/pyxis/issues",
-  "homepage": "https://github.com/Pyxis-Hq/pyxis/tree/main/sdk/wallets-kit#readme",
+  "homepage": "https://docs.usepyxis.xyz/docs/guides/wallet-funnel",
   "publishConfig": {
     "access": "public"
   },
