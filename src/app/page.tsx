@@ -41,7 +41,7 @@ const SIGNAL = (() => {
 
 const FEATURES = [
   ["API metrics", "Requests, latency percentiles and error rates per route, from the OpenTelemetry metrics your services already emit. Metrics only; traces and logs are rejected.", "Percentiles are approximations from merged histograms."],
-  ["Web analytics", "Page views, referrers and devices from a pinned, self-hosted Umami, issued only after you verify the domain by DNS or a file.", "Visitor counts follow Umami's definitions."],
+  ["Web analytics", "Page views, referrers and devices from a self-hosted Umami, issued only after you verify the domain by DNS or a file.", "Visitor counts follow Umami's definitions."],
   ["Wallet funnel", "Where people drop between connecting a wallet and submitting a transaction, counted from event names alone.", "Reported by your frontend. It cannot prove a ledger outcome."],
 ] as const;
 

@@ -3,7 +3,7 @@
 Shared, multi-tenant analytics for Stellar projects. A builder signs in with a Stellar wallet, enrolls a project, and gets three views of their product without running an analytics stack:
 
 - **API analytics:** request volume, latency percentiles (p50 / p95 / p99) and 5xx error rate per route, from the OpenTelemetry metrics their services already emit.
-- **Web analytics:** page views, referrers, countries, browsers and devices from a pinned, self-hosted [Umami](https://umami.is), issued only after the owner proves control of the domain.
+- **Web analytics:** page views, referrers, countries, browsers and devices from a self-hosted [Umami](https://umami.is), issued only after the owner proves control of the domain.
 - **Wallet funnel:** how many people get from "connect wallet" to a reported transaction submission, counted from event names alone.
 
 Built for the SCF RFP *Web and API Analytics for Stellar Ecosystem Projects*. Plan and SCF mapping: [ROADMAP.md](ROADMAP.md). Product truth and constraints: [PRODUCT.md](PRODUCT.md).

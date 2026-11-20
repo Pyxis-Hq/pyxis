@@ -82,7 +82,7 @@ export default function Sites({ params }: { params: Promise<{ id: string }> }) {
   const sites = data?.sites ?? [];
   return (
     <>
-      <PageHeader title="Web analytics" description="Privacy-first page analytics from a pinned, self-hosted Umami. A domain must be verified before a tracker is issued." />
+      <PageHeader title="Web analytics" description="Privacy-first page analytics from a self-hosted Umami. A domain must be verified before a tracker is issued." />
       <div className="grid gap-6">
         <Panel title="Add a site">
           <form className="flex max-w-xl flex-wrap items-end gap-3" onSubmit={async (e) => { e.preventDefault(); if (await add({ id, domain }).unwrap().catch(() => null)) setDomain(""); }}>

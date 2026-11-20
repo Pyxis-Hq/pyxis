@@ -45,7 +45,8 @@ export class Umami {
     };
   }
 
-  // Version-pinned tracker: served from the Umami we operate; no third-party remote script.
+  // Tracker served from the Umami we operate; no third-party remote script. The server image tag is pinned by the
+  // operator, but this snippet carries no version or integrity hash, so the tracker itself is NOT version-pinned.
   snippet(websiteId: string, domain: string) {
     return `<script defer src="${this.cfg.publicUrl}/script.js" data-website-id="${websiteId}" data-domains="${domain}"></script>`;
   }
